@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flare_flutter/flare_actor.dart';
 void main() {
   runApp(MyApp());
 }
@@ -28,11 +29,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
-
+        child: Container(
+          child: FlareActor("assets/animations/MainLogo.flr",animation: "Animations"),
+        )
       ),
     );
 
