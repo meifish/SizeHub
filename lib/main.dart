@@ -29,10 +29,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          child: FlareActor("assets/animations/MainLogo.flr",animation: "Animations"),
-        )
+      body: Container(
+          child: FlareActor("assets/animations/StartAnimation.flr",animation: "Animations"),
+
       ),
     );
 
