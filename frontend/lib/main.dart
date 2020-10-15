@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:size_hub/ui/Pages/SplashPage.dart';
-void src.main() {
+void main() {
   runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
