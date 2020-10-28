@@ -10,13 +10,18 @@ import java.nio.file.Path
 
 
 fun main() {
-    val options = FirebaseOptions.builder()
-        .setCredentials(GoogleCredentials.fromStream(Files.newInputStream(Path.of("creds.json"))))
-        .build()
-    FirebaseApp.initializeApp(options)
+    val serviceAccount = Files.newInputStream(Path.of("sizehub-ac5fc-firebase-adminsdk-i6sv1-0cf75a795b.json"))
 
+    val options = FirebaseOptions.builder()
+        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+        .setDatabaseUrl("https://sizehub-ac5fc.firebaseio.com")
+        .build()
+
+    FirebaseApp.initializeApp(options)
     val db: Firestore = FirestoreClient.getFirestore()
-    db.collection("test").listDocuments().forEach {
-        println(it)
-    }
+    val a =db.collection("test2").document("test")
+    println(a)
+
+
+
 }
