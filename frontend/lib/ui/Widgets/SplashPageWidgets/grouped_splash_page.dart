@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:size_hub/ui/Pages/HomePage.dart';
+import 'package:size_hub/ui/Pages/ExplorePage.dart';
 import 'package:size_hub/ui/Widgets/SplashPageWidgets/splash_page_logo.dart';
 import 'package:size_hub/ui/animations/bounce_in_animation.dart';
 import 'package:size_hub/ui/animations/fade_in_animation.dart';
@@ -38,7 +38,7 @@ class GroupedSplashPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => ExplorePage()),
                       );
                     },
                   )),
