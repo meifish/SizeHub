@@ -37,14 +37,14 @@ class _DetailedPostState extends State<DetailedPost> {
           )),
         ),
         DraggableScrollableSheet(
-          initialChildSize: 0.4,
-          minChildSize: 0.2,
+          initialChildSize: 0.2,
+          minChildSize: 0.1,
           maxChildSize: 1,
           builder: (BuildContext context, ScrollController scrollController) {
             return SingleChildScrollView(
               controller: scrollController,
               child: Container(
-                  height: 1000,
+                  height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: Colors.white,
