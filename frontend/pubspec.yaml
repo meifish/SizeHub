@@ -29,6 +29,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/animations/FullLogo.flr
+    - assets/animations/Loading.flr
     - assets/pictures/logo.jpg
     - assets/data/FakeHomePageData.json
   fonts:

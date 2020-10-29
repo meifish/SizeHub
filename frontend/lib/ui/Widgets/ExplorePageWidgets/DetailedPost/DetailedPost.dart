@@ -32,7 +32,7 @@ class _DetailedPostState extends State<DetailedPost> {
             tag: widget.id,
             child: CachedNetworkImage(
               imageUrl: widget.picture,
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
             ),
           )),
         ),
@@ -56,9 +56,18 @@ class _DetailedPostState extends State<DetailedPost> {
                   child: Padding(
                       padding: const EdgeInsets.only(top: 50),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizeWidget(typeSize: "Waist", size: "55cm"),
-                          SizeWidget(typeSize: "Waist", size: "55cm"),
+                          Row(children: [
+                            SizeWidget(typeSize: "Waist", size: "55cm"),
+                            SizeWidget(typeSize: "Waist", size: "55cm"),
+                          ],
+                          ),
+                          Row(children: [
+                            SizeWidget(typeSize: "Waist", size: "55cm"),
+                            SizeWidget(typeSize: "Waist", size: "55cm"),
+                          ],
+                          )
                         ],
                       ))),
             );
