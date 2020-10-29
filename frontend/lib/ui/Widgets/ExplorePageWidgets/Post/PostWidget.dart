@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -33,9 +31,13 @@ class PostWidget extends StatelessWidget {
           elevation: 8.0,
           child: Stack(children: [
             Center(
-              child: FlareActor('assets/animations/Loading.flr',animation: 'Loading', fit: BoxFit.contain,),
+              child: FlareActor(
+                'assets/animations/Loading.flr',
+                animation: 'Loading',
+                fit: BoxFit.contain,
+              ),
             ),
-            Expanded(child:Hero(
+            Hero(
                 tag: id,
                 child: FadeInImage(
                   height: MediaQuery.of(context).size.height,
@@ -44,8 +46,30 @@ class PostWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                   placeholder: NetworkImage(
                       'https://assets.corusent.com/wp-content/uploads/2015/09/slider-transparent-placeholder.png'),
-                ))
-            )])),
+                )),
+            Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    gradient: LinearGradient(
+                        begin: FractionalOffset.topCenter,
+                        end: FractionalOffset.bottomCenter,
+                        colors: [
+                          Colors.grey.withOpacity(0.0),
+                          Colors.black.withOpacity(0.75),
+                        ],
+                        stops: [
+                          0.0,
+                          1.0
+                        ]))),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Text(userName, style: TextStyle(color: Colors.white),),
+              ),
+            )
+            
+          ])),
     );
   }
 }
