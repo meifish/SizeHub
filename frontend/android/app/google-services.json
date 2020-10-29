@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "291653648795",
+    "firebase_url": "https://sizehub-ac5fc.firebaseio.com",
+    "project_id": "sizehub-ac5fc",
+    "storage_bucket": "sizehub-ac5fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291653648795:android:920ac898f72f27e904213e",
+        "android_client_info": {
+          "package_name": "com.yashdhume.size_hub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291653648795-hut0cqftn0a9aopdlip8dbqc4048e4va.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBocenGjZUNNaECeF4m5KKRAeSgw9vSRkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291653648795-hut0cqftn0a9aopdlip8dbqc4048e4va.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "291653648795-o3jrp0sndqor3ddtpckld9edmkrfufof.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yashdhume.sizeHub"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
