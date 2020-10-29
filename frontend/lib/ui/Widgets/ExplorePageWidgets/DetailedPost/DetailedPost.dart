@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:size_hub/ui/animations/SlideInAnimation.dart';
 
 class DetailedPost extends StatefulWidget {
   String id;
@@ -42,35 +43,45 @@ class _DetailedPostState extends State<DetailedPost> {
           maxChildSize: 1,
           builder: (BuildContext context, ScrollController scrollController) {
             return SingleChildScrollView(
-              controller: scrollController,
-              child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24),
-                    ),
-                  ),
-                  child: Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(children: [
-                            SizeWidget(typeSize: "Waist", size: "55cm"),
-                            SizeWidget(typeSize: "Waist", size: "55cm"),
-                          ],
+                controller: scrollController,
+
+                  child: SlideInAnimation(
+                    //duration: Duration(milliseconds: 1000),
+                      offset: Offset(0,1000),
+                      child: Container(
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(24),
+                              topRight: Radius.circular(24),
+                            ),
                           ),
-                          Row(children: [
-                            SizeWidget(typeSize: "Waist", size: "55cm"),
-                            SizeWidget(typeSize: "Waist", size: "55cm"),
-                          ],
-                          )
-                        ],
-                      ))),
-            );
+                          child: Padding(
+                              padding: const EdgeInsets.only(top: 50),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SizeWidget(
+                                          typeSize: "Waist", size: "55cm"),
+                                      SizeWidget(
+                                          typeSize: "Waist", size: "55cm"),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      SizeWidget(
+                                          typeSize: "Waist", size: "55cm"),
+                                      SizeWidget(
+                                          typeSize: "Waist", size: "55cm"),
+                                    ],
+                                  )
+                                ],
+                              )))),
+                );
           },
         )
       ],
