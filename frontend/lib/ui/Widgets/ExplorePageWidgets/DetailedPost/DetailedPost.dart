@@ -1,9 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class DetailedPost extends StatefulWidget {
+  String id;
+  String picture;
+
+  DetailedPost({this.id, this.picture});
+
   @override
   _DetailedPostState createState() => _DetailedPostState();
 }
@@ -18,45 +21,51 @@ class _DetailedPostState extends State<DetailedPost> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-          children: <Widget>[
-            Positioned(
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                child: Image.network(
-                  'https://picsum.photos/id/206/2880/1800',
-                  fit: BoxFit.cover,
-                ),
-              ),
+      children: <Widget>[
+        Positioned(
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+              child: Hero(
+            tag: widget.id,
+            child: CachedNetworkImage(
+              imageUrl: widget.picture,
+              fit: BoxFit.fill,
             ),
-            DraggableScrollableSheet(
-              initialChildSize: 0.3,
-              minChildSize: 0.1,
-              maxChildSize: 0.8,
-              builder: (BuildContext context, ScrollController scrollController) {
-                return Container(
-                    height: 1000,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        topRight: Radius.circular(24),
-                      ),
+          )),
+        ),
+        DraggableScrollableSheet(
+          initialChildSize: 0.4,
+          minChildSize: 0.2,
+          maxChildSize: 1,
+          builder: (BuildContext context, ScrollController scrollController) {
+            return SingleChildScrollView(
+              controller: scrollController,
+              child: Container(
+                  height: 1000,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24),
+                      topRight: Radius.circular(24),
                     ),
-                    child: Padding(
-                        padding: const EdgeInsets.only(top: 50),
-                        child: Column(
-                          children: [
-                            SizeWidget(typeSize: "Waist", size: "55cm"),
-                            SizeWidget(typeSize: "Waist", size: "55cm"),
-                          ],
-                        )));
-              },
-            )
-          ],
-        ));
+                  ),
+                  child: Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: Column(
+                        children: [
+                          SizeWidget(typeSize: "Waist", size: "55cm"),
+                          SizeWidget(typeSize: "Waist", size: "55cm"),
+                        ],
+                      ))),
+            );
+          },
+        )
+      ],
+    ));
   }
 
   Widget SizeWidget({var typeSize, var size}) {

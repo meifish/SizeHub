@@ -7,10 +7,12 @@ import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/DetailedPost
 class PostWidget extends StatelessWidget {
   final String userName;
   final String picture;
+  final String id;
 
   PostWidget({
     this.userName,
     this.picture,
+    this.id,
   });
 
   @override
@@ -19,17 +21,19 @@ class PostWidget extends StatelessWidget {
       onTap: () => {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DetailedPost()),
+          MaterialPageRoute(builder: (context) => DetailedPost(id: id, picture: picture,)),
         )
       },
       child: Card(
           elevation: 8.0,
-          child: new FadeInImage(
-            width: MediaQuery.of(context).size.width,
-            image: CachedNetworkImageProvider(picture),
-            fit: BoxFit.cover,
-            placeholder: AssetImage("assets/pictures/logo.jpg"),
-          )),
+          child: new Hero(
+              tag: id,
+              child: FadeInImage(
+                width: MediaQuery.of(context).size.width,
+                image: CachedNetworkImageProvider(picture),
+                fit: BoxFit.cover,
+                placeholder: AssetImage("assets/pictures/logo.jpg"),
+              ))),
     );
   }
 }

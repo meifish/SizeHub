@@ -41,7 +41,7 @@ class _GroupedPostsState extends State<GroupedPosts> {
       itemCount: posts.length,
       itemBuilder: (context, index) {
         PostData post = posts[index];
-        return PostWidget(userName: post.author, picture: post.picture);
+        return PostWidget(id: post.id, userName: post.author, picture: post.picture);
       },
       staggeredTileBuilder: (index) =>
           StaggeredTile.count(2, index.isEven ? 2 : 3),
