@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:size_hub/ui/Widgets/ExplorePageWidgets/Post/grouped_posts.dart';
+import 'package:size_hub/ui/Widgets/ExplorePageWidgets/Post/GroupedPosts.dart';
 
 class ExplorePage extends StatelessWidget {
   ExplorePage({Key key}) : super(key: key);

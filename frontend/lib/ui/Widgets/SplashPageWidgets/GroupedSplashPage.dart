@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:size_hub/ui/Pages/ExplorePage.dart';
 import 'package:size_hub/ui/Widgets/FirebaseTest.dart';
-import 'package:size_hub/ui/Widgets/SplashPageWidgets/splash_page_logo.dart';
-import 'package:size_hub/ui/animations/bounce_in_animation.dart';
-import 'package:size_hub/ui/animations/fade_in_animation.dart';
+import 'package:size_hub/ui/Widgets/SplashPageWidgets/SplashPageLogo.dart';
+import 'package:size_hub/ui/animations/BounceInAnimation.dart';
+import 'package:size_hub/ui/animations/FadeInAnimation.dart';
 
 class GroupedSplashPage extends StatelessWidget {
   @override
