@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:size_hub/ui/Pages/ExplorePage.dart';
+import 'package:size_hub/ui/MainLayout/MainLayout.dart';
 import 'package:size_hub/ui/Widgets/FirebaseTest.dart';
 import 'package:size_hub/ui/Widgets/SplashPageWidgets/SplashPageLogo.dart';
 import 'package:size_hub/ui/animations/BounceInAnimation.dart';
@@ -39,7 +39,7 @@ class GroupedSplashPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ExplorePage()),
+                        MaterialPageRoute(builder: (context) => MainLayout()),
                       );
                     },
                   )),

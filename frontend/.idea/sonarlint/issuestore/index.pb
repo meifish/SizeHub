@@ -1,6 +1,4 @@
 
-f
-6lib/ui/Widgets/SplashPageWidgets/splash_page_logo.dart,0/1/01d247f51f245a28472c302bf80d836e5c2a3227
 p
 @lib/ui/Widgets/ExplorePageWidgets/DetailedPost/DetailedPost.dart,d/9/d9cc665e87b3640e5acacc75530673be121e4fba
 E
@@ -11,18 +9,12 @@ L
 lib/ui/Pages/SplashPage.dart,d/f/df6031f403ffcfa38f10e8e7c20c342eb4c1eda8
 M
 lib/ui/Pages/ExplorePage.dart,8/3/839177590d6dfb0843a9899bf364a7321006f20c
-i
-9lib/ui/Widgets/SplashPageWidgets/grouped_splash_page.dart,1/b/1b2897e387cf29d32b2012e74a02265e5a21b677
 F
 lib/data/PostData.dart,d/a/da9ac91862f3431512c568760e0bce239e3d062e
-Z
-*lib/ui/animations/bounce_in_animation.dart,3/3/33e288c4c85f5a532d6fd906f592382a4fbee27b
 <
 pubspec.yaml,e/8/e8e045469170189f1d6ef12576bd01af132b1018
 U
 %ios/Runner/Base.lproj/Main.storyboard,a/9/a9447b23bf39469cf6b0c9d663f74e171b0f4660
-i
-9lib/ui/Widgets/ExplorePageWidgets/Post/grouped_posts.dart,e/2/e2b637f1e7a032b6eb01e16951ce9cf8e2c02dc1
 @
 .flutter-plugins,c/0/c0b6f935ef14af8fe1d6391eeee68e16ee6087eb
 M
@@ -59,3 +51,22 @@ T
 $ios/Runner.xcodeproj/project.pbxproj,1/c/1cac92320f17044ec005b6a831fa994f54fba1bc
 <
 pubspec.lock,c/1/c1c78778a0cef1e5344166792d1d823fdcb8b109
+S
+#.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
+M
+assets/animations/Loading.flr,b/6/b685fc8a8e3762b224e6064b9286469be0ec440e
+W
+'lib/ui/animations/SlideInAnimation.dart,4/7/4755e06520ed388599ae2f1f7878047e075be55c
+h
+8lib/ui/Widgets/ExplorePageWidgets/Post/GroupedPosts.dart,3/a/3a590a6ddbba7b1d56e561352d723e619d090288
+g
+7lib/ui/Widgets/SplashPageWidgets/GroupedSplashPage.dart,e/a/ea18bdf1973975827fa494544a203044c5d2dc81
+d
+4lib/ui/Widgets/SplashPageWidgets/SplashPageLogo.dart,9/0/90066af5b28a96a5b7c4f4eeff4dba98baeb37c1
+V
+&lib/ui/animations/FadeInAnimation.dart,3/4/3419a8af2bd1524640dbe0fde56761bc1decef1b
+X
+(lib/ui/animations/BounceInAnimation.dart,d/1/d179fff10edcbe49fa2890290520bb5f07d83a10
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
