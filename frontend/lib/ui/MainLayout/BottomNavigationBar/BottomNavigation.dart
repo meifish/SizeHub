@@ -5,7 +5,7 @@ class BottomNavigation extends StatefulWidget {
   final ValueChanged<int> onButtonClick;
   final List<BottomNavigationIconButton> iconButtons;
 
-  BottomNavigation({this.onButtonClick, this.iconButtons});
+  BottomNavigation({@required this.onButtonClick, @required this.iconButtons});
 
   @override
   _BottomNavigationState createState() => _BottomNavigationState();

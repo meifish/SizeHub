@@ -4,7 +4,7 @@ class BottomNavigationIconButton {
   final IconData icon;
   bool hasNotification;
 
-  BottomNavigationIconButton({this.icon, this.hasNotification = false});
+  BottomNavigationIconButton({@required this.icon, this.hasNotification = false});
 
   Widget buildBottomNavigationIconButton(
       {int index,

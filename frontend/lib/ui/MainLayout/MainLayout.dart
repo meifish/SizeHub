@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:size_hub/ui/Pages/CameraPage.dart';
 import 'package:size_hub/ui/Pages/ExplorePage.dart';
 import 'package:size_hub/ui/Pages/MapPage.dart';
 import 'package:size_hub/ui/Pages/ProfilePage.dart';
@@ -34,7 +35,7 @@ class _MainLayoutState extends State<MainLayout> {
     return Scaffold(
       extendBody: true,
       body: _children[_currentIndex],
-      floatingActionButton: BottomNavigationFAB(),
+      floatingActionButton: BottomNavigationFAB(child: CameraPage()),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigation(
         onButtonClick: onIconButtonPress,
