@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:size_hub/data/PostData.dart';
 
-import 'PostWidget.dart';
+import 'PostWidget/PostWidget.dart';
 
 class GroupedPosts extends StatefulWidget {
   GroupedPosts({Key key}) : super(key: key);
