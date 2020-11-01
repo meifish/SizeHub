@@ -8,6 +8,7 @@ class BottomNavigationFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: 'camera',
       onPressed: () {
       Navigator.push(context, MaterialPageRoute(builder: (context) => child));
       },

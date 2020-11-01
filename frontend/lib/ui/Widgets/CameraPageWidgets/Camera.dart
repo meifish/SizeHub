@@ -1,4 +1,7 @@
 // This code was helped from the youtube channel Dev Planet.
+import 'package:size_hub/ui/animations/RotateAnimation.dart';
+import 'package:size_hub/ui/animations/SlideInAnimation.dart';
+
 import 'PreviewImage.dart';
 import 'package:path/path.dart';
 import 'CameraPreviewWidget.dart';
@@ -93,9 +96,13 @@ class _CameraState extends State<Camera> {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             FloatingActionButton(
-              child: Icon(
-                Icons.camera,
-                color: Colors.black,
+              heroTag: 'camera',
+              child: RotateAnimation(
+                duration: Duration(milliseconds: 500),
+                child: Icon(
+                  Icons.camera,
+                  color: Colors.black,
+                ),
               ),
               backgroundColor: Colors.white,
               onPressed: () {
@@ -118,16 +125,20 @@ class _CameraState extends State<Camera> {
     return Expanded(
       child: Align(
         alignment: Alignment.centerLeft,
-        child: FlatButton.icon(
-          onPressed: _onSwitchCamera,
-          icon: Icon(
-            _getCameraLensIcon(lensDirection),
-            color: Colors.white,
-            size: 24,
-          ),
-          label: Text(
-            '${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1).toUpperCase()}',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        child: SlideInAnimation(
+          duration: Duration(milliseconds: 500),
+          offset: Offset(-100,100),
+          child: FlatButton.icon(
+            onPressed: _onSwitchCamera,
+            icon: Icon(
+              _getCameraLensIcon(lensDirection),
+              color: Colors.white,
+              size: 24,
+            ),
+            label: Text(
+              '${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1).toUpperCase()}',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            ),
           ),
         ),
       ),

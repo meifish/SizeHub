@@ -1,13 +1,14 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:size_hub/ui/animations/BounceInAnimation.dart';
 
 class CameraPreviewWidget extends StatelessWidget {
+
+  final CameraController controller;
   const CameraPreviewWidget({
     Key key,
     @required this.controller,
   }) : super(key: key);
-
-  final CameraController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +23,11 @@ class CameraPreviewWidget extends StatelessWidget {
       );
     }
 
-    return AspectRatio(
+    return BounceInAnimation(
+      duration: Duration(milliseconds: 500),
+        child: AspectRatio(
       aspectRatio: controller.value.aspectRatio,
       child: CameraPreview(controller),
-    );
+    ));
   }
 }
