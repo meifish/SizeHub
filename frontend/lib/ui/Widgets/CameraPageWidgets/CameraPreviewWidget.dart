@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:size_hub/ui/animations/BounceInAnimation.dart';
+import 'package:size_hub/ui/animations/SlideInAnimation.dart';
 
 class CameraPreviewWidget extends StatelessWidget {
 
@@ -23,7 +23,8 @@ class CameraPreviewWidget extends StatelessWidget {
       );
     }
 
-    return BounceInAnimation(
+    return SlideInAnimation(
+      offset: Offset(0, 1000),
       duration: Duration(milliseconds: 500),
         child: AspectRatio(
       aspectRatio: controller.value.aspectRatio,
