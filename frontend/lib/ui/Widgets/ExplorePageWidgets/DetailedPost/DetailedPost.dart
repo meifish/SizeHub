@@ -3,8 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'DetailedPostScrollableCard.dart';
 
 class DetailedPost extends StatefulWidget {
-  String id;
-  String picture;
+  final String id;
+  final String picture;
 
   DetailedPost({this.id, this.picture});
 

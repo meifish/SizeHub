@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BottomNavigationFAB extends StatelessWidget {
-  Widget child;
+  final Widget child;
 
   BottomNavigationFAB({@required this.child});
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class BottomNavigationIconButton {
   final IconData icon;
-  bool hasNotification;
+  final bool hasNotification;
 
   BottomNavigationIconButton({@required this.icon, this.hasNotification = false});
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SizeWidget extends StatelessWidget {
-  String typeSize;
-  String size;
+  final String typeSize;
+  final String size;
 
   SizeWidget({@required this.typeSize, @required this.size});
 
