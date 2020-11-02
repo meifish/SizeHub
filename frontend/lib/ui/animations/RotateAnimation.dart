@@ -3,13 +3,17 @@ import 'dart:math' show pi;
 
 const Duration defaultDuration = Duration(seconds: 2);
 
+enum RotateDirection { right, left }
+
 class RotateAnimation extends StatefulWidget {
   final Widget child;
   final Duration duration;
   final Duration delay;
+  final RotateDirection rotateDirection;
 
   RotateAnimation(
       {@required this.child,
+      @required this.rotateDirection,
       this.duration = defaultDuration,
       this.delay = Duration.zero});
 
@@ -45,7 +49,9 @@ class _RotateAnimationState extends State<RotateAnimation>
       child: widget.child,
       builder: (_, child) {
         return Transform.rotate(
-          angle: _controller.value * pi * 2,
+          angle: widget.rotateDirection == RotateDirection.right
+              ? _controller.value * pi * 2
+              : -_controller.value * pi * 2,
           child: child,
         );
       },

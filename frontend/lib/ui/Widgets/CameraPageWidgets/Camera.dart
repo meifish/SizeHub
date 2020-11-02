@@ -98,6 +98,7 @@ class _CameraState extends State<Camera> {
             FloatingActionButton(
               heroTag: 'camera',
               child: RotateAnimation(
+                rotateDirection: RotateDirection.right,
                 duration: Duration(milliseconds: 500),
                 child: Icon(
                   Icons.camera,
@@ -127,7 +128,7 @@ class _CameraState extends State<Camera> {
         alignment: Alignment.centerLeft,
         child: SlideInAnimation(
           duration: Duration(milliseconds: 500),
-          offset: Offset(-100,100),
+          offset: Offset(-100, 100),
           child: FlatButton.icon(
             onPressed: _onSwitchCamera,
             icon: Icon(
@@ -137,7 +138,8 @@ class _CameraState extends State<Camera> {
             ),
             label: Text(
               '${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1).toUpperCase()}',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
             ),
           ),
         ),
