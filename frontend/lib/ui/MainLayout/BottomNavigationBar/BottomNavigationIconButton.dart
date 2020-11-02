@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class BottomNavigationIconButton {
   final IconData icon;
   final bool hasNotification;
+  final String text;
 
-  BottomNavigationIconButton({@required this.icon, this.hasNotification = false});
+  BottomNavigationIconButton(
+      {this.icon, this.text, this.hasNotification = false});
 
   Widget buildBottomNavigationIconButton(
       {int index,
@@ -20,9 +22,13 @@ class BottomNavigationIconButton {
               child: Stack(
                 overflow: Overflow.visible,
                 children: [
-                  Icon(
-                    iconButton.icon,
-                    color: currentIndex == index ? Colors.purple : Colors.grey,
+                  Tooltip(
+                    message: iconButton.text,
+                    child: Icon(
+                      iconButton.icon,
+                      color:
+                          currentIndex == index ? Colors.purple : Colors.grey,
+                    ),
                   ),
                   Positioned(
                     bottom: 20,
@@ -36,9 +42,10 @@ class BottomNavigationIconButton {
                 ],
               ),
             )
-          : Icon(
-              iconButton.icon,
-              color: currentIndex == index ? Colors.purple : Colors.grey
+          : Tooltip(
+              message: iconButton.text,
+              child: Icon(iconButton.icon,
+                  color: currentIndex == index ? Colors.purple : Colors.grey),
             ),
     ));
   }

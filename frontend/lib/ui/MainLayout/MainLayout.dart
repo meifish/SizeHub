@@ -40,11 +40,18 @@ class _MainLayoutState extends State<MainLayout> {
       bottomNavigationBar: BottomNavigation(
         onButtonClick: onIconButtonPress,
         iconButtons: [
-          BottomNavigationIconButton(icon: Icons.explore),
-          BottomNavigationIconButton(icon: Icons.search),
-          BottomNavigationIconButton(icon: Icons.map),
           BottomNavigationIconButton(
-              icon: Icons.account_circle_sharp, hasNotification: true)
+              icon: Icons.explore, text: "Explore", hasNotification: false),
+          BottomNavigationIconButton(
+              icon: Icons.trending_up,
+              text: "Trending",
+              hasNotification: false),
+          BottomNavigationIconButton(
+              icon: Icons.search, text: "Search", hasNotification: false),
+          BottomNavigationIconButton(
+              icon: Icons.account_circle_sharp,
+              text: "Profile",
+              hasNotification: true)
         ],
       ),
     );
