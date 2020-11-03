@@ -7,7 +7,7 @@ import 'package:size_hub/ui/Widgets/CameraPageWidgets/PreviewImage.dart';
 import 'package:storage_path/storage_path.dart';
 
 class GalleryView extends StatefulWidget {
-  dynamic controller;
+  final dynamic controller;
 
   GalleryView(this.controller);
 

@@ -167,7 +167,7 @@ class _CameraState extends State<Camera> {
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             child: Image.file(
               File(defaultImage),
-              fit: BoxFit.scaleDown,
+              fit: BoxFit.cover,
             ),
           )),
     );
