@@ -107,31 +107,20 @@ class _CameraState extends State<Camera> {
   }
 
   Widget _cameraControlWidget(context) {
-    return Expanded(
-      child: Align(
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            FloatingActionButton(
-              heroTag: 'camera',
-              child: RotateAnimation(
-                rotateDirection: RotateDirection.right,
-                duration: Duration(milliseconds: 500),
-                child: Icon(
-                  Icons.camera,
-                  color: Colors.black,
-                ),
-              ),
-              backgroundColor: Colors.white,
-              onPressed: () {
-                _onCapturePressed(context);
-              },
-            )
-          ],
+    return FloatingActionButton(
+      heroTag: 'camera',
+      child: RotateAnimation(
+        rotateDirection: RotateDirection.right,
+        duration: Duration(milliseconds: 500),
+        child: Icon(
+          Icons.camera,
+          color: Colors.black,
         ),
       ),
+      backgroundColor: Colors.white,
+      onPressed: () {
+        _onCapturePressed(context);
+      },
     );
   }
 
@@ -142,27 +131,45 @@ class _CameraState extends State<Camera> {
     CameraDescription selectedCamera = cameras[selectedCameraIndex];
     CameraLensDirection lensDirection = selectedCamera.lensDirection;
 
-    return Expanded(
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: SlideInAnimation(
-          duration: Duration(milliseconds: 500),
-          offset: Offset(-100, 100),
-          child: FlatButton.icon(
-            onPressed: _onSwitchCamera,
-            icon: Icon(
-              _getCameraLensIcon(lensDirection),
-              color: Colors.white,
-              size: 24,
-            ),
-            label: Text(
-              '${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1).toUpperCase()}',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-            ),
-          ),
+    return SlideInAnimation(
+      duration: Duration(milliseconds: 500),
+      offset: Offset(-100, 100),
+      child: FlatButton.icon(
+        onPressed: _onSwitchCamera,
+        icon: Icon(
+          _getCameraLensIcon(lensDirection),
+          color: Colors.white,
+          size: 24,
+        ),
+        label: Text(
+          '${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1).toUpperCase()}',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
         ),
       ),
+    );
+  }
+
+  Widget _galleryPreview() {
+    return SlideInAnimation(
+      duration: Duration(milliseconds: 500),
+      offset: Offset(100, 100),
+      child: InkWell(
+          onTap: () {
+            setState(() {
+              viewImages = true;
+            });
+          },
+          child: Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.white, width: 5),
+                borderRadius: BorderRadius.all(Radius.circular(5))),
+            child: Image.file(
+              File(defaultImage),
+              fit: BoxFit.contain,
+            ),
+          )),
     );
   }
 
@@ -175,7 +182,6 @@ class _CameraState extends State<Camera> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Expanded(
-                flex: 1,
                 child: CameraPreviewWidget(controller: controller),
               ),
               Align(
@@ -186,36 +192,12 @@ class _CameraState extends State<Camera> {
                   padding: EdgeInsets.all(15),
                   color: Colors.black,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       _cameraToggleRowWidget(),
-                      Padding(
-                          padding: EdgeInsets.only(left: 60),
-                          child: _cameraControlWidget(context)),
-                      Spacer(),
-                      SlideInAnimation(
-                        duration: Duration(milliseconds: 500),
-                        offset: Offset(100, 100),
-                        child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                viewImages = true;
-                              });
-                            },
-                            child: Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 5),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5))),
-                              child: Image.file(
-                                File(defaultImage),
-                                fit: BoxFit.contain,
-                              ),
-                            )),
-                      ),
+                      Padding( padding: EdgeInsets.only(right: 40),child: _cameraControlWidget(context)),
+                      _galleryPreview(),
                     ],
                   ),
                 ),
@@ -225,9 +207,9 @@ class _CameraState extends State<Camera> {
         ),
         viewImages
             ? GalleryViewScrollableSheet(
-                onPressed: (){
+                onPressed: () {
                   setState(() {
-                    viewImages=false;
+                    viewImages = false;
                   });
                 },
               )
