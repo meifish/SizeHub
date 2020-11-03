@@ -98,3 +98,21 @@ q
 Alib/ui/Widgets/ExplorePageWidgets/Post/PostWidget/PostWidget.dart,2/d/2d808dd2af6d455e038384cde30ba642f6867caa
 ~
 Nlib/ui/Widgets/ExplorePageWidgets/DetailedPost/DetailedPostScrollableCard.dart,b/f/bff715c9e531f19d251a646b8886d7f6f6f34278
+G
+android/settings.gradle,a/4/a44f117a07597d287cedd2edb512680ab4b470f0
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+i
+9lib/ui/Widgets/CameraPageWidgets/CameraPreviewWidget.dart,b/f/bf174f426f8781f6d0c3a66b925b23211e36192e
+b
+2lib/ui/Widgets/CameraPageWidgets/PreviewImage.dart,a/5/a5942538cf733e6cbbb8cbde733b546891cbe88f
+Y
+)android/app/src/debug/AndroidManifest.xml,e/9/e9b8a57f79617fe2b2612f997e0f60425ebc5097
+m
+=lib/ui/Widgets/CameraPageWidgets/GalleryView/GalleryView.dart,4/9/49138aba8ab36483f140ae80a0f0c19c601efda5
+|
+Llib/ui/Widgets/CameraPageWidgets/GalleryView/GalleryViewScrollableSheet.dart,8/2/82c8fa505a00a96b47465351e70e1147bf12e785
+q
+Alib/ui/Widgets/CameraPageWidgets/GalleryView/ImageFileObject.dart,c/5/c5b4001f3603617e168571e5f95d303afb53e823
+\
+,lib/ui/Widgets/CameraPageWidgets/Camera.dart,c/f/cf6eaa90693cd778aab221be3bd15b90dcf4269a

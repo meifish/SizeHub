@@ -167,7 +167,7 @@ class _CameraState extends State<Camera> {
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             child: Image.file(
               File(defaultImage),
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
             ),
           )),
     );
@@ -193,7 +193,6 @@ class _CameraState extends State<Camera> {
                   color: Colors.black,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       _cameraToggleRowWidget(),
                       Padding( padding: EdgeInsets.only(right: 40),child: _cameraControlWidget(context)),
