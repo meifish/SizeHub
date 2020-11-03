@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e913b839-b1e7-44ea-a8af-0e4d8b1aec98" name="Default Changelist" comment="Set up some data objects, and the database collections">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="e913b839-b1e7-44ea-a8af-0e4d8b1aec98" name="Default Changelist" comment="Add more data objects, set up the database collections" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,7 +118,7 @@
       <workItem from="1603906645250" duration="34000" />
       <workItem from="1603926208617" duration="1692000" />
       <workItem from="1604011851199" duration="16000" />
-      <workItem from="1604422805681" duration="204000" />
+      <workItem from="1604422805681" duration="234000" />
     </task>
     <task id="LOCAL-00001" summary="Split project into separate backend and frontend folders">
       <created>1602793464380</created>
@@ -150,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604422852413</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add more data objects, set up the database collections">
+      <created>1604423022445</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1604423022445</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,7 +178,8 @@
     <MESSAGE value="Setup Maven and KTor environment. Setup basic hello world httpServer on port 3000" />
     <MESSAGE value="Convert from Maven to Gradle. Add firebase dependency" />
     <MESSAGE value="Set up some data objects, and the database collections" />
-    <option name="LAST_COMMIT_MESSAGE" value="Set up some data objects, and the database collections" />
+    <MESSAGE value="Add more data objects, set up the database collections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add more data objects, set up the database collections" />
   </component>
   <component name="WindowStateProjectService">
     <state x="440" y="114" key="#Project_Structure" timestamp="1602794143907">
