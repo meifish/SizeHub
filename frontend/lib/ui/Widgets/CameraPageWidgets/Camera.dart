@@ -1,7 +1,13 @@
-// This code was helped from the youtube channel Dev Planet.
+// Implementing the camera code was helped from the youtube channel Dev Planet.
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:size_hub/ui/Widgets/CameraPageWidgets/GalleryView/GalleryViewScrollableSheet.dart';
 import 'package:size_hub/ui/animations/RotateAnimation.dart';
 import 'package:size_hub/ui/animations/SlideInAnimation.dart';
+import 'package:storage_path/storage_path.dart';
 
+import 'package:size_hub/ui/Widgets/CameraPageWidgets/GalleryView/ImageFileObject.dart';
 import 'PreviewImage.dart';
 import 'package:path/path.dart';
 import 'CameraPreviewWidget.dart';
@@ -20,10 +26,23 @@ class _CameraState extends State<Camera> {
   List cameras;
   int selectedCameraIndex;
   String imgPath;
+  bool viewImages = false;
+  String defaultImage;
+
+  getFirstImagesPath() async {
+    var imagePath = await StoragePath.imagesPath;
+    var images = jsonDecode(imagePath) as List;
+    var files = images.map<FileObject>((e) => FileObject.fromJson(e)).toList();
+    if (files != null && files.length > 0)
+      setState(() {
+        defaultImage = files[0].files[0];
+      });
+  }
 
   @override
   void initState() {
     super.initState();
+    getFirstImagesPath();
     availableCameras().then((availableCameras) {
       cameras = availableCameras;
       if (cameras.length > 0) {
@@ -150,34 +169,70 @@ class _CameraState extends State<Camera> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: CameraPreviewWidget(controller: controller),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 120,
-                width: double.infinity,
-                padding: EdgeInsets.all(15),
-                color: Colors.black,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    _cameraToggleRowWidget(),
-                    _cameraControlWidget(context),
-                    Spacer()
-                  ],
-                ),
+      body: Stack(children: [
+        Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: CameraPreviewWidget(controller: controller),
               ),
-            )
-          ],
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: 120,
+                  width: double.infinity,
+                  padding: EdgeInsets.all(15),
+                  color: Colors.black,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      _cameraToggleRowWidget(),
+                      Padding(
+                          padding: EdgeInsets.only(left: 60),
+                          child: _cameraControlWidget(context)),
+                      Spacer(),
+                      SlideInAnimation(
+                        duration: Duration(milliseconds: 500),
+                        offset: Offset(100, 100),
+                        child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                viewImages = true;
+                              });
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.white, width: 5),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5))),
+                              child: Image.file(
+                                File(defaultImage),
+                                fit: BoxFit.contain,
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
+        viewImages
+            ? GalleryViewScrollableSheet(
+                onPressed: (){
+                  setState(() {
+                    viewImages=false;
+                  });
+                },
+              )
+            : Container()
+      ]),
     );
   }
 }
