@@ -3,5 +3,6 @@ package src.data
 import kotlinx.serialization.Serializable
 
 @Serializable
-class ClothingItemData(val brand: String,
-                       val name: String)
+class ClothingItemData(val brandId: Id?,
+                       val name: String,
+                       val imageUrls: List<String>)
