@@ -1,6 +1,10 @@
 package src.database
 
 import com.google.cloud.firestore.CollectionReference
+import com.google.cloud.firestore.DocumentSnapshot
+import com.google.gson.Gson
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import src.data.Id
 
 class DataIdPair<T>(val id: Id, val data: T)
@@ -11,16 +15,22 @@ interface ReadOnlyFirestoreCollection<T>{
 }
 
 class FirestoreCollection<T>(private val collection: CollectionReference,
-                             private val clazz: Class<T>)
+                             private val decoder: (String)->T)
     : ReadOnlyFirestoreCollection<T> {
 
+    private val gson = Gson()
+
+    private fun toObject(documentSnapshot: DocumentSnapshot): T{
+        return decoder(gson.toJson(documentSnapshot.data))
+    }
+
     override fun getById(id: Id): T? {
-        return collection.document(id).get().get().toObject(clazz)
+        return toObject(collection.document(id).get().get())
     }
 
     fun create(item: T): DataIdPair<T>?{
         return collection.add(item).get().get().get().let {
-            it.toObject(clazz)?.let { item -> DataIdPair(it.id, item) }
+            toObject(it)?.let { item -> DataIdPair(it.id, item) }
         }
     }
 }

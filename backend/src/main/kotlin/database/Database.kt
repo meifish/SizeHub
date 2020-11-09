@@ -5,6 +5,9 @@ import com.google.cloud.firestore.Firestore
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import com.google.firebase.cloud.FirestoreClient
+import com.google.gson.Gson
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import src.data.ClothingItemData
 import src.data.PostData
 import src.data.UserMeasurementsData
@@ -30,8 +33,8 @@ class Database {
         FirebaseApp.initializeApp(options)
         val db: Firestore = FirestoreClient.getFirestore()
 
-        val clothingItemDb = FirestoreCollection(db.collection("ClothingItems"), ClothingItemData::class.java)
-        val postDb = FirestoreCollection(db.collection("Posts"), PostData::class.java)
+        val clothingItemDb = FirestoreCollection(db.collection("ClothingItems")){ Json.decodeFromString<ClothingItemData>(it) }
+        val postDb = FirestoreCollection(db.collection("Posts")){ Json.decodeFromString<PostData>(it) }
 
         sizeHubDb = SizeHubDb(clothingItemDb, postDb)
 
