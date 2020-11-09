@@ -5,21 +5,16 @@ import com.google.cloud.firestore.Firestore
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import com.google.firebase.cloud.FirestoreClient
-import com.google.gson.Gson
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import src.data.ClothingItemData
-import src.data.PostData
-import src.data.UserMeasurementsData
-import src.database.dbitems.ClothingItem
-import src.database.dbitems.Post
-import src.database.dbitems.toItem
+import src.data.*
 import java.nio.file.Files
 import java.nio.file.Path
 
 class Database {
 
-    private val sizeHubDb: SizeHubDb
+    val publicDb: PublicDb
 
     init{
         val serviceAccount = Files.newInputStream(
@@ -35,21 +30,9 @@ class Database {
 
         val clothingItemDb = FirestoreCollection(db.collection("ClothingItems")){ Json.decodeFromString<ClothingItemData>(it) }
         val postDb = FirestoreCollection(db.collection("Posts")){ Json.decodeFromString<PostData>(it) }
+        val brandDb = FirestoreCollection(db.collection("Brands")){ Json.decodeFromString<BrandData>(it) }
+        val userDb = FirestoreCollection(db.collection("Users")){ Json.decodeFromString<UserData>(it) }
 
-        sizeHubDb = SizeHubDb(clothingItemDb, postDb)
-
-        val gucciPurse = clothingItemDb.create(ClothingItemData("Gucci", "Purse"))?.toItem()
-        val supremeSticker = clothingItemDb.create(ClothingItemData("Supreme", "Sticker"))?.toItem()
-        val supremeTShirt = clothingItemDb.create(ClothingItemData("Supreme", "T-Shirt"))?.toItem()
-
-        supremeTShirt?.let {
-            val post = postDb.create(PostData(
-                "null",
-                supremeTShirt.id,
-                UserMeasurementsData(weight = 120, height = 60),
-                listOf(),
-                "My new T-Shirt")
-            )?.toItem(sizeHubDb)
-        }
+        publicDb = PublicDb(clothingItemDb, postDb, brandDb, userDb)
     }
 }

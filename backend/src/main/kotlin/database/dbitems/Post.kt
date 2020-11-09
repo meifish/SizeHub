@@ -1,18 +1,15 @@
 package src.database.dbitems
 
-import src.data.ClothingItemData
 import src.data.Id
 import src.data.PostData
 import src.database.DataIdPair
-import src.database.SizeHubDb
+import src.database.PublicDb
 
 class Post(override val id: Id,
            override val data: PostData,
-           private val sizeHubDb: SizeHubDb) : DbItem<PostData> {
+           private val publicDb: PublicDb) : DbItem<PostData> {
 
-    fun getClothingItem(): ClothingItem?
-            = sizeHubDb.clothingItemDb.getById(data.itemId)?.wrap(data.itemId)
+    fun getClothingItem(): ClothingItem? = data.itemId?.let { publicDb.getClothingItemById(it) }
 }
 
-fun PostData.wrap(id: Id, sizeHubDb: SizeHubDb) = Post(id, this, sizeHubDb)
-fun DataIdPair<PostData>.toItem(sizeHubDb: SizeHubDb) = Post(id, data, sizeHubDb)
+fun DataIdPair<PostData>.toItem(publicDb: PublicDb) = Post(id, data, publicDb)

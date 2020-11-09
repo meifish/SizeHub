@@ -9,28 +9,37 @@ import src.data.Id
 
 class DataIdPair<T>(val id: Id, val data: T)
 
-interface ReadOnlyFirestoreCollection<T>{
-
-    fun getById(id: Id): T?
-}
-
 class FirestoreCollection<T>(private val collection: CollectionReference,
-                             private val decoder: (String)->T)
-    : ReadOnlyFirestoreCollection<T> {
+                             private val decoder: (String)->T){
 
     private val gson = Gson()
 
-    private fun toObject(documentSnapshot: DocumentSnapshot): T{
-        return decoder(gson.toJson(documentSnapshot.data))
+    fun <U> migrate(oldDecoder: (String)->U, updater: (U)->T){
+        collection.listDocuments().forEach {
+            it.set(updater(oldDecoder(gson.toJson(it.get().get().data))) as Any)
+        }
     }
 
-    override fun getById(id: Id): T? {
+    private fun toObject(documentSnapshot: DocumentSnapshot): DataIdPair<T>{
+        return DataIdPair(documentSnapshot.id, decoder(gson.toJson(documentSnapshot.data)))
+    }
+
+    fun getById(id: Id): DataIdPair<T>? {
         return toObject(collection.document(id).get().get())
     }
 
-    fun create(item: T): DataIdPair<T>?{
-        return collection.add(item).get().get().get().let {
-            toObject(it)?.let { item -> DataIdPair(it.id, item) }
-        }
+    fun getBy(field: String, value: Any): DataIdPair<T>? {
+        return collection.whereEqualTo(field, value).get().get().firstOrNull()?.let { toObject(it) }
+    }
+
+    fun getAllBy(field: String, value: Any): List<DataIdPair<T>> {
+        return collection.whereEqualTo(field, value).get().get().map { toObject(it) }
+    }
+
+    fun getAll(): List<DataIdPair<T>>
+            = collection.listDocuments().mapNotNull { it.get().get()?.let { doc -> toObject(doc) } }
+
+    fun create(item: T): DataIdPair<T> {
+        return toObject(collection.add(item).get().get().get())
     }
 }
