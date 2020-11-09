@@ -3,7 +3,7 @@ The starter code for the major group project.
 
 Group members (3) (no Student IDs, only names):
 1. Group Member1 yashdhume
-2. Group Member2 VincentGalloroUOIT
+2. Group Member2 VincentGalloroUOIT/VincentGalloro
 3. Group Member3 meifish
 
 ## Overview
