@@ -21,7 +21,7 @@ class _MainLayoutState extends State<MainLayout> {
     ExplorePage(),
     SearchPage(),
     MapPage(),
-    ProfilePage()
+    ProfilePage(),
   ];
 
   void onIconButtonPress(int index) {
@@ -43,11 +43,9 @@ class _MainLayoutState extends State<MainLayout> {
           BottomNavigationIconButton(
               icon: Icons.explore, text: "Explore", hasNotification: false),
           BottomNavigationIconButton(
-              icon: Icons.trending_up,
-              text: "Trending",
-              hasNotification: false),
-          BottomNavigationIconButton(
               icon: Icons.search, text: "Search", hasNotification: false),
+          BottomNavigationIconButton(
+              icon: Icons.home, text: "Home", hasNotification: false),
           BottomNavigationIconButton(
               icon: Icons.account_circle_sharp,
               text: "Profile",

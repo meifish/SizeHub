@@ -36,6 +36,9 @@ flutter:
     - assets/animations/FullLogo.flr
     - assets/animations/Loading.flr
     - assets/pictures/logo.jpg
+    - assets/pictures/bodyshape/
+    - assets/pictures/profile/
+    - assets/pictures/gallery/
     - assets/data/FakeHomePageData.json
   fonts:
     - family: SnowburstOne
