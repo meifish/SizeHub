@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:size_hub/ui/Widgets/ProfilePageWidgets/TextInfoPaddingBox.dart';
 import 'package:size_hub/ui/Widgets/DialogueWidget/BodyShapeDialog.dart';
-
-import 'dart:convert';
+import 'package:size_hub/model/notification_helper.dart';
 
 class ProfileEditPage extends StatefulWidget {
   // This is a json map structure as listed in 'assets/data/FakeProfileData.json
@@ -16,6 +14,14 @@ class ProfileEditPage extends StatefulWidget {
 }
 
 class _ProfileEditPageState extends State<ProfileEditPage> {
+  ////////// Notifications Channel Setup ///////////////////////////////////////
+  final _notifications = Notifications(
+      channelId: "profileNotification",
+      channelName: "Profile Notification",
+      channelDescription: "Profile Notification");
+  final notificationPayLoad = "Profile";
+
+  ////////// Form Data /////////////////////////////////////////////////////////
   final GlobalKey _formKey = GlobalKey();
   List<bool> _genderSelections = List.generate(3, (_) => false);
   String usrName;
@@ -32,6 +38,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
     'Rectangle'
   ];
   String dropdownValue = 'Hourglass';
+  ////////// Form Data /////////////////////////////////////////////////////////
 
   void initState() {
     super.initState();
@@ -40,6 +47,8 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   @override
   Widget build(BuildContext context) {
     print(widget.existingProfile);
+    _notifications.init();
+
     return Scaffold(
         body: SafeArea(
             top: true,
@@ -100,7 +109,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         return null;
                       },
                       textInputAction: TextInputAction.next,
-                      autofocus: true,
+                      // autofocus: true,
                       onSaved: (userName) {
                         this.usrName = userName;
                       },
@@ -180,7 +189,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                 return null;
                               },
                               textInputAction: TextInputAction.next,
-                              autofocus: true,
+                              // autofocus: true,
                               onSaved: (userHeightFeet) {
                                 this.heightfeet = userHeightFeet;
                               },
@@ -213,7 +222,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                 LengthLimitingTextInputFormatter(3)
                               ],
                               textInputAction: TextInputAction.next,
-                              autofocus: true,
+                              // autofocus: true,
                               onSaved: (userHeightInch) {
                                 this.heightInch = userHeightInch;
                               },
@@ -250,7 +259,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                 LengthLimitingTextInputFormatter(3)
                               ],
                               textInputAction: TextInputAction.next,
-                              autofocus: true,
+                              // autofocus: true,
                               onSaved: (userWeightPound) {
                                 this.weightPound = userWeightPound;
                               },
@@ -317,7 +326,12 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                     // Save
                     RaisedButton(
                       child: Text("Save"),
-                      onPressed: () {},
+                      onPressed: () {
+                        _notifications.sendNotificationNow(
+                            "SizeHub",
+                            "thank you for setting up your profile!",
+                            notificationPayLoad);
+                      },
                     )
                   ],
                 ))));
