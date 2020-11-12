@@ -13,17 +13,15 @@ class Database{
   }
 
   Future<List<PostData>> readAll() async {
-    print("Did we make it here?");
     await Firebase.initializeApp();
     List<PostData> posts = [];
     for(QueryDocumentSnapshot e in (await FirebaseFirestore.instance.collection("Posts").get()).docs){
       posts.add(PostData(
           e.id,
-          await getUsername(e["userId"]),
+          getUsername(e["userId"]),
           (e["photoUrls"] as List<dynamic>).map((e) => e as String).toList()
       ));
     }
-    print(posts[0].author);
     return posts;
   }
 }

@@ -13,7 +13,7 @@ class PostWidgetStack extends StatelessWidget {
 
   final String id;
   final String picture;
-  final String userName;
+  final Future<String> userName;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,14 @@ class PostWidgetStack extends StatelessWidget {
       Hero(
           tag: id,
           child: FadeInImage(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
             image: CachedNetworkImageProvider(picture),
             fit: BoxFit.cover,
             placeholder: NetworkImage(
@@ -37,14 +43,19 @@ class PostWidgetStack extends StatelessWidget {
           )),
       SubtleGradientOverlay(),
       Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: Text(
-            userName,
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+          padding: const EdgeInsets.all(8.0),
+          child: Align(
+              alignment: Alignment.bottomRight,
+              child: FutureBuilder<String>(
+                  future: userName,
+                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    return Text(
+                      snapshot.data,
+                      style: TextStyle(color: Colors.white),
+                    );
+                  }
+              )
+          )
       )
     ]);
   }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/DetailedPost.dart';
 
 class PostWidget extends StatelessWidget {
-  final String userName;
+  final Future<String> userName;
   final String picture;
   final String id;
 
