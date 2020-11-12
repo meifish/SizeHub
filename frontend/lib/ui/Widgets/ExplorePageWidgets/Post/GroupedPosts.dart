@@ -50,7 +50,7 @@ class _GroupedPostsState extends State<GroupedPosts> {
                 snapshot.data.docs.forEach((e) {
                   posts.add(PostData(
                       e.id,
-                      _database.getUsername(e["userId"]),
+                      e["userId"],
                       (e["photoUrls"] as List<dynamic>)
                           .map((e) => e as String)
                           .toList(),
@@ -65,7 +65,7 @@ class _GroupedPostsState extends State<GroupedPosts> {
                     PostData post = posts[index];
                     return PostWidget(
                         id: post.id,
-                        userName: post.author,
+                        userName: post.getUsername(_database),
                         picture:
                             post.photoUrls == null || post.photoUrls.isEmpty
                                 ? ""
