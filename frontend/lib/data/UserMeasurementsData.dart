@@ -3,8 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'UserMeasurementsData.g.dart';
 
 @JsonSerializable()
-class UserMeasurementsData{
-
+class UserMeasurementsData {
   final int weight;
   final int height;
 
