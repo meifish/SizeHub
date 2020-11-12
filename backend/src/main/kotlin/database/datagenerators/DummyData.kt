@@ -1,6 +1,7 @@
-package src.database
+package src.database.datagenerators
 
 import src.data.*
+import src.database.PublicDb
 import src.database.dbitems.User
 import kotlin.random.Random
 
