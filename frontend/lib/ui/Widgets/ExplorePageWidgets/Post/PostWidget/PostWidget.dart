@@ -1,3 +1,4 @@
+import 'package:size_hub/data/UserMeasurementData.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/Post/PostWidget/PostWidgetStack.dart';
 import 'package:flutter/material.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/DetailedPost.dart';
@@ -6,12 +7,9 @@ class PostWidget extends StatelessWidget {
   final Future<String> userName;
   final String picture;
   final String id;
+  final UserMeasurementData data;
 
-  PostWidget({
-    this.userName,
-    this.picture,
-    this.id,
-  });
+  const PostWidget({Key key, this.userName, this.picture, this.id, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +21,7 @@ class PostWidget extends StatelessWidget {
               builder: (context) => DetailedPost(
                     id: id,
                     picture: picture,
+                data: data,
                   )),
         )
       },

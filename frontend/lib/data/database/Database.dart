@@ -12,16 +12,8 @@ class Database{
     return doc["username"];
   }
 
-  Future<List<PostData>> readAll() async {
+  Future<Stream<QuerySnapshot>> readAllNew() async {
     await Firebase.initializeApp();
-    List<PostData> posts = [];
-    for(QueryDocumentSnapshot e in (await FirebaseFirestore.instance.collection("Posts").get()).docs){
-      posts.add(PostData(
-          e.id,
-          getUsername(e["userId"]),
-          (e["photoUrls"] as List<dynamic>).map((e) => e as String).toList()
-      ));
-    }
-    return posts;
+    return FirebaseFirestore.instance.collection("Posts").snapshots();
   }
 }
