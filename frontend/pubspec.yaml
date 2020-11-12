@@ -40,6 +40,7 @@ flutter:
     - assets/pictures/profile/
     - assets/pictures/gallery/
     - assets/data/FakeHomePageData.json
+    - assets/data/FakeProfileData.json
   fonts:
     - family: SnowburstOne
       fonts:
