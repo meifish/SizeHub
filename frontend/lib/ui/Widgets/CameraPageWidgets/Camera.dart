@@ -85,12 +85,13 @@ class _CameraState extends State<Camera> {
   void _onCapturePressed(context) async {
     try {
       final path =
-          join((await getTemporaryDirectory()).path, '${DateTime.now()}.png');
+      join((await getTemporaryDirectory()).path, '${DateTime.now()}.png');
       await controller.takePicture(path);
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => PreviewImage(
+            builder: (context) =>
+                PreviewImage(
                   imgPath: path,
                 )),
       );
@@ -101,7 +102,7 @@ class _CameraState extends State<Camera> {
 
   void _onSwitchCamera() {
     selectedCameraIndex =
-        selectedCameraIndex < cameras.length - 1 ? selectedCameraIndex + 1 : 0;
+    selectedCameraIndex < cameras.length - 1 ? selectedCameraIndex + 1 : 0;
     CameraDescription selectedCamera = cameras[selectedCameraIndex];
     _initCameraController(selectedCamera);
   }
@@ -142,7 +143,8 @@ class _CameraState extends State<Camera> {
           size: 24,
         ),
         label: Text(
-          '${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1).toUpperCase()}',
+          '${lensDirection.toString().substring(
+              lensDirection.toString().indexOf('.') + 1).toUpperCase()}',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
         ),
       ),
@@ -165,10 +167,15 @@ class _CameraState extends State<Camera> {
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.white, width: 5),
                 borderRadius: BorderRadius.all(Radius.circular(5))),
-            child: Image.file(
+            child: defaultImage != null ? Image.file(
               File(defaultImage),
               fit: BoxFit.cover,
-            ),
+            ) : Container(
+                child: Center(
+                  child: Text("No Images", textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white),
+                    textScaleFactor: 0.8,),
+                )),
           )),
     );
   }
@@ -195,7 +202,8 @@ class _CameraState extends State<Camera> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       _cameraToggleRowWidget(),
-                      Padding( padding: EdgeInsets.only(right: 40),child: _cameraControlWidget(context)),
+                      Padding(padding: EdgeInsets.only(right: 40),
+                          child: _cameraControlWidget(context)),
                       _galleryPreview(),
                     ],
                   ),
@@ -204,14 +212,14 @@ class _CameraState extends State<Camera> {
             ],
           ),
         ),
-        viewImages
+        viewImages != null && defaultImage != null
             ? GalleryViewScrollableSheet(
-                onPressed: () {
-                  setState(() {
-                    viewImages = false;
-                  });
-                },
-              )
+          onPressed: () {
+            setState(() {
+              viewImages = false;
+            });
+          },
+        )
             : Container()
       ]),
     );
