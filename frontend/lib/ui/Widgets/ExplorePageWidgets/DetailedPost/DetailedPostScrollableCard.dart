@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:size_hub/data/UserMeasurementData.dart';
+import 'package:size_hub/data/UserMeasurementsData.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/DetailedPostScrollableCardContent.dart';
 import 'package:size_hub/ui/animations/SlideInAnimation.dart';
 
 class DetailedPostScrollableCard extends StatelessWidget {
 
-  final UserMeasurementData data;
+  final UserMeasurementsData data;
 
   const DetailedPostScrollableCard({Key key, this.data}) : super(key: key);
 

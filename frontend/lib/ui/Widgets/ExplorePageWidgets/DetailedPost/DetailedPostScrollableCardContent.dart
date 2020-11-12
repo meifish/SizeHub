@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:size_hub/data/UserMeasurementData.dart';
+import 'package:size_hub/data/UserMeasurementsData.dart';
 
 import 'SizeWidget.dart';
 
 class DetailedPostScrollableCardContent extends StatelessWidget {
 
-  final UserMeasurementData data;
+  final UserMeasurementsData data;
 
   const DetailedPostScrollableCardContent({Key key, this.data}) : super(key: key);
 
@@ -22,12 +22,6 @@ class DetailedPostScrollableCardContent extends StatelessWidget {
                 SizeWidget(typeSize: "Height", size: "${data.height}cm"),
               ],
             ),
-            Row(
-              children: [
-                SizeWidget(typeSize: "Waist", size: "55cm"),
-                SizeWidget(typeSize: "Waist", size: "55cm"),
-              ],
-            )
           ],
         ));
   }

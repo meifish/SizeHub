@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:size_hub/data/UserMeasurementData.dart';
+import 'package:size_hub/data/UserMeasurementsData.dart';
 import 'DetailedPostScrollableCard.dart';
 
 class DetailedPost extends StatefulWidget {
   final String id;
   final String picture;
-  final UserMeasurementData data;
+  final UserMeasurementsData data;
 
   const DetailedPost({Key key, this.id, this.picture, this.data}) : super(key: key);
 

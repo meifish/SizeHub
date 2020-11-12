@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:size_hub/data/PostData.dart';
-import 'package:size_hub/data/UserMeasurementData.dart';
+import 'package:size_hub/data/UserMeasurementsData.dart';
 import 'package:size_hub/data/database/Database.dart';
 
 import 'PostWidget/PostWidget.dart';
@@ -48,28 +48,22 @@ class _GroupedPostsState extends State<GroupedPosts> {
                   );
                 List<PostData> posts = [];
                 snapshot.data.docs.forEach((e) {
-                  posts.add(PostData(
-                      e.id,
-                      e["userId"],
-                      (e["photoUrls"] as List<dynamic>)
-                          .map((e) => e as String)
-                          .toList(),
-                      UserMeasurementData(
-                          e["userMeasurementsData"]["weight"],
-                          e["userMeasurementsData"]["height"])));
+                  posts.add(PostData.fromJson(e.data()));
                 });
+                print(posts);
                 return StaggeredGridView.countBuilder(
                   crossAxisCount: 4,
                   itemCount: snapshot.data.docs.length,
                   itemBuilder: (context, index) {
                     PostData post = posts[index];
                     return PostWidget(
-                        id: post.id,
-                        userName: post.getUsername(_database),
-                        picture:
-                            post.photoUrls == null || post.photoUrls.isEmpty
-                                ? ""
-                                : post.photoUrls[0]);
+                      id: "PostHeroId_$index",
+                      userName: post.getUsername(_database),
+                      picture: post.photoUrls == null || post.photoUrls.isEmpty
+                          ? ""
+                          : post.photoUrls[0],
+                      data: post.userMeasurementsData,
+                    );
                   },
                   staggeredTileBuilder: (index) =>
                       StaggeredTile.count(2, index.isEven ? 2 : 3),
