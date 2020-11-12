@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:size_hub/ui/Widgets/ProfilePageWidgets/TextInfoPaddingBox.dart';
 import 'package:size_hub/ui/Widgets/DialogueWidget/BodyShapeDialog.dart';
-
-import 'dart:convert';
 
 class ProfileEditPage extends StatefulWidget {
   // This is a json map structure as listed in 'assets/data/FakeProfileData.json
