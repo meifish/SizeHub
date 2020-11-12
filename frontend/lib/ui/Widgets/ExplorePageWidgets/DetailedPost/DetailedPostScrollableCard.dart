@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:size_hub/data/UserMeasurementData.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/DetailedPostScrollableCardContent.dart';
 import 'package:size_hub/ui/animations/SlideInAnimation.dart';
 
 class DetailedPostScrollableCard extends StatelessWidget {
+
+  final UserMeasurementData data;
+
+  const DetailedPostScrollableCard({Key key, this.data}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
@@ -24,7 +30,7 @@ class DetailedPostScrollableCard extends StatelessWidget {
                       topRight: Radius.circular(24),
                     ),
                   ),
-                  child: DetailedPostScrollableCardContent())),
+                  child: DetailedPostScrollableCardContent(data: data,))),
         );
       },
     );

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:size_hub/data/UserMeasurementData.dart';
 import 'DetailedPostScrollableCard.dart';
 
 class DetailedPost extends StatefulWidget {
   final String id;
   final String picture;
+  final UserMeasurementData data;
 
-  DetailedPost({this.id, this.picture});
+  const DetailedPost({Key key, this.id, this.picture, this.data}) : super(key: key);
 
   @override
   _DetailedPostState createState() => _DetailedPostState();
@@ -37,7 +39,7 @@ class _DetailedPostState extends State<DetailedPost> {
             ),
           )),
         ),
-        DetailedPostScrollableCard(),
+        DetailedPostScrollableCard(data: widget.data,),
       ],
     ));
   }

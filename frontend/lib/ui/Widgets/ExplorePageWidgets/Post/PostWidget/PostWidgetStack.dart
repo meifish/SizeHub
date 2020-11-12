@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:size_hub/ui/Widgets/Common/SubtleGradientOverlay.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:size_hub/ui/animations/FadeInAnimation.dart';
 
 class PostWidgetStack extends StatelessWidget {
   const PostWidgetStack({
@@ -27,19 +28,21 @@ class PostWidgetStack extends StatelessWidget {
       ),
       Hero(
           tag: id,
-          child: FadeInImage(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
-            image: CachedNetworkImageProvider(picture),
-            fit: BoxFit.cover,
-            placeholder: NetworkImage(
-                'https://assets.corusent.com/wp-content/uploads/2015/09/slider-transparent-placeholder.png'),
+          child: FadeInAnimation(
+            child: Container(
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              child: CachedNetworkImage(
+                imageUrl: picture,
+                fit: BoxFit.cover,
+              )
+            ),
           )),
       SubtleGradientOverlay(),
       Padding(
@@ -49,6 +52,9 @@ class PostWidgetStack extends StatelessWidget {
               child: FutureBuilder<String>(
                   future: userName,
                   builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    if(snapshot.data == null){
+                      return Container();
+                    }
                     return Text(
                       snapshot.data,
                       style: TextStyle(color: Colors.white),
