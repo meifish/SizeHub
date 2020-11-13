@@ -15,7 +15,7 @@ class ProfileEditPage extends StatefulWidget {
   // This is a json map structure as listed in 'assets/data/FakeProfileData.json
   ProfileEditPage.fromMap(Map<String, dynamic> map) {
     user = Profile(
-      usrID: int.parse(map["usrID"]),
+      usrID: map["usrID"],
       usrName: map["usrName"],
       gender: map["gender"],
       imgURL: map["imgURL"],
