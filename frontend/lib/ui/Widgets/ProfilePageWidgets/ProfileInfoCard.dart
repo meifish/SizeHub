@@ -69,11 +69,14 @@ class ProfileInfoCard extends StatelessWidget {
                               color: Colors.blue),
                         ),
                         onTap: () async {
-                          await Navigator.push(
+                          final result = await Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ProfileEditPage(
                                       existingUserMap: profileMap)));
+                          Scaffold.of(context)
+                            ..removeCurrentSnackBar()
+                            ..showSnackBar(SnackBar(content: Text("$result")));
                         }),
                   ])
                 ],

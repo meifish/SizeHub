@@ -416,7 +416,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
     _updateProfile();
     _sendSuccesfulNotification();
 
-    Navigator.pop(context);
+    Navigator.pop(context, "Profile updated.");
   }
 
   void _updateProfile() async {
