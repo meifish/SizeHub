@@ -2,9 +2,23 @@
 The starter code for the major group project.
 
 Group members (3) (no Student IDs, only names):
-1. Group Member1 yashdhume
-2. Group Member2 VincentGalloroUOIT/VincentGalloro
-3. Group Member3 meifish
+1. Group Member1 yashdhume (Name: Yash Dhume)
+2. Group Member2 VincentGalloroUOIT/VincentGalloro (Name: Vincent Galloro)
+3. Group Member3 meifish (Name: Kathryn, meiyu, Chen)
+
+
+# Demo User Instruction
+- Login page: Click Login to enter the fake user account.
+- Explore page: Fetch dummy data from firebase db.
+- Camera page: A demo camera photo widget.
+- Profile page: Show dummy user profile page, click "edit profile" button to access Profile Editing Page.
+- Profile Editing page: A form of profile editing page. 
+  - A information button. Click to display dialog.
+  - Save button: save data to local database, and display notification and snackbar.
+ 
+
+
+
 
 ## Overview
 This group project is designed for you to demonstrate the skills that you have learned in this course.  The final project that you submit in the last week of classes will be a completed mobile application.  Non-functional requirements, especially those associated with production-readiness, will be considered extremely important when marking this project.  You are expected to work in a group of three to five students when completing this project.  Students are not permitted to work alone on the project, as this eliminates one of the learning objectives of this assessment.  
