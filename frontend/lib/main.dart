@@ -15,18 +15,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
 
-          // Button style
-          buttonTheme: ButtonThemeData(
-              buttonColor: Colors.purple,
-              textTheme: ButtonTextTheme.accent,
-              colorScheme: Theme.of(context)
-                  .colorScheme
-                  .copyWith(secondary: Colors.white),
-              splashColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  side: BorderSide(color: Colors.purple))),
-
           //Input Field style
           inputDecorationTheme:
               InputDecorationTheme(labelStyle: TextStyle(color: Colors.purple)),

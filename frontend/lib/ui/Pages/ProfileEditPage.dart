@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:size_hub/data/profileModel.dart';
 import 'package:size_hub/ui/Widgets/DialogueWidget/BodyShapeDialog.dart';
+import 'package:size_hub/ui/Widgets/ProfilePageWidgets/Buttons/RaisedButton.dart';
 import 'package:size_hub/model/notification_helper.dart';
 import 'package:size_hub/model/profileDB_helper.dart';
 
@@ -110,10 +111,8 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
                     //////////////// Change Photo ////////////////////////
                     Container(
                         height: 35,
-                        child: RaisedButton(
-                          child: Text("Change Image"),
-                          onPressed: () {},
-                        )),
+                        child: RaisedPurpleButton(
+                            child: Text("Change Image"), onPressed: () {})),
                     SizedBox(height: 5),
                     ////////////////////// Name //////////////////////////
                     Container(
@@ -385,37 +384,39 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
 
               SizedBox(height: 50),
               //////////////////////// Save //////////////////////////////
-              RaisedButton(
+              RaisedPurpleButton(
                 child: Text("Save"),
-                onPressed: () async {
-                  if (_formKey.currentState.validate()) {
-                    // Show Snackbar
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text('profile updated.'),
-                    ));
-
-                    _formKey.currentState.save();
-                    if ((int.tryParse(widget.heightFeet) != null) &&
-                        (int.tryParse(widget.heightInch) != null)) {
-                      widget.user.Height = {
-                        "feet": widget.heightFeet,
-                        "inch": widget.heightInch,
-                      };
-                    }
-                    if (int.tryParse(widget.weightPound) != null) {
-                      widget.user.Weight = widget.weightPound;
-                    }
-                  }
-                  print("Save profile");
-                  _updateProfile();
-                  _sendSuccesfulNotification();
-
-                  Navigator.pop(context);
-                },
+                onPressed: submit,
               )
             ],
           )),
     );
+  }
+
+  void submit() async {
+    if (_formKey.currentState.validate()) {
+      // Show Snackbar
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('profile updated.'),
+      ));
+
+      _formKey.currentState.save();
+      if ((int.tryParse(widget.heightFeet) != null) &&
+          (int.tryParse(widget.heightInch) != null)) {
+        widget.user.Height = {
+          "feet": widget.heightFeet,
+          "inch": widget.heightInch,
+        };
+      }
+      if (int.tryParse(widget.weightPound) != null) {
+        widget.user.Weight = widget.weightPound;
+      }
+    }
+    print("Save profile");
+    _updateProfile();
+    _sendSuccesfulNotification();
+
+    Navigator.pop(context);
   }
 
   void _updateProfile() async {
