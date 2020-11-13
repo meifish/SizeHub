@@ -72,8 +72,8 @@ class ProfileInfoCard extends StatelessWidget {
                           await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ProfileEditPage(
-                                      existingProfile: profileMap)));
+                                  builder: (context) =>
+                                      ProfileEditPage.fromMap(profileMap)));
                         }),
                   ])
                 ],

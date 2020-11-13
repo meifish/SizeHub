@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:size_hub/ui/Pages/SplashPage.dart';
-import 'package:size_hub/ui/Pages/ProfileEditPage.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

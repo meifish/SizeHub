@@ -26,6 +26,7 @@ dependencies:
   font_awesome_flutter:
   flutter_local_notifications:
   timezone:
+  sqflite:
 dev_dependencies:
   flutter_test:
     sdk: flutter
