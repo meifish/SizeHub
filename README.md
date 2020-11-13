@@ -8,14 +8,15 @@ Group members (3) (no Student IDs, only names):
 
 
 # Demo User Instruction
-- Login page: Click Login to enter the fake user account.
-- Explore page: Fetch dummy data from firebase db.
-- Camera page: A demo camera photo widget.
+- Login: goes to main page for now
+- create accont  page: goes to not compleated login/ register page.
+- Explore page: Fetch dummy data from firebase db. 
+- Camera page: A demo camera photo widget. and gallary view and you can share after 
 - Profile page: Show dummy user profile page, click "edit profile" button to access Profile Editing Page.
 - Profile Editing page: A form of profile editing page. 
   - A information button. Click to display dialog.
   - Save button: save data to local database, and display notification and snackbar.
- 
+- create accont  page: goes to not compleated login/ register page.
 
 
 
