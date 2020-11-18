@@ -212,7 +212,7 @@ class _CameraState extends State<Camera> {
             ],
           ),
         ),
-        viewImages != null && defaultImage != null
+        viewImages
             ? GalleryViewScrollableSheet(
           onPressed: () {
             setState(() {

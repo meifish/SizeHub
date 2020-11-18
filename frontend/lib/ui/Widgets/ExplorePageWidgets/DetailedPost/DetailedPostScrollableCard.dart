@@ -5,9 +5,10 @@ import 'package:size_hub/ui/animations/SlideInAnimation.dart';
 
 class DetailedPostScrollableCard extends StatelessWidget {
 
-  final UserMeasurementsData data;
+  final UserMeasurementsData userMeasurementData;
+  final List<String> photoUrls;
 
-  const DetailedPostScrollableCard({Key key, this.data}) : super(key: key);
+  const DetailedPostScrollableCard({Key key, this.userMeasurementData, this.photoUrls}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class DetailedPostScrollableCard extends StatelessWidget {
           child: SlideInAnimation(
               offset: Offset(0, 1000),
               child: Container(
-                  height: MediaQuery.of(context).size.height,
+                 // height: 3000,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -30,7 +31,7 @@ class DetailedPostScrollableCard extends StatelessWidget {
                       topRight: Radius.circular(24),
                     ),
                   ),
-                  child: DetailedPostScrollableCardContent(data: data,))),
+                  child: DetailedPostScrollableCardContent(photoUrls: photoUrls, userMeasurementData: userMeasurementData,))),
         );
       },
     );

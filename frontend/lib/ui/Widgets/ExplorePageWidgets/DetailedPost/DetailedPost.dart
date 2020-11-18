@@ -6,9 +6,10 @@ import 'DetailedPostScrollableCard.dart';
 class DetailedPost extends StatefulWidget {
   final String id;
   final String picture;
-  final UserMeasurementsData data;
+  final UserMeasurementsData userMeasurementData;
+  final List<String> photoUrls;
 
-  const DetailedPost({Key key, this.id, this.picture, this.data}) : super(key: key);
+  const DetailedPost({Key key, this.id, this.picture, this.userMeasurementData, this.photoUrls}) : super(key: key);
 
   @override
   _DetailedPostState createState() => _DetailedPostState();
@@ -33,13 +34,15 @@ class _DetailedPostState extends State<DetailedPost> {
           child: Container(
               child: Hero(
             tag: widget.id,
-            child: CachedNetworkImage(
-              imageUrl: widget.picture,
-              fit: BoxFit.cover,
+            child: InteractiveViewer(
+              child: CachedNetworkImage(
+                imageUrl: widget.picture,
+                fit: BoxFit.cover,
+              ),
             ),
           )),
         ),
-        DetailedPostScrollableCard(data: widget.data,),
+        DetailedPostScrollableCard(userMeasurementData: widget.userMeasurementData, photoUrls: widget.photoUrls,),
       ],
     ));
   }

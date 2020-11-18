@@ -8,22 +8,21 @@ class SizeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: RichText(
-        text: TextSpan(
-          style: TextStyle(color: Color(0xFFACACAC)),
-          children: [
-            TextSpan(text: "$typeSize Size\n"),
-            TextSpan(
-              text: size,
-              style: TextStyle(
-                  color: Color(0xFF535353),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-            )
-          ],
-        ),
+    return Text.rich(
+      TextSpan(
+        style: TextStyle(color: Color(0xFFACACAC)),
+        children: [
+          TextSpan(text: "$typeSize\n"),
+          TextSpan(
+            text: size,
+            style: TextStyle(
+                color: Color(0xFF535353),
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
+          )
+        ],
       ),
+      textAlign: TextAlign.center,
     );
   }
 }

@@ -7,9 +7,17 @@ class PostWidget extends StatelessWidget {
   final Future<String> userName;
   final String picture;
   final String id;
-  final UserMeasurementsData data;
+  final UserMeasurementsData userMeasurementData;
+  final List<String> photoUrls;
 
-  const PostWidget({Key key, this.userName, this.picture, this.id, this.data}) : super(key: key);
+  const PostWidget(
+      {Key key,
+      this.userName,
+      this.picture,
+      this.id,
+      this.userMeasurementData,
+      this.photoUrls})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +27,10 @@ class PostWidget extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => DetailedPost(
-                    id: id,
-                    picture: picture,
-                data: data,
-                  )),
+                  id: id,
+                  picture: picture,
+                  userMeasurementData: userMeasurementData,
+                  photoUrls: photoUrls)),
         )
       },
       child: Card(

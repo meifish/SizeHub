@@ -50,7 +50,6 @@ class _GroupedPostsState extends State<GroupedPosts> {
                 snapshot.data.docs.forEach((e) {
                   posts.add(PostData.fromJson(e.data()));
                 });
-                print(posts);
                 return StaggeredGridView.countBuilder(
                   crossAxisCount: 4,
                   itemCount: snapshot.data.docs.length,
@@ -62,7 +61,9 @@ class _GroupedPostsState extends State<GroupedPosts> {
                       picture: post.photoUrls == null || post.photoUrls.isEmpty
                           ? ""
                           : post.photoUrls[0],
-                      data: post.userMeasurementsData,
+                      userMeasurementData: post.userMeasurementsData,
+                      photoUrls: post.photoUrls,
+
                     );
                   },
                   staggeredTileBuilder: (index) =>
