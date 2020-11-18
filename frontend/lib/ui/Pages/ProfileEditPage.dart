@@ -109,6 +109,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
                               fit: BoxFit.cover)),
                     ),
                   ),
+                  SizedBox(height: 300),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
