@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:size_hub/data/profileModel.dart';
 import 'package:size_hub/ui/Widgets/DialogueWidget/BodyShapeDialog.dart';
 import 'package:size_hub/ui/Widgets/ProfilePageWidgets/BackgroundPainter.dart';
-import 'package:size_hub/ui/Widgets/ProfilePageWidgets/Buttons/RaisedButton.dart';
+import 'package:size_hub/ui/Widgets/Common/PurpleRaisedButton.dart';
 import 'package:size_hub/model/notification_helper.dart';
 import 'package:size_hub/model/profileDB_helper.dart';
 
