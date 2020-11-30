@@ -20,6 +20,8 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
   bool _isRegister;
   PageController _pageViewController;
   Curve _curve = Curves.bounceIn;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -80,7 +82,9 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
               child: PurpleRaisedButton(
                 child: Text(!_isRegister ? "Login" : "Create Account"),
                 onPressed: () {
-                  setState(() {});
+                  setState(() {
+                    print(emailController.text + " " + passwordController.text);
+                  });
                 },
               ),
               delay: Duration(milliseconds: 200),
@@ -118,6 +122,8 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
   Center _buildLogin() {
     return Center(
       child: LoginCard(
+        emailController: emailController,
+        passwordController: passwordController,
         onChangedEmail: (v) {},
         onChangedPassword: (v) {},
       ),
@@ -127,6 +133,8 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
   Center _buildSignUp() {
     return Center(
       child: SignUpCard(
+        emailController: emailController,
+        passwordController: passwordController,
         onChangedEmail: (v) {
           print(v);
           setState(() {

@@ -7,8 +7,15 @@ import 'Buttons/RoundedPasswordField.dart';
 class LoginCard extends StatelessWidget {
   final Function onChangedEmail;
   final Function onChangedPassword;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
 
-  LoginCard({Key key, this.onChangedEmail, this.onChangedPassword})
+  LoginCard(
+      {Key key,
+      this.onChangedEmail,
+      this.onChangedPassword,
+      this.emailController,
+      this.passwordController})
       : super(key: key);
 
   @override
@@ -20,6 +27,7 @@ class LoginCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 25, right: 25),
             child: RoundedInputField(
+              controller: emailController,
               textInputType: TextInputType.emailAddress,
               icon: Icons.email_outlined,
               hintText: "Your Email",
@@ -34,6 +42,7 @@ class LoginCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 25, right: 25),
             child: RoundedPasswordField(
+              controller: passwordController,
               color: Colors.black,
               onChanged: onChangedPassword,
             ),
