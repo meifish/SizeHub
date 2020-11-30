@@ -32,6 +32,7 @@ class ScrollableCard extends StatelessWidget {
               offset: Offset(0, 1000),
               child: Container(
                   width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                     color: backgroundColor,
                     borderRadius: BorderRadius.only(
