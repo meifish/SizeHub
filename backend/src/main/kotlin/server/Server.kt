@@ -3,13 +3,16 @@ package src.server
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
-import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.websocket.*
+import src.api.endpoints.KtorGetEndpoint
+import src.api.endpoints.KtorPostEndpoint
+import src.api.endpoints.post.CreatePostEndpoint
+import src.database.PublicDb
 
-class Server {
+class Server(val publicDb: PublicDb) {
 
     init {
         val port = System.getenv("PORT")?.toInt() ?: 3000
@@ -33,10 +36,12 @@ class Server {
             }
             install(WebSockets)
             routing {
-                get("/") { call.respond("Welcome to ... the Backend") }
+                post("/createPost"){
+                    KtorPostEndpoint(CreatePostEndpoint(publicDb)).handle(call)
+                }
             }
         }
+        println("Server starting on port $port")
         server.start(wait = true)
     }
-
 }

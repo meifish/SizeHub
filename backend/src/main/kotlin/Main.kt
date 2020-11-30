@@ -1,14 +1,11 @@
 package src
 
 import src.database.Database
-import src.database.datagenerators.LuluLemonDatasetUploader
-import java.nio.file.Files
-import java.nio.file.Path
-import java.util.*
-import javax.imageio.ImageIO
+import src.server.Server
 
 fun main() {
     val database = Database()
+    val server = Server(database.publicDb)
 
     //DummyData(database.publicDb).generate()
     //LuluLemonDatasetUploader(database.publicDb).upload()

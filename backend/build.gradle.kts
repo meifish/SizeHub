@@ -33,7 +33,6 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:1.4.1")
     implementation("io.ktor:ktor-websockets:1.4.1")
     implementation("com.google.firebase:firebase-admin:7.0.1")
-    implementation("com.google.firebase:firebase-admin:7.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
     implementation("com.google.firebase:firebase-storage:16.0.3")
 }
