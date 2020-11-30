@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:size_hub/ui/MainLayout/MainLayout.dart';
 import 'package:size_hub/ui/Pages/LoginPage.dart';
 import 'package:size_hub/ui/Widgets/Common/PurpleRaisedButton.dart';
-import 'package:size_hub/ui/Widgets/FirebaseTest.dart';
 import 'package:size_hub/ui/Widgets/SplashPageWidgets/SplashPageLogo.dart';
 import 'package:size_hub/ui/animations/BounceInAnimation.dart';
 import 'package:size_hub/ui/animations/FadeInAnimation.dart';
@@ -36,7 +34,8 @@ class GroupedSplashPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MainLayout()),
+                  MaterialPageRoute(
+                      builder: (context) => LoginPage(isRegister: false)),
                 );
               },
             ),
@@ -53,7 +52,8 @@ class GroupedSplashPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    MaterialPageRoute(
+                        builder: (context) => LoginPage(isRegister: true)),
                   );
                 },
               )),

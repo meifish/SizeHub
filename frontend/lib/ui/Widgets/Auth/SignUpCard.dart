@@ -4,11 +4,11 @@ import 'package:size_hub/ui/animations/BounceInAnimation.dart';
 import 'Buttons/RoundedInputField.dart';
 import 'Buttons/RoundedPasswordField.dart';
 
-class LoginCard extends StatelessWidget {
+class SignUpCard extends StatelessWidget {
   final Function onChangedEmail;
   final Function onChangedPassword;
 
-  LoginCard({Key key, this.onChangedEmail, this.onChangedPassword})
+  SignUpCard({Key key, this.onChangedEmail, this.onChangedPassword})
       : super(key: key);
 
   @override
@@ -20,10 +20,10 @@ class LoginCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 25, right: 25),
             child: RoundedInputField(
-              textInputType: TextInputType.emailAddress,
-              icon: Icons.email_outlined,
+              textInputType: TextInputType.text,
+              icon: Icons.person_outlined,
               hintText: "Your Email",
-              color: Colors.black,
+              color: Colors.white,
               onChanged: onChangedEmail,
             ),
           ),
@@ -33,12 +33,26 @@ class LoginCard extends StatelessWidget {
         BounceInAnimation(
           child: Padding(
             padding: const EdgeInsets.only(left: 25, right: 25),
-            child: RoundedPasswordField(
-              color: Colors.black,
-              onChanged: onChangedPassword,
+            child: RoundedInputField(
+              textInputType: TextInputType.emailAddress,
+              icon: Icons.email_outlined,
+              hintText: "Your Email",
+              color: Colors.white,
+              onChanged: onChangedEmail,
             ),
           ),
           delay: Duration(milliseconds: 100),
+        ),
+        SizedBox(height: 25),
+        BounceInAnimation(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 25, right: 25),
+            child: RoundedPasswordField(
+              color: Colors.white,
+              onChanged: onChangedPassword,
+            ),
+          ),
+          delay: Duration(milliseconds: 200),
         ),
       ],
     );

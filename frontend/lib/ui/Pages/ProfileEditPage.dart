@@ -116,7 +116,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
                       //////////////// Change Photo ////////////////////////
                       Container(
                           height: 35,
-                          child: RaisedPurpleButton(
+                          child: PurpleRaisedButton(
                               child: Text("Change Image"), onPressed: () {})),
                       SizedBox(height: 5),
                       ////////////////////// Name //////////////////////////
@@ -389,7 +389,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
 
                 SizedBox(height: 50),
                 //////////////////////// Save //////////////////////////////
-                RaisedPurpleButton(
+                PurpleRaisedButton(
                   child: Text("Save"),
                   onPressed: submit,
                 )
