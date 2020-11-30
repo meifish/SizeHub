@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:size_hub/model/AuthenticationService.dart';
+import 'package:size_hub/ui/MainLayout/MainLayout.dart';
 import 'package:size_hub/ui/Widgets/Auth/BackgroundPainter.dart';
 import 'package:size_hub/ui/Widgets/Auth/LoginCard.dart';
 import 'package:size_hub/ui/Widgets/Common/PurpleRaisedButton.dart';
 import 'package:size_hub/ui/animations/BounceInAnimation.dart';
-
+import 'package:provider/provider.dart';
 import 'SignUpCard.dart';
 
 class GroupedAuthWidgets extends StatefulWidget {
@@ -82,9 +84,43 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
               child: PurpleRaisedButton(
                 child: Text(!_isRegister ? "Login" : "Create Account"),
                 onPressed: () {
-                  setState(() {
-                    print(emailController.text + " " + passwordController.text);
-                  });
+                  if (_isRegister)
+                    context
+                        .read<AuthenticationService>()
+                        .signUp(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        )
+                        .then((value) {
+                      Scaffold.of(context)
+                          .showSnackBar(SnackBar(content: Text(value)));
+                      if (value == 'Signed up') {
+                        setState(() {
+                          _isRegister = false;
+                          _pageViewController.animateToPage(0,
+                              duration: Duration(milliseconds: 200),
+                              curve: _curve);
+                          _controller.reverse();
+                        });
+                      }
+                    });
+                  else
+                    context
+                        .read<AuthenticationService>()
+                        .signIn(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        )
+                        .then((value) {
+                      Scaffold.of(context)
+                          .showSnackBar(SnackBar(content: Text(value)));
+                      if (value == 'Signed in') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MainLayout()),
+                        );
+                      }
+                    });
                 },
               ),
               delay: Duration(milliseconds: 200),
@@ -124,8 +160,6 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
       child: LoginCard(
         emailController: emailController,
         passwordController: passwordController,
-        onChangedEmail: (v) {},
-        onChangedPassword: (v) {},
       ),
     );
   }
@@ -135,13 +169,6 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
       child: SignUpCard(
         emailController: emailController,
         passwordController: passwordController,
-        onChangedEmail: (v) {
-          print(v);
-          setState(() {
-            print(v);
-          });
-        },
-        onChangedPassword: (v) {},
       ),
     );
   }
