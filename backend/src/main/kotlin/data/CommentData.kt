@@ -1,6 +1,8 @@
 package src.data
 
-class CommentData(val id: Id,
-                  val postId: Id,
+import kotlinx.serialization.Serializable
+
+@Serializable
+class CommentData(val postId: Id,
                   val userId: Id,
                   val comment: String)

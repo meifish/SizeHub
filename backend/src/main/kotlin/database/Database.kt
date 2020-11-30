@@ -34,7 +34,7 @@ class Database {
         val postDb = FirestoreCollection(db.collection("Posts")){ Json.decodeFromString<PostData>(it) }
         val brandDb = FirestoreCollection(db.collection("Brands")){ Json.decodeFromString<BrandData>(it) }
         val userDb = FirestoreCollection(db.collection("Users")){ Json.decodeFromString<UserData>(it) }
-        val commentDb = FirestoreCollection(db.collection("Comment")){ Json.decodeFromString<CommentData>(it) }
+        val commentDb = FirestoreCollection(db.collection("Comments")){ Json.decodeFromString<CommentData>(it) }
 
         publicDb = PublicDb(clothingItemDb, postDb, brandDb, userDb, commentDb)
     }

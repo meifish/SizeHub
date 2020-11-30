@@ -7,14 +7,9 @@ import io.ktor.response.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-interface KtorEndpoint{
+class KtorGetHandler {
 
-    suspend fun handle(call: ApplicationCall)
-}
-
-class KtorGetEndpoint(private val endpoint: Endpoint) {
-
-    suspend fun handle(call: ApplicationCall){
+    suspend fun handle(call: ApplicationCall, endpoint: Endpoint){
         try{
             val argMap = call.request.queryParameters.entries().map { it.key to it.value.first() }.toMap()
             call.respond(endpoint.handle(Json.encodeToString(argMap)))
@@ -25,9 +20,9 @@ class KtorGetEndpoint(private val endpoint: Endpoint) {
     }
 }
 
-class KtorPostEndpoint(private val endpoint: Endpoint){
+class KtorPostHandler {
 
-    suspend fun handle(call: ApplicationCall){
+    suspend fun handle(call: ApplicationCall, endpoint: Endpoint){
         try{
             call.respond(endpoint.handle(call.receiveText()))
         }

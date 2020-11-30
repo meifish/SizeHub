@@ -7,14 +7,12 @@ import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.websocket.*
-import src.api.endpoints.KtorGetEndpoint
-import src.api.endpoints.KtorPostEndpoint
-import src.api.endpoints.post.CreatePostEndpoint
 import src.database.PublicDb
 
 class Server(val publicDb: PublicDb) {
 
     init {
+        val router = Router(publicDb)
         val port = System.getenv("PORT")?.toInt() ?: 3000
         val server = embeddedServer(Netty, port = port) {
             install(CORS) {
@@ -35,11 +33,7 @@ class Server(val publicDb: PublicDb) {
                 header(HttpHeaders.AccessControlAllowOrigin)
             }
             install(WebSockets)
-            routing {
-                post("/createPost"){
-                    KtorPostEndpoint(CreatePostEndpoint(publicDb)).handle(call)
-                }
-            }
+            routing(router.setup)
         }
         println("Server starting on port $port")
         server.start(wait = true)

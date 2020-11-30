@@ -22,6 +22,9 @@ class PublicDb(private val clothingItemCollection: FirestoreCollection<ClothingI
 
     fun getBrands(): List<Brand> = brandCollection.getAll().map { it.toItem() }
 
+    fun getReplies(postId: Id): List<Comment>
+            = commentCollection.getAll().filter { it.data.postId == postId }.map { it.toItem(this) }
+
     fun searchBrandByName(name: String): Brand? = brandCollection.getBy("name", name)?.toItem()
     fun searchItemByName(name: String): ClothingItem? = clothingItemCollection.getBy("name", name)?.toItem(this)
     fun searchItemsByBrand(brandId: Id): List<ClothingItem>
