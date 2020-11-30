@@ -2,23 +2,23 @@ package src.database
 
 import src.data.*
 import src.database.dbitems.*
-import src.database.mutators.CreateBrandMutator
-import src.database.mutators.CreateClothingItemMutator
-import src.database.mutators.CreatePostMutator
-import src.database.mutators.CreateUserMutator
+import src.database.mutators.*
 
 class PublicDb(private val clothingItemCollection: FirestoreCollection<ClothingItemData>,
                private val postCollection: FirestoreCollection<PostData>,
                private val brandCollection: FirestoreCollection<BrandData>,
-               private val userCollection: FirestoreCollection<UserData>) {
+               private val userCollection: FirestoreCollection<UserData>,
+               private val commentCollection: FirestoreCollection<CommentData>) {
 
     val createBrand = CreateBrandMutator(brandCollection)
     val createClothingItem = CreateClothingItemMutator(clothingItemCollection, this)
     val createPost = CreatePostMutator(postCollection, this)
     val createUser = CreateUserMutator(userCollection, this)
+    val createComment = CreateCommentMutator(commentCollection, this)
 
     fun getBrandById(id: Id): Brand? = brandCollection.getById(id)?.toItem()
     fun getClothingItemById(id: Id): ClothingItem? = clothingItemCollection.getById(id)?.toItem(this)
+    fun getPostById(id: Id): Post? = postCollection.getById(id)?.toItem(this)
 
     fun getBrands(): List<Brand> = brandCollection.getAll().map { it.toItem() }
 
