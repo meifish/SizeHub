@@ -4,18 +4,20 @@ import 'package:size_hub/ui/animations/BounceInAnimation.dart';
 import 'Buttons/RoundedInputField.dart';
 import 'Buttons/RoundedPasswordField.dart';
 
-class LoginCard extends StatelessWidget {
+class SignUpCard extends StatelessWidget {
   final Function onChangedEmail;
   final Function onChangedPassword;
+  final TextEditingController nameController;
   final TextEditingController emailController;
   final TextEditingController passwordController;
 
-  LoginCard(
+  SignUpCard(
       {Key key,
       this.onChangedEmail,
       this.onChangedPassword,
       this.emailController,
-      this.passwordController})
+      this.passwordController,
+      this.nameController})
       : super(key: key);
 
   @override
@@ -27,11 +29,11 @@ class LoginCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 25, right: 25),
             child: RoundedInputField(
-              controller: emailController,
-              textInputType: TextInputType.emailAddress,
-              icon: Icons.email_outlined,
-              hintText: "Your Email",
-              color: Colors.black,
+              controller: nameController,
+              textInputType: TextInputType.text,
+              icon: Icons.person_outlined,
+              hintText: "Your Name",
+              color: Colors.white,
               onChanged: onChangedEmail,
             ),
           ),
@@ -41,13 +43,28 @@ class LoginCard extends StatelessWidget {
         BounceInAnimation(
           child: Padding(
             padding: const EdgeInsets.only(left: 25, right: 25),
-            child: RoundedPasswordField(
-              controller: passwordController,
-              color: Colors.black,
-              onChanged: onChangedPassword,
+            child: RoundedInputField(
+              controller: emailController,
+              textInputType: TextInputType.emailAddress,
+              icon: Icons.email_outlined,
+              hintText: "Your Email",
+              color: Colors.white,
+              onChanged: onChangedEmail,
             ),
           ),
           delay: Duration(milliseconds: 100),
+        ),
+        SizedBox(height: 25),
+        BounceInAnimation(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 25, right: 25),
+            child: RoundedPasswordField(
+              controller: passwordController,
+              color: Colors.white,
+              onChanged: onChangedPassword,
+            ),
+          ),
+          delay: Duration(milliseconds: 200),
         ),
       ],
     );

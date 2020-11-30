@@ -27,6 +27,7 @@ dependencies:
   flutter_local_notifications:
   timezone:
   sqflite:
+  provider:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -45,6 +46,7 @@ flutter:
     - assets/pictures/gallery/
     - assets/data/FakeHomePageData.json
     - assets/data/FakeProfileData.json
+    - assets/animations/BackgroundPurpleFlow.flr
   fonts:
     - family: SnowburstOne
       fonts:

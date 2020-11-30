@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-class RaisedPurpleButton extends StatelessWidget {
+class PurpleRaisedButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Widget child;
+  final double elevation;
 
-  RaisedPurpleButton({this.child, this.onPressed});
+  PurpleRaisedButton({this.child, this.onPressed, this.elevation = 2});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,8 @@ class RaisedPurpleButton extends StatelessWidget {
         textColor: Colors.white,
         color: Colors.purple,
         splashColor: Colors.purpleAccent,
+        elevation: elevation,
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)));
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)));
   }
 }

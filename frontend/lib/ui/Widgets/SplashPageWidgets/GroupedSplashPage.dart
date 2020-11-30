@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:size_hub/ui/MainLayout/MainLayout.dart';
 import 'package:size_hub/ui/Pages/LoginPage.dart';
-import 'package:size_hub/ui/Widgets/FirebaseTest.dart';
+import 'package:size_hub/ui/Widgets/Common/PurpleRaisedButton.dart';
 import 'package:size_hub/ui/Widgets/SplashPageWidgets/SplashPageLogo.dart';
 import 'package:size_hub/ui/animations/BounceInAnimation.dart';
 import 'package:size_hub/ui/animations/FadeInAnimation.dart';
@@ -29,21 +28,18 @@ class GroupedSplashPage extends StatelessWidget {
         Flexible(
             child: BounceInAnimation(
           child: SizedBox(
-              width: 250,
-              child: RaisedButton(
-                child: Text('Login'),
-                color: Colors.purple,
-                textColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.purple)),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainLayout()),
-                  );
-                },
-              )),
+            width: 250,
+            child: PurpleRaisedButton(
+              child: Text('Login'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => LoginPage(isRegister: false)),
+                );
+              },
+            ),
+          ),
           delay: Duration(milliseconds: 2000),
         )),
         Flexible(
@@ -56,7 +52,8 @@ class GroupedSplashPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    MaterialPageRoute(
+                        builder: (context) => LoginPage(isRegister: true)),
                   );
                 },
               )),

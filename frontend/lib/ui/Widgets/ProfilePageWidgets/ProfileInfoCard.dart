@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:size_hub/model/AuthenticationService.dart';
 import 'package:size_hub/ui/Pages/ProfileEditPage.dart';
+import 'package:size_hub/ui/Pages/SplashPage.dart';
+import 'package:size_hub/ui/Widgets/Common/PurpleRaisedButton.dart';
 import 'package:size_hub/ui/Widgets/ProfilePageWidgets/TextInfoPaddingBox.dart';
 import 'package:size_hub/ui/Widgets/ProfilePageWidgets/GridPhotoDisplay.dart';
+import 'package:provider/provider.dart';
 
 class ProfileInfoCard extends StatelessWidget {
   var profileMap;
@@ -116,6 +120,16 @@ class ProfileInfoCard extends StatelessWidget {
         ),
         SizedBox(height: 20),
         GridPhotoDisplay(),
+        SizedBox(height: 20),
+        PurpleRaisedButton(
+            child: Text("Sign out"),
+            onPressed: () {
+              context.read<AuthenticationService>().signOut();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SplashPage()),
+              );
+            })
       ],
     );
   }
