@@ -3,9 +3,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:size_hub/AuthenticationWrapper.dart';
+import 'package:size_hub/api/ApiClient.dart';
+import 'package:size_hub/api/args/CreateCommentArgs.dart';
 import 'package:size_hub/model/AuthenticationService.dart';
 
 void main() {
+
+  ApiClient().createComment(CreateCommentArgs(userId: "0", postId: "0", comment: "test")).then((value) => {
+    print(value)
+  });
+  ApiClient().getReplies("0VNmEhqIa7qbz2WXk1HA").then((value) => {
+    print(value)
+  });
+
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp().then((_) => runApp(MyApp()));
 }
