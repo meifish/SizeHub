@@ -22,8 +22,8 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
   bool _isRegister;
   PageController _pageViewController;
   Curve _curve = Curves.bounceIn;
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -44,6 +44,9 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
   @override
   void dispose() {
     _controller.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _pageViewController.dispose();
     super.dispose();
   }
 
@@ -88,8 +91,8 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
                     context
                         .read<AuthenticationService>()
                         .signUp(
-                          email: emailController.text,
-                          password: passwordController.text,
+                          email: _emailController.text,
+                          password: _passwordController.text,
                         )
                         .then((value) {
                       Scaffold.of(context)
@@ -108,8 +111,8 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
                     context
                         .read<AuthenticationService>()
                         .signIn(
-                          email: emailController.text,
-                          password: passwordController.text,
+                          email: _emailController.text,
+                          password: _passwordController.text,
                         )
                         .then((value) {
                       Scaffold.of(context)
@@ -158,8 +161,8 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
   Center _buildLogin() {
     return Center(
       child: LoginCard(
-        emailController: emailController,
-        passwordController: passwordController,
+        emailController: _emailController,
+        passwordController: _passwordController,
       ),
     );
   }
@@ -167,8 +170,8 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
   Center _buildSignUp() {
     return Center(
       child: SignUpCard(
-        emailController: emailController,
-        passwordController: passwordController,
+        emailController: _emailController,
+        passwordController: _passwordController,
       ),
     );
   }
