@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:size_hub/ui/MainLayout/MainLayout.dart';
 import 'package:size_hub/ui/Pages/LoginPage.dart';
+import 'package:size_hub/ui/Widgets/Common/PurpleRaisedButton.dart';
 import 'package:size_hub/ui/Widgets/FirebaseTest.dart';
 import 'package:size_hub/ui/Widgets/SplashPageWidgets/SplashPageLogo.dart';
 import 'package:size_hub/ui/animations/BounceInAnimation.dart';
@@ -29,21 +30,17 @@ class GroupedSplashPage extends StatelessWidget {
         Flexible(
             child: BounceInAnimation(
           child: SizedBox(
-              width: 250,
-              child: RaisedButton(
-                child: Text('Login'),
-                color: Colors.purple,
-                textColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.purple)),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainLayout()),
-                  );
-                },
-              )),
+            width: 250,
+            child: PurpleRaisedButton(
+              child: Text('Login'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainLayout()),
+                );
+              },
+            ),
+          ),
           delay: Duration(milliseconds: 2000),
         )),
         Flexible(
