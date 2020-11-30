@@ -49,6 +49,7 @@ flutter:
     - assets/data/FakeHomePageData.json
     - assets/data/FakeProfileData.json
     - assets/animations/BackgroundPurpleFlow.flr
+    - assets/animations/Like.flr
   fonts:
     - family: SnowburstOne
       fonts:
