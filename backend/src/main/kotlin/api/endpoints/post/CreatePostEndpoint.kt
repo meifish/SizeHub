@@ -29,7 +29,7 @@ class CreatePostEndpoint(private val publicDb: PublicDb) : Endpoint{
         val input = json.decodeFromString<CreatePostArgs>(jsonInput)
         //TODO: token check
         val post = publicDb.createPost(input.toPostData())
-            ?: return json.encodeToString(ErrorResponse.unknown())
+            ?: return ErrorResponse("Failed to create post").toJson(json)
         return json.encodeToString(post.data)
     }
 }

@@ -15,7 +15,7 @@ class DummyData(private val publicDb: PublicDb) {
         val theGapBrand = publicDb.searchBrandByName("The Gap")
             ?: publicDb.createBrand(BrandData("The Gap", "https://www.gapcanada.ca/"))
 
-        listOf(gucciBrand, supremeBrand, theGapBrand).forEach { brand ->
+        listOf(gucciBrand, supremeBrand, theGapBrand).filterNotNull().forEach { brand ->
             listOf("Red", "Green", "Blue").forEach { color ->
                 listOf("T-Shirt", "Pants").forEach { item ->
                     val name = "$color $item"

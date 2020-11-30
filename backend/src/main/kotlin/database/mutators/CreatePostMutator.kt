@@ -11,6 +11,6 @@ class CreatePostMutator(private val postCollection: FirestoreCollection<PostData
 
     //TODO: token check
     operator fun invoke(postData: PostData): Post?{
-        return postCollection.create(postData).toItem(publicDb)
+        return postCollection.create(postData)?.toItem(publicDb)
     }
 }

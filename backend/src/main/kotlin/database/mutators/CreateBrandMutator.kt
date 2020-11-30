@@ -7,7 +7,7 @@ import src.database.dbitems.toItem
 
 class CreateBrandMutator(private val brandCollection: FirestoreCollection<BrandData>) {
 
-    operator fun invoke(brandData: BrandData): Brand {
-        return brandCollection.create(brandData).toItem()
+    operator fun invoke(brandData: BrandData): Brand? {
+        return brandCollection.create(brandData)?.toItem()
     }
 }

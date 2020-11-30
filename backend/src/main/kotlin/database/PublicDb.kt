@@ -32,8 +32,8 @@ class PublicDb(private val clothingItemCollection: FirestoreCollection<ClothingI
     fun searchItemByNameAndBrand(brandId: Id?, name: String): ClothingItem?
             = clothingItemCollection.getAllBy("name", name).find { it.data.brandId == brandId }?.toItem(this)
     fun searchUserByName(name: String): User? = userCollection.getBy("username", name)?.toItem()
-    fun searchPostsByUserAndClothingItem(userId: Id, itemId: Id): List<Post>
+    fun searchPostsByUserAndClothingItem(userId: Id, clothingItemId: Id): List<Post>
             = postCollection.getAllBy("userId", userId)
         .map { it.toItem(this) }
-        .filter { it.data.itemId == itemId }
+        .filter { it.data.clothingItemId == clothingItemId }
 }

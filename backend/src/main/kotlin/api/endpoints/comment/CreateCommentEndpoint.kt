@@ -11,7 +11,7 @@ import src.database.PublicDb
 
 //This class is temporarily identical to CommentData (until auth is implemented)
 @Serializable
-class CreateCommentArgs(private val postId: Id,
+class CreateCommentArgs(val postId: Id,
                         private val userId: Id,
                         private val comment: String){
 
@@ -25,8 +25,10 @@ class CreateCommentEndpoint(private val publicDb: PublicDb) : Endpoint {
     override fun handle(jsonInput: String): String {
         val input = json.decodeFromString<CreateCommentArgs>(jsonInput)
         //TODO: token check
+        val post = publicDb.getPostById(input.postId)
+            ?: return ErrorResponse("Post does not exist").toJson(json)
         val comment = publicDb.createComment(input.toCommentData())
-            ?: return json.encodeToString(ErrorResponse.unknown())
+            ?: return ErrorResponse("Failed to create comment").toJson(json)
         return json.encodeToString(comment.data)
     }
 }

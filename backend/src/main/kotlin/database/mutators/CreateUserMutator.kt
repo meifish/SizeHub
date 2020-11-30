@@ -11,6 +11,6 @@ class CreateUserMutator(private val userCollection: FirestoreCollection<UserData
 
     operator fun invoke(userData: UserData): User? {
         if(publicDb.searchUserByName(userData.username) != null) return null
-        return userCollection.create(userData).toItem()
+        return userCollection.create(userData)?.toItem()
     }
 }

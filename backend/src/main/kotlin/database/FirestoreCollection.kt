@@ -20,8 +20,16 @@ class FirestoreCollection<T>(private val collection: CollectionReference,
         }
     }
 
-    private fun toObject(documentSnapshot: DocumentSnapshot): DataIdPair<T>{
-        return DataIdPair(documentSnapshot.id, decoder(gson.toJson(documentSnapshot.data)))
+    private fun toObject(documentSnapshot: DocumentSnapshot): DataIdPair<T>?{
+        if(documentSnapshot.data == null) return null
+        try {
+            return DataIdPair(documentSnapshot.id, decoder(gson.toJson(documentSnapshot.data)))
+        }
+        catch (e: Exception){
+            System.err.println("Critical Error decoding ${documentSnapshot.data}")
+            System.err.println("ID = ${documentSnapshot.id}")
+            throw e
+        }
     }
 
     fun getById(id: Id): DataIdPair<T>? {
@@ -33,13 +41,13 @@ class FirestoreCollection<T>(private val collection: CollectionReference,
     }
 
     fun getAllBy(field: String, value: Any): List<DataIdPair<T>> {
-        return collection.whereEqualTo(field, value).get().get().map { toObject(it) }
+        return collection.whereEqualTo(field, value).get().get().mapNotNull { toObject(it) }
     }
 
     fun getAll(): List<DataIdPair<T>>
             = collection.listDocuments().mapNotNull { it.get().get()?.let { doc -> toObject(doc) } }
 
-    fun create(item: T): DataIdPair<T> {
+    fun create(item: T): DataIdPair<T>? {
         return toObject(collection.add(item).get().get().get())
     }
 }

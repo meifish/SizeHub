@@ -5,14 +5,11 @@ import com.google.cloud.firestore.Firestore
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import com.google.firebase.cloud.FirestoreClient
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import src.data.*
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.*
-import javax.imageio.ImageIO
 
 class Database {
 

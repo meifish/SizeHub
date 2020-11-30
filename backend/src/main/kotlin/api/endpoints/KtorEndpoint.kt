@@ -10,6 +10,7 @@ import kotlinx.serialization.json.Json
 class KtorGetHandler {
 
     suspend fun handle(call: ApplicationCall, endpoint: Endpoint){
+        println("Get request to ${endpoint.path}")
         try{
             val argMap = call.request.queryParameters.entries().map { it.key to it.value.first() }.toMap()
             call.respond(endpoint.handle(Json.encodeToString(argMap)))
@@ -23,6 +24,7 @@ class KtorGetHandler {
 class KtorPostHandler {
 
     suspend fun handle(call: ApplicationCall, endpoint: Endpoint){
+        println("Post request to ${endpoint.path}")
         try{
             call.respond(endpoint.handle(call.receiveText()))
         }

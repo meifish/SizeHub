@@ -11,6 +11,7 @@ class CreateCommentMutator(private val commentCollection: FirestoreCollection<Co
 
     //TODO: token check
     operator fun invoke(commentData: CommentData): Comment? {
-        return commentCollection.create(commentData).toItem(publicDb)
+        publicDb.getPostById(commentData.postId) ?: return null
+        return commentCollection.create(commentData)?.toItem(publicDb)
     }
 }

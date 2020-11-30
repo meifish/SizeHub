@@ -13,6 +13,6 @@ class CreateClothingItemMutator(private val clothingItemCollection: FirestoreCol
         clothingItemData.brandId?.let {
             if (publicDb.getBrandById(it) == null) return null
         }
-        return clothingItemCollection.create(clothingItemData).toItem(publicDb)
+        return clothingItemCollection.create(clothingItemData)?.toItem(publicDb)
     }
 }

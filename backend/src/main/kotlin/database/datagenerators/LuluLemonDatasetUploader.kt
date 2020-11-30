@@ -11,7 +11,7 @@ class LuluLemonDatasetUploader(private val publicDb: PublicDb) {
 
     fun upload(){
         val luluLemonBrand = publicDb.searchBrandByName("LuluLemon")
-            ?: publicDb.createBrand(BrandData("LuluLemon", "https://shop.lululemon.com/"))
+            ?: publicDb.createBrand(BrandData("LuluLemon", "https://shop.lululemon.com/")) ?: return
 
         Files.list(dataRootPath).forEach { modelPath ->
             val modelName = modelPath.fileName.toString()
