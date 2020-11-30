@@ -1,9 +1,9 @@
 import 'dart:io';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:size_hub/data/profileModel.dart';
 import 'package:size_hub/ui/Widgets/DialogueWidget/BodyShapeDialog.dart';
-import 'package:size_hub/ui/Widgets/ProfilePageWidgets/BackgroundPainter.dart';
 import 'package:size_hub/ui/Widgets/Common/PurpleRaisedButton.dart';
 import 'package:size_hub/model/notification_helper.dart';
 import 'package:size_hub/model/profileDB_helper.dart';
@@ -89,8 +89,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
       bottom: true,
       child: Stack(
         children: [SizedBox.expand(
-            child: CustomPaint(
-              painter: BackgroundPainter())),Form(
+            child: FlareActor('assets/animations/BackgroundPurpleFlow.flr', animation: 'Flow', fit: BoxFit.cover,)),Form(
             key: _formKey,
             child: ListView(
               padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
