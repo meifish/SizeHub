@@ -9,7 +9,7 @@ import src.database.dbitems.toItem
 class CreateClothingItemMutator(private val clothingItemCollection: FirestoreCollection<ClothingItemData>,
                                 private val publicDb: PublicDb) {
 
-    operator fun invoke(clothingItemData: ClothingItemData): ClothingItem?{
+    operator fun invoke(clothingItemData: ClothingItemData): ClothingItem? {
         clothingItemData.brandId?.let {
             if (publicDb.getBrandById(it) == null) return null
         }

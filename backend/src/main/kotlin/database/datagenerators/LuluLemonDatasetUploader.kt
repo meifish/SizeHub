@@ -7,7 +7,7 @@ import java.nio.file.Path
 
 class LuluLemonDatasetUploader(private val publicDb: PublicDb) {
 
-    val dataRootPath = Path.of("C:\\Users\\Vincent\\IdeaProjects\\major-group-project-size_hub\\backend\\data\\crawl")
+    private val dataRootPath = Path.of("C:\\Users\\Vincent\\IdeaProjects\\major-group-project-size_hub\\backend\\data\\crawl")
 
     fun upload(){
         val luluLemonBrand = publicDb.searchBrandByName("LuluLemon")
@@ -25,18 +25,19 @@ class LuluLemonDatasetUploader(private val publicDb: PublicDb) {
                 val clothingName = clothingPath.fileName.toString()
                 println("  $clothingName")
 
+                /*
                 val clothingItem = publicDb.searchItemByNameAndBrand(luluLemonBrand.id, clothingName)
-                    ?: publicDb.createClothingItem(ClothingItemData(luluLemonBrand.id, clothingName, listOf("https://image.shutterstock.com/image-illustration/red-stamp-on-white-background-260nw-1165179109.jpg")))
+                    ?: publicDb.createClothingItem(ClothingItemData(luluLemonBrand.id, clothingName, "")
                     ?: return@ClothingLoop
 
                 if(publicDb.searchPostsByUserAndClothingItem(user.id, clothingItem.id).isEmpty()){
                     publicDb.createPost(PostData(
                         user.id,
                         clothingItem.id,
-                        UserMeasurementsData(123, 456),
+                        UserMeasurementsData("123", 120, "456"),
                         listOf("https://image.shutterstock.com/image-illustration/red-stamp-on-white-background-260nw-1165179109.jpg"),
                         "temp comment"))
-                }
+                }*/
             }
         }
     }

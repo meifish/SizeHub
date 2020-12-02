@@ -20,7 +20,7 @@ class DummyData(private val publicDb: PublicDb) {
                 listOf("T-Shirt", "Pants").forEach { item ->
                     val name = "$color $item"
                     if(publicDb.searchItemByNameAndBrand(brand.id, name) == null) {
-                        publicDb.createClothingItem(ClothingItemData(brand.id, name, emptyList()))
+                        publicDb.createClothingItem(ClothingItemData(brand.id, name, ""))
                     }
                 }
             }
@@ -37,7 +37,10 @@ class DummyData(private val publicDb: PublicDb) {
     fun generateRandomPost(user: User){
         val brand = publicDb.getBrands().random()
         val item = publicDb.searchItemsByBrand(brand.id).random()
-        val measurementsData = UserMeasurementsData(Random.nextInt(100, 200), Random.nextInt(100, 200))
+        val measurementsData = UserMeasurementsData(
+            Random.nextInt(100, 200).toString(),
+            Random.nextInt(100, 200),
+            Random.nextInt(2, 20).toString())
 
         publicDb.createPost(PostData(user.id, item.id, measurementsData, emptyList(), "test comment"))
     }

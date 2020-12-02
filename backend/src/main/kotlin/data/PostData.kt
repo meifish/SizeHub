@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 class PostData(val userId: Id,
                val clothingItemId: Id? = null,
-               val userMeasurementsData: UserMeasurementsData,
+               val userMeasurementsData: UserMeasurementsData? = null,
                val photoUrls: List<String>,
                val comment: String)
