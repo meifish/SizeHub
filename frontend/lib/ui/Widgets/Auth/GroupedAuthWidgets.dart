@@ -72,88 +72,97 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
             textAlign: TextAlign.center,
             textScaleFactor: 2,
           )),
-      PageView(
-        physics: new NeverScrollableScrollPhysics(),
-        controller: _pageViewController,
-        children: [_buildLogin(), _buildSignUp()],
-      ),
-      Positioned(
-        bottom: 250,
-        left: 25,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BounceInAnimation(
-              child: PurpleRaisedButton(
-                child: Text(!_isRegister ? "Login" : "Create Account"),
-                onPressed: () {
-                  if (_isRegister)
-                    context
-                        .read<AuthenticationService>()
-                        .signUp(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                        )
-                        .then((value) {
-                      Scaffold.of(context)
-                          .showSnackBar(SnackBar(content: Text(value)));
-                      if (value == 'Signed up') {
-                        setState(() {
-                          _isRegister = false;
-                          _pageViewController.animateToPage(0,
-                              duration: Duration(milliseconds: 200),
-                              curve: _curve);
-                          _controller.reverse();
-                        });
-                      }
-                    });
-                  else
-                    context
-                        .read<AuthenticationService>()
-                        .signIn(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                        )
-                        .then((value) {
-                      Scaffold.of(context)
-                          .showSnackBar(SnackBar(content: Text(value)));
-                      if (value == 'Signed in') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MainLayout()),
-                        );
-                      }
-                    });
-                },
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+         Flexible(
+              child: PageView(
+                physics: new NeverScrollableScrollPhysics(),
+                controller: _pageViewController,
+                children: [_buildLogin(), _buildSignUp()],
               ),
-              delay: Duration(milliseconds: 200),
             ),
-            BounceInAnimation(
-              child: FlatButton(
-                child: Text(
-                    _isRegister ? "Already Have an account" : "Create Account"),
-                textColor: _isRegister ? Colors.white : Colors.black,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0)),
-                onPressed: () {
-                  setState(() {
-                    _isRegister = !_isRegister;
-                    if (!_isRegister) {
-                      _controller.reverse();
-                      _pageViewController.animateToPage(0,
-                          duration: Duration(milliseconds: 200), curve: _curve);
-                    } else {
-                      _controller.forward(from: 0);
-                      _pageViewController.animateToPage(1,
-                          duration: Duration(milliseconds: 200), curve: _curve);
-                    }
-                  });
-                },
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.only(left:20),
+              child: BounceInAnimation(
+                child: PurpleRaisedButton(
+                  child: Text(!_isRegister ? "Login" : "Create Account"),
+                  onPressed: () {
+                    if (_isRegister)
+                      context
+                          .read<AuthenticationService>()
+                          .signUp(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          )
+                          .then((value) {
+                        Scaffold.of(context)
+                            .showSnackBar(SnackBar(content: Text(value)));
+                        if (value == 'Signed up') {
+                          setState(() {
+                            _isRegister = false;
+                            _pageViewController.animateToPage(0,
+                                duration: Duration(milliseconds: 200),
+                                curve: _curve);
+                            _controller.reverse();
+                          });
+                        }
+                      });
+                    else
+                      context
+                          .read<AuthenticationService>()
+                          .signIn(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          )
+                          .then((value) {
+                        Scaffold.of(context)
+                            .showSnackBar(SnackBar(content: Text(value)));
+                        if (value == 'Signed in') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MainLayout()),
+                          );
+                        }
+                      });
+                  },
+                ),
+                delay: Duration(milliseconds: 200),
               ),
-              delay: Duration(milliseconds: 300),
-            )
-          ],
-        ),
+            ),
+          ),
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: BounceInAnimation(
+                child: FlatButton(
+                  child: Text(
+                      _isRegister ? "Already Have an account" : "Create Account"),
+                  textColor: _isRegister ? Colors.white : Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0)),
+                  onPressed: () {
+                    setState(() {
+                      _isRegister = !_isRegister;
+                      if (!_isRegister) {
+                        _controller.reverse();
+                        _pageViewController.animateToPage(0,
+                            duration: Duration(milliseconds: 200), curve: _curve);
+                      } else {
+                        _controller.forward(from: 0);
+                        _pageViewController.animateToPage(1,
+                            duration: Duration(milliseconds: 200), curve: _curve);
+                      }
+                    });
+                  },
+                ),
+                delay: Duration(milliseconds: 300),
+              ),
+            ),
+          ),
+        ],
       )
     ]);
   }
