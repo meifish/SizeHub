@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:size_hub/ui/Pages/CameraPage.dart';
 import 'package:size_hub/ui/Pages/ExplorePage.dart';
-import 'package:size_hub/ui/Pages/MapPage.dart';
+import 'package:size_hub/ui/Pages/TrendingPage.dart';
 import 'package:size_hub/ui/Pages/ProfilePage.dart';
 import 'package:size_hub/ui/Pages/SearchPage.dart';
 import 'BottomNavigationBar/BottomNavigation.dart';
@@ -20,7 +20,7 @@ class _MainLayoutState extends State<MainLayout> {
   List<Widget> _children = [
     ExplorePage(),
     SearchPage(),
-    MapPage(),
+    TrendingPage(),
     ProfilePage(),
   ];
 
@@ -45,7 +45,7 @@ class _MainLayoutState extends State<MainLayout> {
           BottomNavigationIconButton(
               icon: Icons.search, text: "Search", hasNotification: false),
           BottomNavigationIconButton(
-              icon: Icons.home, text: "Home", hasNotification: false),
+              icon: Icons.trending_up, text: "Trending", hasNotification: false),
           BottomNavigationIconButton(
               icon: Icons.account_circle_sharp,
               text: "Profile",
