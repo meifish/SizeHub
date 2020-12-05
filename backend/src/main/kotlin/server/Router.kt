@@ -1,12 +1,14 @@
 package src.server
 
 import io.ktor.routing.*
+import src.api.endpoints.Endpoint
 import src.api.endpoints.KtorGetHandler
 import src.api.endpoints.KtorPostHandler
 import src.api.endpoints.comment.CreateCommentEndpoint
 import src.api.endpoints.comment.GetRepliesEndpoint
 import src.api.endpoints.post.CreatePostEndpoint
 import src.api.endpoints.post.GetDetailedPostEndpoint
+import src.api.endpoints.user.CreateUserEndpoint
 import src.api.endpoints.user.GetDetailedProfileEndpoint
 import src.database.PublicDb
 
@@ -15,7 +17,7 @@ class Router(publicDb: PublicDb) {
     private val ktorGetHandler = KtorGetHandler()
     private val ktorPostHandler = KtorPostHandler()
 
-    private val getEndpoints = listOf(
+    private val getEndpoints: List<Endpoint> = listOf(
         //comment
         GetRepliesEndpoint(publicDb),
 
@@ -26,7 +28,7 @@ class Router(publicDb: PublicDb) {
         GetDetailedProfileEndpoint(publicDb)
     )
 
-    private val postEndpoints = listOf(
+    private val postEndpoints: List<Endpoint> = listOf(
         //comment
         CreateCommentEndpoint(publicDb),
 
@@ -34,7 +36,7 @@ class Router(publicDb: PublicDb) {
         CreatePostEndpoint(publicDb),
 
         //user
-        GetDetailedProfileEndpoint(publicDb)
+        CreateUserEndpoint(publicDb)
     )
 
     val setup: Routing.() -> Unit = {
@@ -43,6 +45,18 @@ class Router(publicDb: PublicDb) {
         }
         postEndpoints.forEach { endpoint ->
             post(endpoint.path) { ktorPostHandler.handle(context, endpoint) }
+        }
+    }
+
+    fun print(){
+        println("/GET")
+        getEndpoints.forEach {
+            println("${it.path} - ${it.javaClass.simpleName.substring(0 until it.javaClass.simpleName.length-8)}")
+        }
+        println()
+        println("/POST")
+        postEndpoints.forEach {
+            println("${it.path} - ${it.javaClass.simpleName.substring(0 until it.javaClass.simpleName.length-8)}")
         }
     }
 }

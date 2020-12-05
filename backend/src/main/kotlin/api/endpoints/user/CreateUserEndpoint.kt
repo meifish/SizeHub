@@ -16,7 +16,7 @@ class CreateUserArgs(private val username: String){
     fun toUserData() = UserData(username)
 }
 
-class CreateUser(private val publicDb: PublicDb) : Endpoint{
+class CreateUserEndpoint(private val publicDb: PublicDb) : Endpoint{
 
     override val path = "/createUser"
 
