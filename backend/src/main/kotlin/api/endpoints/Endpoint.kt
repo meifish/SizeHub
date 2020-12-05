@@ -1,6 +1,7 @@
 package src.api.endpoints
 
 import kotlinx.serialization.json.Json
+import src.api.responses.Response
 
 interface Endpoint {
 
@@ -10,5 +11,5 @@ interface Endpoint {
         ignoreUnknownKeys = true
     }
 
-    fun handle(jsonInput: String): String
+    fun handle(jsonInput: String): Response
 }

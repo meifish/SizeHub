@@ -4,7 +4,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import src.api.endpoints.Endpoint
+import src.api.responses.CommentResponse
 import src.api.responses.ErrorResponse
+import src.api.responses.Response
 import src.data.CommentData
 import src.data.Id
 import src.database.PublicDb
@@ -22,13 +24,14 @@ class CreateCommentEndpoint(private val publicDb: PublicDb) : Endpoint {
 
     override val path = "/createComment"
 
-    override fun handle(jsonInput: String): String {
+    override fun handle(jsonInput: String): Response {
         val input = json.decodeFromString<CreateCommentArgs>(jsonInput)
         //TODO: token check
         val post = publicDb.getPostById(input.postId)
-            ?: return ErrorResponse("Post does not exist").toJson(json)
+            ?: return ErrorResponse.postNotFound()
         val comment = publicDb.createComment(input.toCommentData())
-            ?: return ErrorResponse("Failed to create comment").toJson(json)
-        return json.encodeToString(comment.data)
+            ?: return ErrorResponse("Failed to create comment")
+
+        return CommentResponse.from(comment)
     }
 }

@@ -6,6 +6,8 @@ import src.api.endpoints.KtorPostHandler
 import src.api.endpoints.comment.CreateCommentEndpoint
 import src.api.endpoints.comment.GetRepliesEndpoint
 import src.api.endpoints.post.CreatePostEndpoint
+import src.api.endpoints.post.GetDetailedPostEndpoint
+import src.api.endpoints.user.GetDetailedProfileEndpoint
 import src.database.PublicDb
 
 class Router(publicDb: PublicDb) {
@@ -14,11 +16,25 @@ class Router(publicDb: PublicDb) {
     private val ktorPostHandler = KtorPostHandler()
 
     private val getEndpoints = listOf(
-        GetRepliesEndpoint(publicDb)
+        //comment
+        GetRepliesEndpoint(publicDb),
+
+        //post
+        GetDetailedPostEndpoint(publicDb),
+
+        //user
+        GetDetailedProfileEndpoint(publicDb)
     )
+
     private val postEndpoints = listOf(
+        //comment
+        CreateCommentEndpoint(publicDb),
+
+        //post
         CreatePostEndpoint(publicDb),
-        CreateCommentEndpoint(publicDb)
+
+        //user
+        GetDetailedProfileEndpoint(publicDb)
     )
 
     val setup: Routing.() -> Unit = {
