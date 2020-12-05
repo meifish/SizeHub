@@ -35,6 +35,7 @@ class LuluLemonDatasetUploaderV2(private val publicDb: PublicDb) {
             val post = publicDb.createPost(PostData(
                 user.id,
                 clothingItem.id,
+                it.modelWearSize,
                 it.toUserMeasurementData(),
                 it.imageUrls, "${clothingItem.data.name} Modelled by ${user.data.username}"))
         }

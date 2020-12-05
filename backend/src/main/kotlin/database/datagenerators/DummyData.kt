@@ -39,9 +39,8 @@ class DummyData(private val publicDb: PublicDb) {
         val item = publicDb.searchItemsByBrand(brand.id).random()
         val measurementsData = UserMeasurementsData(
             Random.nextInt(100, 200).toString(),
-            Random.nextInt(100, 200),
-            Random.nextInt(2, 20).toString())
+            Random.nextInt(100, 200))
 
-        publicDb.createPost(PostData(user.id, item.id, measurementsData, emptyList(), "test comment"))
+        publicDb.createPost(PostData(user.id, item.id, "4", measurementsData, emptyList(), "test comment"))
     }
 }

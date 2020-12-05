@@ -19,6 +19,8 @@ class PublicDb(private val clothingItemCollection: FirestoreCollection<ClothingI
     fun getBrandById(id: Id): Brand? = brandCollection.getById(id)?.toItem()
     fun getClothingItemById(id: Id): ClothingItem? = clothingItemCollection.getById(id)?.toItem(this)
     fun getPostById(id: Id): Post? = postCollection.getById(id)?.toItem(this)
+    //TODO: PROTECT THIS FUNCTION WITH TOKEN CHECKS
+    fun getUserById(id: Id): User? = userCollection.getById(id)?.toItem(this)
 
     fun getBrands(): List<Brand> = brandCollection.getAll().map { it.toItem() }
 
@@ -31,9 +33,11 @@ class PublicDb(private val clothingItemCollection: FirestoreCollection<ClothingI
             = clothingItemCollection.getAllBy("brandId", brandId).map { it.toItem(this) }
     fun searchItemByNameAndBrand(brandId: Id?, name: String): ClothingItem?
             = clothingItemCollection.getAllBy("name", name).find { it.data.brandId == brandId }?.toItem(this)
-    fun searchUserByName(name: String): User? = userCollection.getBy("username", name)?.toItem()
+    fun searchUserByName(name: String): User? = userCollection.getBy("username", name)?.toItem(this)
     fun searchPostsByUserAndClothingItem(userId: Id, clothingItemId: Id): List<Post>
+            = searchPostsByUser(userId)
+        .filter { it.data.clothingItemId == clothingItemId }
+    fun searchPostsByUser(userId: Id): List<Post>
             = postCollection.getAllBy("userId", userId)
         .map { it.toItem(this) }
-        .filter { it.data.clothingItemId == clothingItemId }
 }

@@ -10,6 +10,10 @@ class Post(override val id: Id,
            private val publicDb: PublicDb) : DbItem<PostData> {
 
     fun getClothingItem(): ClothingItem? = data.clothingItemId?.let { publicDb.getClothingItemById(it) }
+
+    fun getReplies() = publicDb.getReplies(id)
+
+    fun getUser() = publicDb.getUserById(id)
 }
 
 fun DataIdPair<PostData>.toItem(publicDb: PublicDb) = Post(id, data, publicDb)
