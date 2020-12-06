@@ -5,7 +5,6 @@ import kotlinx.serialization.decodeFromString
 import src.api.endpoints.Endpoint
 import src.api.responses.ErrorResponse
 import src.api.responses.PublicUserProfileResponse
-import src.api.responses.Response
 import src.data.Id
 import src.data.PostData
 import src.database.PublicDb
@@ -20,13 +19,12 @@ class GetDetailedProfileEndpoint(private val publicDb: PublicDb) : Endpoint{
 
     override val path = "/profile"
 
-    override fun handle(jsonInput: String): Response {
+    override fun handle(jsonInput: String): String {
         val args = json.decodeFromString<GetDetailedProfileArgs>(jsonInput)
 
-        //TODO: ADD TOKEN CHECKS
-        val user = publicDb.getUserById(args.userId)
-            ?: return ErrorResponse.notFound("user")
+        val user = publicDb.getPublicUser(args.userId)
+            ?: return ErrorResponse.notFound("User").toJson()
 
-        return PublicUserProfileResponse.from(user)
+        return PublicUserProfileResponse.from(user).toJson()
     }
 }

@@ -1,6 +1,9 @@
 package src.api.responses
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import src.data.Id
 import src.database.dbitems.ClothingItem
 
@@ -8,9 +11,9 @@ import src.database.dbitems.ClothingItem
 class ClothingItemResponse(val clothingItemId: Id,
                            val brand: BrandResponse?,
                            val name: String,
-                           val category: String): Response {
+                           val category: String) {
 
-    companion object{
+    companion object {
 
         fun from(clothingItem: ClothingItem) = ClothingItemResponse(
             clothingItem.id,
@@ -19,4 +22,6 @@ class ClothingItemResponse(val clothingItemId: Id,
             clothingItem.data.name
         )
     }
+
+    fun toJson() = Json.encodeToString(this)
 }

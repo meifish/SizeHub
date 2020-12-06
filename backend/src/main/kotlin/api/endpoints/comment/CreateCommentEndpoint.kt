@@ -2,36 +2,35 @@ package src.api.endpoints.comment
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
+import src.api.endpoints.AuthEndpoint
 import src.api.endpoints.Endpoint
+import src.api.endpoints.Token
 import src.api.responses.CommentResponse
 import src.api.responses.ErrorResponse
-import src.api.responses.Response
-import src.data.CommentData
 import src.data.Id
 import src.database.PublicDb
+import src.database.dbitems.User
 
-//This class is temporarily identical to CommentData (until auth is implemented)
 @Serializable
-class CreateCommentArgs(val postId: Id,
-                        private val userId: Id,
+class CreateCommentArgs(val token: String,
+                        val postId: Id,
                         private val comment: String){
 
-    fun toCommentData() = CommentData(postId, userId, comment)
+    fun toMutatorArgs() = src.database.mutators.CreateCommentArgs(postId, comment)
 }
 
-class CreateCommentEndpoint(private val publicDb: PublicDb) : Endpoint {
+class CreateCommentEndpoint(publicDb: PublicDb) : AuthEndpoint(publicDb) {
 
     override val path = "/createComment"
 
-    override fun handle(jsonInput: String): Response {
+    override fun handle(jsonInput: String, user: User): String {
         val input = json.decodeFromString<CreateCommentArgs>(jsonInput)
-        //TODO: token check
-        val post = publicDb.getPostById(input.postId)
-            ?: return ErrorResponse.postNotFound()
-        val comment = publicDb.createComment(input.toCommentData())
-            ?: return ErrorResponse("Failed to create comment")
 
-        return CommentResponse.from(comment)
+        val post = publicDb.getPostById(input.postId)
+            ?: return ErrorResponse.postNotFound().toJson()
+        val comment = publicDb.createComment(input.token, input.toMutatorArgs())
+            ?: return ErrorResponse("Failed to create comment").toJson()
+
+        return CommentResponse.from(comment).toJson()
     }
 }
