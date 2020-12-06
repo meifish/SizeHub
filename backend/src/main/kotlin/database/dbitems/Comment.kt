@@ -3,13 +3,13 @@ package src.database.dbitems
 import src.data.CommentData
 import src.data.Id
 import src.database.DataIdPair
-import src.database.PublicDb
+import src.database.ProtectedDb
 
 class Comment(override val id: Id,
               override val data: CommentData,
-              private val publicDb: PublicDb) : DbItem<CommentData> {
+              private val protectedDb: ProtectedDb) : DbItem<CommentData> {
 
-    fun getPost(): Post? = data.postId.let { publicDb.getPostById(it) }
+    fun getPost(): Post? = data.postId.let { protectedDb.getPostById(it) }
 }
 
-fun DataIdPair<CommentData>.toItem(publicDb: PublicDb) = Comment(id, data, publicDb)
+fun DataIdPair<CommentData>.toItem(protectedDb: ProtectedDb) = Comment(id, data, protectedDb)

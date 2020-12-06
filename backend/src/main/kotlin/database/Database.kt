@@ -14,6 +14,7 @@ import java.nio.file.Path
 
 class Database {
 
+    private val protectedDb: ProtectedDb
     val publicDb: PublicDb
 
     init{
@@ -34,6 +35,7 @@ class Database {
         val userDb = FirestoreCollection(db.collection("Users")){ Json.decodeFromString<UserData>(it) }
         val commentDb = FirestoreCollection(db.collection("Comments")){ Json.decodeFromString<CommentData>(it) }
 
-        publicDb = PublicDb(clothingItemDb, postDb, brandDb, userDb, commentDb)
+        protectedDb = ProtectedDb(clothingItemDb, postDb, brandDb, userDb, commentDb)
+        publicDb = PublicDb(protectedDb)
     }
 }
