@@ -2,24 +2,25 @@ package src.database.datagenerators
 
 import src.data.*
 import src.database.FirestoreCollection
-import src.database.ProtectedDb
+import src.database.PublicDb
 import java.nio.file.Files
 import java.nio.file.Path
 
-class LuluLemonDatasetUploader(private val protectedDb: ProtectedDb) {
+class LuluLemonDatasetUploader(private val publicDb: PublicDb) {
 
     private val dataRootPath = Path.of("C:\\Users\\Vincent\\IdeaProjects\\major-group-project-size_hub\\backend\\data\\crawl")
 
     fun upload(){
-        val luluLemonBrand = protectedDb.searchBrandByName("LuluLemon")
-            ?: protectedDb.createBrand(BrandData("LuluLemon", "https://shop.lululemon.com/")) ?: return
+        /*
+        val luluLemonBrand = publicDb.searchBrandByName("LuluLemon")
+            ?: publicDb.createBrand(BrandData("LuluLemon", "https://shop.lululemon.com/")) ?: return
 
         Files.list(dataRootPath).forEach { modelPath ->
             val modelName = modelPath.fileName.toString()
             println(modelName)
 
-            val user = /*protectedDb.searchUserByName(modelName)
-                ?: */protectedDb.createUser(UserData("${modelName}@fakemail.com", modelName))
+            val user = /*publicDb.searchUserByName(modelName)
+                ?: */publicDb.createUser(UserData("${modelName}@fakemail.com", modelName))
                 ?: return@forEach
 
             Files.list(modelPath).forEach ClothingLoop@{ clothingPath ->
@@ -27,12 +28,12 @@ class LuluLemonDatasetUploader(private val protectedDb: ProtectedDb) {
                 println("  $clothingName")
 
                 /*
-                val clothingItem = protectedDb.searchItemByNameAndBrand(luluLemonBrand.id, clothingName)
-                    ?: protectedDb.createClothingItem(ClothingItemData(luluLemonBrand.id, clothingName, "")
+                val clothingItem = publicDb.searchItemByNameAndBrand(luluLemonBrand.id, clothingName)
+                    ?: publicDb.createClothingItem(ClothingItemData(luluLemonBrand.id, clothingName, "")
                     ?: return@ClothingLoop
 
-                if(protectedDb.searchPostsByUserAndClothingItem(user.id, clothingItem.id).isEmpty()){
-                    protectedDb.createPost(PostData(
+                if(publicDb.searchPostsByUserAndClothingItem(user.id, clothingItem.id).isEmpty()){
+                    publicDb.createPost(PostData(
                         user.id,
                         clothingItem.id,
                         UserMeasurementsData("123", 120, "456"),
@@ -40,6 +41,6 @@ class LuluLemonDatasetUploader(private val protectedDb: ProtectedDb) {
                         "temp comment"))
                 }*/
             }
-        }
+        }*/
     }
 }

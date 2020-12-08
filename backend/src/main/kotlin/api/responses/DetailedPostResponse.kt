@@ -1,6 +1,5 @@
 package src.api.responses
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -10,7 +9,7 @@ import src.database.dbitems.Post
 
 @Serializable
 class DetailedPostResponse(val postId: Id,
-                           val user: PublicUserResponse?,
+                           val user: UserPublicResponse?,
                            val clothingItem: ClothingItemResponse?,
                            val clothingItemSize: String?,
                            val userMeasurementsData: UserMeasurementsData?,
@@ -21,7 +20,7 @@ class DetailedPostResponse(val postId: Id,
     companion object{
         fun from(post: Post) = DetailedPostResponse(
             post.id,
-            post.getPublicUser()?.let { PublicUserResponse.from(it) },
+            post.getPublicUser()?.let { UserPublicResponse.from(it) },
             post.getClothingItem()?.let { ClothingItemResponse.from(it) },
             post.data.clothingItemSize,
             post.data.userMeasurementsData,

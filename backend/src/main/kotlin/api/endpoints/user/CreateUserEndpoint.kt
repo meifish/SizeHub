@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import src.api.endpoints.Endpoint
 import src.api.responses.ErrorResponse
-import src.api.responses.PublicUserResponse
+import src.api.responses.UserPublicResponse
 import src.data.UserData
 import src.database.PublicDb
 
@@ -24,6 +24,6 @@ class CreateUserEndpoint(private val publicDb: PublicDb) : Endpoint{
         val user = publicDb.createUser(args.toUserData())
             ?: return ErrorResponse("There was a problem creating the user").toJson()
 
-        return PublicUserResponse.from(user).toJson()
+        return UserPublicResponse.from(user.toPublicUser()).toJson()
     }
 }

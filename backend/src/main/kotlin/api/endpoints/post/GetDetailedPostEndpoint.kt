@@ -18,7 +18,7 @@ class GetDetailedPostEndpoint(private val publicDb: PublicDb) : Endpoint{
     override fun handle(jsonInput: String): String {
         val args = json.decodeFromString<GetDetailedPostArgs>(jsonInput)
 
-        val post = publicDb.getPostById(args.postId)
+        val post = publicDb.posts.getById(args.postId)
             ?: return ErrorResponse.postNotFound().toJson()
 
         return DetailedPostResponse.from(post).toJson()

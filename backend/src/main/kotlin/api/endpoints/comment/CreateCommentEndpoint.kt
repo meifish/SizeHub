@@ -26,7 +26,7 @@ class CreateCommentEndpoint(publicDb: PublicDb) : AuthEndpoint(publicDb) {
     override fun handle(jsonInput: String, user: User): String {
         val input = json.decodeFromString<CreateCommentArgs>(jsonInput)
 
-        val post = publicDb.getPostById(input.postId)
+        val post = publicDb.posts.getById(input.postId)
             ?: return ErrorResponse.postNotFound().toJson()
         val comment = publicDb.createComment(input.token, input.toMutatorArgs())
             ?: return ErrorResponse("Failed to create comment").toJson()

@@ -30,7 +30,7 @@ class GetRepliesEndpoint(private val publicDb: PublicDb) : Endpoint {
     override fun handle(jsonInput: String): String {
         val input = json.decodeFromString<GetRepliesArgs>(jsonInput)
 
-        val post = publicDb.getPostById(input.postId)
+        val post = publicDb.posts.getById(input.postId)
             ?: return ErrorResponse.postNotFound().error
 
         return GetRepliesResponse.from(post.getReplies()).toJson()
