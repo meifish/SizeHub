@@ -1,22 +1,30 @@
 package src.database
 
+import src.auth.AuthService
 import src.data.*
-import src.database.dbitems.Brand
-import src.database.dbitems.User
-import src.database.dbitems.toItem
-import src.database.dbitems.toPublicItem
 import src.database.mutators.*
+import src.database.queries.*
 
 //Safe functionality. Available to the entire codebase
-class PublicDb(private val protectedDb: ProtectedDb) {
+class PublicDb(clothingItemCollection: FirestoreCollection<ClothingItemData>,
+               postCollection: FirestoreCollection<PostData>,
+               brandCollection: FirestoreCollection<BrandData>,
+               userCollection: FirestoreCollection<UserData>,
+               commentCollection: FirestoreCollection<CommentData>,
+               authService: AuthService) {
 
-    val createPost get() = protectedDb.createPost
-    val createUser get() = protectedDb.createUser
-    val createComment get() = protectedDb.createComment
+    //MUTATORS
+    val createBrand = CreateBrandMutator(brandCollection)
+    val createClothingItem = CreateClothingItemMutator(clothingItemCollection, this)
+    val createPost = CreatePostMutator(postCollection, this)
+    val createUser = CreateUserMutator(userCollection, this)
+    val createComment = CreateCommentMutator(commentCollection, this)
 
-    //TODO: TOKEN CHECK AND PRIVACY SETTINGS FOR POST
-    fun getPostById(id: Id) = protectedDb.getPostById(id)
-    fun getPublicUser(id: Id) = protectedDb.getPublicUser(id)
-    fun getUser(token: String) = protectedDb.getUser(token)
-    fun validateToken(token: String) = protectedDb.validateToken(token)
+    //QUERIES
+    val auth = AuthQueries(this, userCollection, authService)
+    val brands = BrandQueries(brandCollection)
+    val clothingItems = ClothingItemQueries(this, clothingItemCollection)
+    val comments = CommentQueries(this, commentCollection)
+    val posts = PostQueries(this, postCollection)
+    val users = UserQueries(this, userCollection)
 }
