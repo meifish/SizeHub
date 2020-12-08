@@ -8,13 +8,13 @@ import 'package:size_hub/api/args/CreateCommentArgs.dart';
 import 'package:size_hub/model/AuthenticationService.dart';
 
 void main() {
-
-  ApiClient().createComment(CreateCommentArgs(userId: "0", postId: "0", comment: "test")).then((value) => {
-    print(value)
-  });
-  ApiClient().getReplies("0VNmEhqIa7qbz2WXk1HA").then((value) => {
-    print(value)
-  });
+  ApiClient()
+      .createComment(
+          CreateCommentArgs(userId: "0", postId: "0", comment: "test"))
+      .then((value) => {print(value)});
+  ApiClient()
+      .getReplies("0VNmEhqIa7qbz2WXk1HA")
+      .then((value) => {print(value)});
 
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp().then((_) => runApp(MyApp()));
