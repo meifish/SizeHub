@@ -80,17 +80,25 @@ def parse_model_and_img_from_single_cloth_page(url, brand="", category=""):
         pickle.dump(anonymous_idx+1, open( anonymous_idx_file, "wb"))
         dir_path = os.path.join(model_name, str(anonymous_idx) + '_' + product_title_clean)
 
+    if not os.path.exists(dir_path):
+        os.mkdir(dir_path)
+
+    
     for link in image_links:
         response = requests.get(link)
         if response:
             save_path = os.path.join(dir_path, (model_name + '_' + product_title_clean + '_' + str(count) + ".jpeg"))  
-            save_img(dir_path, save_path, response.content)            
+            # save_img(dir_path, save_path, response.content)            
             count += 1
         else:
             print("The img link does not have response:", link)
 
     # Save product summary
     page_summary = {}
+
+    image_links = list(image_links)
+    image_links.sort(key=lambda x: int(x.split("_")[-1]))
+
     if has_model_name:
 
         with open(os.path.join(dir_path, "product.json"), 'w') as f:
@@ -100,12 +108,14 @@ def parse_model_and_img_from_single_cloth_page(url, brand="", category=""):
             page_summary["product_title"] = product_title
             page_summary["brand"] = brand
             page_summary["category"] = category
+            page_summary["img_urls"] = image_links
             json.dump(page_summary, f)
     else:
         with open(os.path.join(dir_path, "product.json"), 'w') as f:
             page_summary["product_title"] = product_title
             page_summary["brand"] = brand
             page_summary["category"] = category
+            page_summary["img_urls"] = image_links
             json.dump(page_summary, f)
 
     print(product_title)
@@ -122,8 +132,9 @@ user_records = {}
 #                  "https://shop.lululemon.com/api/c/women-tanks/",
 #                  "https://shop.lululemon.com/api/c/mens-ls-tops/"
 #                  "https://shop.lululemon.com/api/c/mens-ss-tops/",
-#                  "https://shop.lululemon.com/api/c/mens-t-shirts/"]
-category_urls = ["https://shop.lululemon.com/api/c/mens-ss-tops/"]
+#                  "https://shop.lululemon.com/api/c/mens-t-shirts/",
+#                  "https://shop.lululemon.com/api/c/mens-jackets-and-hoodies-hoodies/"]
+category_urls = ["https://shop.lululemon.com/api/c/mens-jackets-and-hoodies-hoodies/"]
 
 s = requests.session()
 s.max_redirects = 100
@@ -169,6 +180,7 @@ for cat_url in category_urls:
             
             print(idx, ":", product_url)
             
+
             for attempt in range(3):
                 try:
                     doc, page_summary = parse_model_and_img_from_single_cloth_page(product_url, brand="lululemon", category=category)
