@@ -36,6 +36,9 @@ class Server(val publicDb: PublicDb) {
             routing(router.setup)
         }
         println("Server starting on port $port")
+
+        router.print()
+
         server.start(wait = true)
     }
 }

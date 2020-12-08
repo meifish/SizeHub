@@ -1,47 +1,46 @@
 package src.database.datagenerators
 
 import src.data.*
-import src.database.PublicDb
+import src.database.ProtectedDb
 import src.database.dbitems.User
 import kotlin.random.Random
 
-class DummyData(private val publicDb: PublicDb) {
+class DummyData(private val protectedDb: ProtectedDb) {
 
     fun generate(){
-        val gucciBrand = publicDb.searchBrandByName("Gucci")
-            ?: publicDb.createBrand(BrandData("Gucci", "https://www.gucci.com/ca/en/"))
-        val supremeBrand = publicDb.searchBrandByName("Supreme")
-            ?: publicDb.createBrand(BrandData("Supreme", "https://www.streetwearofficial.com/collections/supreme"))
-        val theGapBrand = publicDb.searchBrandByName("The Gap")
-            ?: publicDb.createBrand(BrandData("The Gap", "https://www.gapcanada.ca/"))
+        val gucciBrand = protectedDb.searchBrandByName("Gucci")
+            ?: protectedDb.createBrand(BrandData("Gucci", "https://www.gucci.com/ca/en/"))
+        val supremeBrand = protectedDb.searchBrandByName("Supreme")
+            ?: protectedDb.createBrand(BrandData("Supreme", "https://www.streetwearofficial.com/collections/supreme"))
+        val theGapBrand = protectedDb.searchBrandByName("The Gap")
+            ?: protectedDb.createBrand(BrandData("The Gap", "https://www.gapcanada.ca/"))
 
         listOf(gucciBrand, supremeBrand, theGapBrand).filterNotNull().forEach { brand ->
             listOf("Red", "Green", "Blue").forEach { color ->
                 listOf("T-Shirt", "Pants").forEach { item ->
                     val name = "$color $item"
-                    if(publicDb.searchItemByNameAndBrand(brand.id, name) == null) {
-                        publicDb.createClothingItem(ClothingItemData(brand.id, name, ""))
+                    if(protectedDb.searchItemByNameAndBrand(brand.id, name) == null) {
+                        protectedDb.createClothingItem(ClothingItemData(brand.id, name, ""))
                     }
                 }
             }
         }
-
-        val jeb = publicDb.searchUserByName("Jeb24") ?: publicDb.createUser(UserData("Jeb24"))
-        val joe = publicDb.searchUserByName("Joe1999") ?: publicDb.createUser(UserData("Joe1999"))
+/*
+        val jeb = protectedDb.searchUserByName("Jeb24") ?: protectedDb.createUser(UserData("test@mail.com", "Jeb24"))
+        val joe = protectedDb.searchUserByName("Joe1999") ?: protectedDb.createUser(UserData("test2@mail.com", "Joe1999"))
 
         repeat(5){
             generateRandomPost(listOf(jeb, joe).random()!!)
-        }
+        }*/
     }
 
     fun generateRandomPost(user: User){
-        val brand = publicDb.getBrands().random()
-        val item = publicDb.searchItemsByBrand(brand.id).random()
+        val brand = protectedDb.getBrands().random()
+        val item = protectedDb.searchItemsByBrand(brand.id).random()
         val measurementsData = UserMeasurementsData(
             Random.nextInt(100, 200).toString(),
-            Random.nextInt(100, 200),
-            Random.nextInt(2, 20).toString())
+            Random.nextInt(100, 200))
 
-        publicDb.createPost(PostData(user.id, item.id, measurementsData, emptyList(), "test comment"))
+        //protectedDb.createPost(PostData(user.id, item.id, "4", measurementsData, emptyList(), "test comment"))
     }
 }

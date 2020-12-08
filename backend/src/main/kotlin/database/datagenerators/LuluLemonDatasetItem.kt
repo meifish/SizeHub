@@ -15,7 +15,7 @@ class LuluLemonDatasetItem (@SerialName("model") val modelName: String = "Anonym
     fun toUserMeasurementData(): UserMeasurementsData? {
         modelHeight?.let {
             modelWearSize?.let {
-                return UserMeasurementsData(modelHeight.replace("\u2019", "'"), 120, modelWearSize)
+                return UserMeasurementsData(modelHeight.replace("\u2019", "'"), 120)
             }
         }
         return null
