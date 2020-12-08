@@ -14,7 +14,7 @@ abstract class AuthEndpoint(protected val publicDb: PublicDb) : Endpoint {
 
     abstract fun handle(jsonInput: String, user: User): String
 
-    override fun handle(jsonInput: String): String {
+    final override fun handle(jsonInput: String): String {
         val token = json.decodeFromString<Token>(jsonInput)
         if(!publicDb.auth.validateToken(token.token)) return ErrorResponse.invalidToken().toJson()
         val user = publicDb.auth.getUser(token.token)

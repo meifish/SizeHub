@@ -10,6 +10,7 @@ import src.api.endpoints.post.CreatePostEndpoint
 import src.api.endpoints.post.GetDetailedPostEndpoint
 import src.api.endpoints.user.CreateUserEndpoint
 import src.api.endpoints.user.GetDetailedProfileEndpoint
+import src.api.endpoints.user.GetPostsByUserEndpoint
 import src.database.PublicDb
 
 class Router(publicDb: PublicDb) {
@@ -25,7 +26,8 @@ class Router(publicDb: PublicDb) {
         GetDetailedPostEndpoint(publicDb),
 
         //user
-        GetDetailedProfileEndpoint(publicDb)
+        GetDetailedProfileEndpoint(publicDb),
+        GetPostsByUserEndpoint(publicDb)
     )
 
     private val postEndpoints: List<Endpoint> = listOf(
