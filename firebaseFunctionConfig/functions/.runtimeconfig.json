@@ -1,0 +1,7 @@
+{
+  "elasticsearch": {
+    "url": "https://a00fb47e0c284c62be6ba4d0526aae81.us-central1.gcp.cloud.es.io:9243",
+    "username": "elastic",
+    "password": "SppDWAjzBCOhkZbGf1edXOYg"
+  }
+}
