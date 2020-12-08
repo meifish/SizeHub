@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:elastic_client/console_http_transport.dart';
+import 'package:elastic_client/elastic_client.dart';
+import 'package:size_hub/elasticsearch/ElasticsearchDelegate.dart';
 
 class SearchBar extends StatelessWidget {
   SearchBar({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _showSearch() async {
+      await showSearch(
+          context: context, delegate: ElasticSearchDelegate(), query: "");
+    }
+
     return Stack(
       children: [
         Container(
@@ -55,10 +63,9 @@ class SearchBar extends StatelessWidget {
                         prefixIcon: Material(
                           elevation: 0.0,
                           borderRadius: BorderRadius.all(Radius.circular(30)),
-                          child: Icon(
-                            Icons.search,
-                            color: Colors.purple,
-                          ),
+                          child: IconButton(
+                              onPressed: _showSearch,
+                              icon: Icon(Icons.search, color: Colors.purple)),
                         ),
                         border: InputBorder.none,
                         contentPadding:

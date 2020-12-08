@@ -29,6 +29,8 @@ dependencies:
   sqflite:
   provider:
   dio:
+  elastic_client: ^0.1.13
+  http: ^0.12.2
 
 dev_dependencies:
   flutter_test:

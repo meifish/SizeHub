@@ -24,7 +24,10 @@ class DetailedPostScrollableCardContent extends StatelessWidget {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('Lululemon', textScaleFactor: 4,),
+                  Text(
+                    'Lululemon',
+                    textScaleFactor: 4,
+                  ),
                   CircleAvatar(
                     backgroundColor: Colors.transparent,
                     child: CachedNetworkImage(
@@ -39,10 +42,14 @@ class DetailedPostScrollableCardContent extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(left: 20),
-                child: Text('Perfectly Oversized Crew', textScaleFactor: 1.5, style: TextStyle(fontWeight: FontWeight.bold),),
+                child: Text(
+                  'Perfectly Oversized Crew',
+                  textScaleFactor: 1.5,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left:20),
+                padding: const EdgeInsets.only(left: 20),
                 child: SizeWidget(typeSize: "Size", size: "6"),
               ),
             ],
@@ -57,38 +64,43 @@ class DetailedPostScrollableCardContent extends StatelessWidget {
                   child: Text(
                       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
                 ),
-                SizedBox(height: 10,),
-                userMeasurementData==null ? Text("No Measurement Provided with this Post") :
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    {
-                      'icon': FontAwesomeIcons.rulerVertical,
-                      'text': '${userMeasurementData.height}'
-                    },
-                    {
-                      'icon': FontAwesomeIcons.rulerHorizontal,
-                      'text': '${userMeasurementData.weight}lbs'
-                    },
-                    /*{
-                      'icon': FontAwesomeIcons.rulerHorizontal,
-                      'text': 'Size ${userMeasurementData.wearSize}'
-                    },*/
-                  ]
-                      .map((e) => Chip(
-                            backgroundColor: Colors.purpleAccent.withAlpha(100),
-                            avatar: CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              child: Icon(
-                                e['icon'],
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                            ),
-                            label: Text(e['text']),
-                          ))
-                      .toList(),
-                )
+                SizedBox(
+                  height: 10,
+                ),
+                userMeasurementData == null
+                    ? Text("No Measurement Provided with this Post")
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          {
+                            'icon': FontAwesomeIcons.rulerVertical,
+                            'text': '${userMeasurementData.height.toString()}'
+                          },
+                          {
+                            'icon': FontAwesomeIcons.rulerHorizontal,
+                            'text':
+                                '${userMeasurementData.weight.toString()}lbs'
+                          },
+                          {
+                            'icon': FontAwesomeIcons.rulerHorizontal,
+                            'text': 'Size ${userMeasurementData.wearSize}'
+                          },
+                        ]
+                            .map((e) => Chip(
+                                  backgroundColor:
+                                      Colors.purpleAccent.withAlpha(100),
+                                  avatar: CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    child: Icon(
+                                      e['icon'],
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
+                                  ),
+                                  label: Text(e['text']),
+                                ))
+                            .toList(),
+                      )
               ],
             ),
           ),
