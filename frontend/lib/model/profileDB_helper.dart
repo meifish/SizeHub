@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:sqflite/sqflite.dart';
-import 'package:size_hub/data/profileModel.dart';
+import 'file:///C:/Users/Vincent/IdeaProjects/major-group-project-size_hub/frontend/lib/data/temp/profileModel.dart';
 import 'db_utils.dart';
 
 class profileDBModel {

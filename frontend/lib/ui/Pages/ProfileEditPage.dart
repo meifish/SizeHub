@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:size_hub/data/profileModel.dart';
+import 'package:size_hub/data/temp/profileModel.dart';
 import 'package:size_hub/ui/Widgets/DialogueWidget/BodyShapeDialog.dart';
 import 'package:size_hub/ui/Widgets/Common/PurpleRaisedButton.dart';
 import 'package:size_hub/model/notification_helper.dart';
@@ -425,9 +425,9 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
   }
 
   void _updateProfile() async {
-    int response = await _db.updateProfile(widget.user);
-    print("update successful");
-    print(response);
+    //int response = await _db.updateProfile(widget.user);
+    //print("update successful");
+    //print(response);
   }
 
   void _sendSuccesfulNotification() {

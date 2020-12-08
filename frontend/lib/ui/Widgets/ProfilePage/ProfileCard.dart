@@ -1,9 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:size_hub/data/PublicUserProfileData.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/SizeWidget.dart';
 
 class ProfileCard extends StatelessWidget {
-  ProfileCard({Key key}) : super(key: key);
+
+  final PublicUserProfileData profile;
+
+  ProfileCard({Key key, this.profile}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,7 @@ class ProfileCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Kiko Suzuki',
+                    profile.user.username,
                     textScaleFactor: 1.5,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),

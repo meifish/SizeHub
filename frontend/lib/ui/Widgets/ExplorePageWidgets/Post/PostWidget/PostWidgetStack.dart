@@ -14,7 +14,7 @@ class PostWidgetStack extends StatelessWidget {
 
   final String id;
   final String picture;
-  final Future<String> userName;
+  final String userName;
 
   @override
   Widget build(BuildContext context) {
@@ -49,18 +49,7 @@ class PostWidgetStack extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Align(
               alignment: Alignment.bottomRight,
-              child: FutureBuilder<String>(
-                  future: userName,
-                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                    if(snapshot.data == null){
-                      return Container();
-                    }
-                    return Text(
-                      snapshot.data,
-                      style: TextStyle(color: Colors.white),
-                    );
-                  }
-              )
+              child: Text(userName, style: TextStyle(color: Colors.white))
           )
       )
     ]);

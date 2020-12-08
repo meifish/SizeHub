@@ -70,10 +70,10 @@ class DetailedPostScrollableCardContent extends StatelessWidget {
                       'icon': FontAwesomeIcons.rulerHorizontal,
                       'text': '${userMeasurementData.weight}lbs'
                     },
-                    {
+                    /*{
                       'icon': FontAwesomeIcons.rulerHorizontal,
                       'text': 'Size ${userMeasurementData.wearSize}'
-                    },
+                    },*/
                   ]
                       .map((e) => Chip(
                             backgroundColor: Colors.purpleAccent.withAlpha(100),
