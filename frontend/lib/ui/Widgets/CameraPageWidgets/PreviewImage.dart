@@ -3,8 +3,8 @@ import 'dart:typed_data';
 import 'package:path/path.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
+import 'package:size_hub/data/database/Database.dart';
 
 class PreviewImage extends StatefulWidget {
   final String imgPath;
@@ -48,10 +48,12 @@ class _PreviewImageState extends State<PreviewImage> {
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      getBytesFromFile().then((bytes) {
-                        Share.file('Share via', basename(widget.imgPath),
-                            bytes.buffer.asUint8List(), 'image/path');
-                      });
+                      print("IMAGE PATH: "+widget.imgPath);
+                      Database().uploadFile(File(widget.imgPath)).then((value) => print("BOO YEA: "+value));
+                      // getBytesFromFile().then((bytes) {
+                      //   Share.file('Share via', basename(widget.imgPath),
+                      //       bytes.buffer.asUint8List(), 'image/path');
+                      // });
                     },
                   ),
                 ),
