@@ -2,17 +2,17 @@ package src.database.mutators
 
 import src.data.ClothingItemData
 import src.database.FirestoreCollection
-import src.database.ProtectedDb
+import src.database.PublicDb
 import src.database.dbitems.ClothingItem
 import src.database.dbitems.toItem
 
 class CreateClothingItemMutator(private val clothingItemCollection: FirestoreCollection<ClothingItemData>,
-                                private val protectedDb: ProtectedDb) {
+                                private val publicDb: PublicDb) {
 
     operator fun invoke(clothingItemData: ClothingItemData): ClothingItem? {
         clothingItemData.brandId?.let {
-            if (protectedDb.getBrandById(it) == null) return null
+            if (publicDb.brands.getById(it) == null) return null
         }
-        return clothingItemCollection.create(clothingItemData)?.toItem(protectedDb)
+        return clothingItemCollection.create(clothingItemData)?.toItem(publicDb)
     }
 }

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:size_hub/ui/Widgets/Common/ScrollableCard.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/CommentBox/CommentList.dart';
+import 'package:size_hub/ui/animations/SlideInAnimation.dart';
 
-class CommentBox extends StatefulWidget {
-  CommentBox({Key key}) : super(key: key);
-
-  @override
-  _CommentBoxState createState() => _CommentBoxState();
-}
-
-class _CommentBoxState extends State<CommentBox> {
-  var fakeData = [
+class CommentBox extends StatelessWidget {
+  CommentBox({Key key, this.onClose}) : super(key: key);
+  final VoidCallback onClose;
+  final fakeData = [
     {
       "name": "Joe",
       "profilePic":
@@ -39,6 +35,31 @@ class _CommentBoxState extends State<CommentBox> {
 
   @override
   Widget build(BuildContext context) {
-    return ScrollableCard(child: CommentList(data: fakeData));
+    return Column(
+      children: [
+        Expanded(
+            child: ScrollableCard(
+                child: CommentList(data: fakeData, onPressed: onClose),
+                backgroundColor: Colors.grey[100])),
+        SlideInAnimation(
+          offset: Offset(0, 1000),
+          child: TextField(
+            cursorColor: Colors.black,
+            style: TextStyle(fontSize: 16.0, color: Colors.black),
+            decoration: InputDecoration(
+                focusColor: Colors.black,
+                border: InputBorder.none,
+                prefixIcon: Icon(
+                  Icons.add_comment,
+                  color: Colors.black,
+                ),
+                hintText: "Add a Comment",
+                hintStyle: TextStyle(color: Colors.black, fontSize: 17.0),
+                filled: true,
+                fillColor: Colors.white),
+          ),
+        )
+      ],
+    );
   }
 }

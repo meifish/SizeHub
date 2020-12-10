@@ -14,10 +14,10 @@ abstract class AuthEndpoint(protected val publicDb: PublicDb) : Endpoint {
 
     abstract fun handle(jsonInput: String, user: User): String
 
-    override fun handle(jsonInput: String): String {
+    final override fun handle(jsonInput: String): String {
         val token = json.decodeFromString<Token>(jsonInput)
-        if(!publicDb.validateToken(token.token)) return ErrorResponse.invalidToken().toJson()
-        val user = publicDb.getUser(token.token)
+        if(!publicDb.auth.validateToken(token.token)) return ErrorResponse.invalidToken().toJson()
+        val user = publicDb.auth.getUser(token.token)
             ?: return ErrorResponse("No user associated with the token").toJson()
         return handle(jsonInput, user)
     }

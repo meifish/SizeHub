@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/DetailedPost.dart';
 
 class PostWidget extends StatelessWidget {
-  final Future<String> userName;
+  final String userName;
   final String picture;
   final String id;
+  final String postId;
   final UserMeasurementsData userMeasurementData;
   final List<String> photoUrls;
 
@@ -16,6 +17,7 @@ class PostWidget extends StatelessWidget {
       this.picture,
       this.id,
       this.userMeasurementData,
+      this.postId,
       this.photoUrls})
       : super(key: key);
 

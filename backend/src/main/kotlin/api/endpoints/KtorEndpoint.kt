@@ -13,9 +13,13 @@ class KtorGetHandler {
         println("Get request to ${endpoint.path}")
         try{
             val argMap = call.request.queryParameters.entries().map { it.key to it.value.first() }.toMap()
-            call.respond(endpoint.handle(Json.encodeToString(argMap)))
+            println(argMap)
+            val response = endpoint.handle(Json.encodeToString(argMap))
+            //println(response)
+            call.respond(response)
         }
         catch (e: Exception){
+            e.printStackTrace()
             call.respond(HttpStatusCode.InternalServerError, e.localizedMessage)
         }
     }

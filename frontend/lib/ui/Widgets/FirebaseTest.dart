@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../data/flutterfire.dart';
+import '../../data/temp/flutterfire.dart';
 
 class FirebaseTest extends StatefulWidget {
   FirebaseTest({Key key}) : super(key: key);

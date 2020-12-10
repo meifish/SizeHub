@@ -3,15 +3,15 @@ package src.database.dbitems
 import src.data.Id
 import src.data.UserData
 import src.database.DataIdPair
-import src.database.ProtectedDb
+import src.database.PublicDb
 
-class User(private val protectedDb: ProtectedDb,
+class User(private val publicDb: PublicDb,
            override val id: Id,
            override val data: UserData) : DbItem<UserData> {
 
-    fun getPosts(): List<Post> = protectedDb.searchPostsByUser(id)
-    
-    fun toPublicUser() = PublicUser(protectedDb, id, data.toPublicUserData())
+    fun toPublicUser() = PublicUser(publicDb, id, data.toPublicUserData())
+
+    fun getPosts(): List<Post> = publicDb.posts.getByUser(id)
 }
 
-fun DataIdPair<UserData>.toItem(protectedDb: ProtectedDb) = User(protectedDb, id, data)
+fun DataIdPair<UserData>.toItem(publicDb: PublicDb) = User(publicDb, id, data)

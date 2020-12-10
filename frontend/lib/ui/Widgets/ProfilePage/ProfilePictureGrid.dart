@@ -48,7 +48,7 @@ class _ProfilePictureGridState extends State<ProfilePictureGrid>
                       (1 - _animation.value)),
               child: child,
             ),
-            child: Image.asset(widget.images[index]),
+            child: Image.network(widget.images[index]),
           );
         },
         childCount: widget.images.length,

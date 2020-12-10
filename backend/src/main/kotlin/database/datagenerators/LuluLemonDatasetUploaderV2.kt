@@ -4,41 +4,49 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import src.data.BrandData
 import src.data.ClothingItemData
-import src.data.PostData
 import src.data.UserData
-import src.database.ProtectedDb
+import src.database.FirestoreCollection
+import src.database.PublicDb
+import src.database.dbitems.toItem
 import src.database.mutators.CreatePostArgs
 import java.nio.file.Files
 import java.nio.file.Path
+import kotlin.random.Random
 import kotlin.streams.asSequence
 
-class LuluLemonDatasetUploaderV2(private val protectedDb: ProtectedDb) {
+class LuluLemonDatasetUploaderV2(private val userCollection: FirestoreCollection<UserData>,
+                                 private val publicDb: PublicDb) {
 
     val dataRootPath = Path.of("C:\\Users\\Vincent\\IdeaProjects\\major-group-project-size_hub\\backend\\data")
 
     fun upload(){
-        val luluLemonBrand = protectedDb.searchBrandByName("LuluLemon")
-            ?: protectedDb.createBrand(BrandData("LuluLemon", "https://shop.lululemon.com/")) ?: return
+        val luluLemonBrand = publicDb.brands.getByName("LuluLemon")
+            ?: publicDb.createBrand(BrandData("LuluLemon", "https://shop.lululemon.com/")) ?: return
 
-        products().forEach {
-            println(it.modelName)
-
-            val user = /*protectedDb.searchUserByName(it.modelName)
-                ?: */protectedDb.createUser(UserData("${it.modelName}@fakemail.com", it.modelName))
+        products().filter { Random.nextDouble()<0.3 }.forEach {
+            val user = userCollection.getBy("username", it.modelName)?.toItem(publicDb)
+                ?: publicDb.createUser(UserData("${it.modelName}@fakemail.com", it.modelName))
                 ?: return@forEach
 
-            println(it.productName)
+            println(user.data.username)
 
-            val clothingItem = protectedDb.searchItemByNameAndBrand(luluLemonBrand.id, it.productName)
-                ?: protectedDb.createClothingItem(ClothingItemData(luluLemonBrand.id, it.productName, it.itemCategory))
+            val clothingItem = publicDb.clothingItems.getByNameAndBrand(luluLemonBrand.id, it.productName)
+                ?: publicDb.createClothingItem(
+                    ClothingItemData(luluLemonBrand.id, it.productName, it.itemCategory))
                 ?: return@forEach
 
-            /*
-            val post = protectedDb.createPost(CreatePostArgs(
+            println(clothingItem.data.name)
+
+            val post = publicDb.createPost("admin-${user.data.email}", CreatePostArgs(
                 clothingItem.id,
                 it.modelWearSize,
                 it.toUserMeasurementData(),
-                it.imageUrls, "${clothingItem.data.name} Modelled by ${user.data.username}"))*/
+                it.imageUrls,
+                "${clothingItem.data.name} Modelled by ${user.data.username}")
+            )
+
+            println(post)
+            println()
         }
     }
 

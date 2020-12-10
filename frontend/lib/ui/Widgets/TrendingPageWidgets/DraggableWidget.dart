@@ -67,7 +67,7 @@ class _DraggableWidgetsStat extends State<DraggableWidget> {
                   builder: (context) => DetailedPost(
                       id: widget.uKey,
                       picture: widget.image,
-                      userMeasurementData: UserMeasurementsData(25, '25', '25'),
+                      userMeasurementData: UserMeasurementsData(25, '25'),
                       photoUrls: [])));
         },
         onPanUpdate: (tapInfo) {

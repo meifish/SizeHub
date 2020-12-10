@@ -8,13 +8,16 @@ import com.google.firebase.cloud.FirestoreClient
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import src.auth.AdminBackdoorAuthService
+import src.auth.FirebaseAuthService
+import src.auth.MultiAuthService
 import src.data.*
+import src.database.datagenerators.LuluLemonDatasetUploaderV2
 import java.nio.file.Files
 import java.nio.file.Path
 
 class Database {
 
-    private val protectedDb: ProtectedDb
     val publicDb: PublicDb
 
     init{
@@ -35,7 +38,10 @@ class Database {
         val userDb = FirestoreCollection(db.collection("Users")){ Json.decodeFromString<UserData>(it) }
         val commentDb = FirestoreCollection(db.collection("Comments")){ Json.decodeFromString<CommentData>(it) }
 
-        protectedDb = ProtectedDb(clothingItemDb, postDb, brandDb, userDb, commentDb)
-        publicDb = PublicDb(protectedDb)
+        val authService = MultiAuthService(listOf(AdminBackdoorAuthService(), FirebaseAuthService()))
+
+        publicDb = PublicDb(clothingItemDb, postDb, brandDb, userDb, commentDb, authService)
+
+        //LuluLemonDatasetUploaderV2(userDb, publicDb).upload()
     }
 }

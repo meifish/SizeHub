@@ -6,15 +6,22 @@ import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/DetailedPost
 class DetailedPostScrollableCard extends StatelessWidget {
   final UserMeasurementsData userMeasurementData;
   final List<String> photoUrls;
+  final VoidCallback onCommentBoxPressed;
 
   const DetailedPostScrollableCard(
-      {Key key, this.userMeasurementData, this.photoUrls})
+      {Key key,
+      this.userMeasurementData,
+      this.photoUrls,
+      this.onCommentBoxPressed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ScrollableCard(
         child: DetailedPostScrollableCardContent(
-            photoUrls: photoUrls, userMeasurementData: userMeasurementData));
+      photoUrls: photoUrls,
+      userMeasurementData: userMeasurementData,
+      onCommentButtonPressed: onCommentBoxPressed,
+    ));
   }
 }
