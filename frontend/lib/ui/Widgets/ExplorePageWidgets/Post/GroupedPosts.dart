@@ -30,7 +30,7 @@ class _GroupedPostsState extends State<GroupedPosts> {
     return FutureBuilder(
         future: (widget.displayClotheID == null)
             ? _database.readAllNew()
-            : _database.readAllNew(),
+            : _database.queryByClotheID(widget.displayClotheID),
         builder: (BuildContext context,
             AsyncSnapshot<Stream<QuerySnapshot>> snapshot) {
           if (snapshot.data == null) return Text("No data");
