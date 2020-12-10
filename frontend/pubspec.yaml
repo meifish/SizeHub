@@ -32,6 +32,9 @@ dependencies:
   elastic_client: ^0.1.13
   http: ^0.12.2
   firebase_storage:
+  latlong:
+  geolocator: 5.1.1
+  geocoder:
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,16 +1,14 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:size_hub/api/ApiClient.dart';
 import 'package:size_hub/data/PublicUserData.dart';
 import 'package:size_hub/data/PublicUserProfileData.dart';
 import 'package:size_hub/ui/Widgets/Common/Point.dart';
-import 'package:size_hub/ui/Widgets/ProfilePage/ProfileCard.dart';
-import 'package:size_hub/ui/Widgets/ProfilePage/ProfilePictureGrid.dart';
 
 import 'Collection.dart';
+import 'ProfileCard.dart';
 import 'ProfileCardAppBar.dart';
+import 'ProfilePictureGrid.dart';
 
 class GroupedProfilePageWidgets extends StatefulWidget {
   GroupedProfilePageWidgets({Key key}) : super(key: key);
