@@ -8,15 +8,11 @@ import src.socket.trending.TrendingPageEndpoint
 class TrendingPageUpdater(private val publicDb: PublicDb,
                           private val trendingPageEndpoint: TrendingPageEndpoint) {
 
-    private val lastUpdate: Long = System.currentTimeMillis()
+    private var nextUpdate: Long = System.currentTimeMillis()
     private var latestPosts: List<Post> = listOf()
 
     private val postUpdateTime = 2 * 60 * 1000
-    private val shouldUpdate get() = System.currentTimeMillis() > lastUpdate + postUpdateTime
-
-    init{
-        updatePosts()
-    }
+    private val shouldUpdate get() = System.currentTimeMillis() > nextUpdate
 
     fun start(){
         Thread {
@@ -31,6 +27,12 @@ class TrendingPageUpdater(private val publicDb: PublicDb,
     }
 
     private fun updatePosts(){
+        println("Checking")
+        if(!trendingPageEndpoint.hasClients){
+            return
+        }
+        println("Updating Post List for Trending Page")
+        nextUpdate = System.currentTimeMillis() + postUpdateTime
         latestPosts = publicDb.posts.getLatestPosts(10)
     }
 

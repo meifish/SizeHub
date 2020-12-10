@@ -13,6 +13,7 @@ class TrendingPageEndpoint : SocketEndpoint<TrendingPageClient> {
     override val path: String get() = "/trending"
 
     private val clients = Collections.synchronizedSet(LinkedHashSet<TrendingPageClient>())
+    val hasClients get() = clients.isNotEmpty()
 
     suspend fun sendPost(post: Post){
         clients.forEach {

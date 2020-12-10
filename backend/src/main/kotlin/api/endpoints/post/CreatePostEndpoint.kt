@@ -7,6 +7,7 @@ import src.api.endpoints.Endpoint
 import src.api.responses.ErrorResponse
 import src.api.responses.PostPreviewResponse
 import src.data.Id
+import src.data.PostLocation
 import src.data.UserMeasurementsData
 import src.database.PublicDb
 import src.database.dbitems.User
@@ -18,10 +19,11 @@ class CreatePostArgs(val token: String,
                      private val clothingItemSize: String? = null,
                      private val userMeasurementsData: UserMeasurementsData,
                      private val photoUrls: List<String>,
+                     private val location: PostLocation? = null,
                      private val comment: String){
 
     fun toMutatorArgs() = src.database.mutators.CreatePostArgs(clothingItemId, clothingItemSize,
-        userMeasurementsData, photoUrls, comment)
+        userMeasurementsData, photoUrls, location, comment)
 }
 
 class CreatePostEndpoint(publicDb: PublicDb) : AuthEndpoint(publicDb){
