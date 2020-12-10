@@ -30,17 +30,21 @@ class ScrollableCard extends StatelessWidget {
           controller: scrollController,
           child: SlideInAnimation(
               offset: Offset(0, 1000),
-              child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  //height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    color: backgroundColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(radius),
-                      topRight: Radius.circular(radius),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height,
+                ),
+                child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: backgroundColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(radius),
+                        topRight: Radius.circular(radius),
+                      ),
                     ),
-                  ),
-                  child: child)),
+                    child: child),
+              )),
         );
       },
     );

@@ -1,11 +1,9 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:size_hub/api/ApiClient.dart';
 import 'package:size_hub/data/DetailedPostData.dart';
-import 'package:size_hub/data/PostPreviewData.dart';
 import 'package:size_hub/data/database/Database.dart';
 
 import 'PostWidget/PostWidget.dart';
@@ -50,24 +48,26 @@ class _GroupedPostsState extends State<GroupedPosts> {
                   itemCount: snapshot.data.docs.length,
                   itemBuilder: (context, index) {
                     return FutureBuilder(
-                        future: apiClient.getDetailedPost(
-                            snapshot.data.docs[index].id),
+                        future: apiClient
+                            .getDetailedPost(snapshot.data.docs[index].id),
                         builder: (BuildContext context,
                             AsyncSnapshot<DetailedPostData> data) {
                           DetailedPostData post = data.data;
-                          print(post);
-                          return post==null ? CircularProgressIndicator() : PostWidget(
-                            id: "PostHeroId_$index",
-                            postId: post.postId,
-                            userName: post.user==null ? "[User Not Found]" : post.user.username,
-                            picture: post.photoUrls == null || post.photoUrls
-                                .isEmpty
-                                ? ""
-                                : post.photoUrls[0],
-                            photoUrls: post.photoUrls,
-                          );
-                        }
-                    );
+                          return post == null
+                              ? CircularProgressIndicator()
+                              : PostWidget(
+                                  id: "PostHeroId_$index",
+                                  postId: post.postId,
+                                  userName: post.user == null
+                                      ? "[User Not Found]"
+                                      : post.user.username,
+                                  picture: post.photoUrls == null ||
+                                          post.photoUrls.isEmpty
+                                      ? ""
+                                      : post.photoUrls[0],
+                                  photoUrls: post.photoUrls,
+                                );
+                        });
                   },
                   staggeredTileBuilder: (index) =>
                       StaggeredTile.count(2, index.isEven ? 2 : 3),
