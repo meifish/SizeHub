@@ -5,13 +5,15 @@ import 'package:size_hub/data/database/Database.dart';
 part 'PostData.g.dart';
 
 @JsonSerializable()
-class PostData{
+class PostData {
   final String id;
   final String userId;
+  final String clothingItemId;
   final List<String> photoUrls;
   final UserMeasurementsData userMeasurementsData;
 
-  PostData(this.id, this.userId, this.photoUrls, this.userMeasurementsData);
+  PostData(this.id, this.userId, this.clothingItemId, this.photoUrls,
+      this.userMeasurementsData);
 
   factory PostData.fromJson(Map<String, dynamic> json) =>
       json == null ? null : _$PostDataFromJson(json);
@@ -24,6 +26,6 @@ class PostData{
 
   @override
   String toString() {
-    return 'PostData{id: $id, userId: $userId, photoUrls: $photoUrls, userMeasurementData: $userMeasurementsData}';
+    return 'PostData{id: $id, userId: $userId, photoUrls: $photoUrls, clothingItemId: $clothingItemId, userMeasurementData: $userMeasurementsData}';
   }
 }
