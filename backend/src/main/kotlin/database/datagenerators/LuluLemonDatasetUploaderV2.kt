@@ -42,6 +42,7 @@ class LuluLemonDatasetUploaderV2(private val userCollection: FirestoreCollection
                 it.modelWearSize,
                 it.toUserMeasurementData(),
                 it.imageUrls,
+                null,
                 "${clothingItem.data.name} Modelled by ${user.data.username}")
             )
 

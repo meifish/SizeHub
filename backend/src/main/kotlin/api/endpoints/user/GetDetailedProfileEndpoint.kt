@@ -14,7 +14,7 @@ class GetDetailedProfileArgs(val userId: Id)
 
 class GetDetailedProfileEndpoint(private val publicDb: PublicDb) : Endpoint{
 
-    override val path = "/profile"
+    override val path get() = "/profile"
 
     override fun handle(jsonInput: String): String {
         val args = json.decodeFromString<GetDetailedProfileArgs>(jsonInput)

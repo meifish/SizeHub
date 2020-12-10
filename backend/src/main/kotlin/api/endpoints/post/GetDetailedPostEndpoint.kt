@@ -13,7 +13,7 @@ class GetDetailedPostArgs(val postId: Id)
 
 class GetDetailedPostEndpoint(private val publicDb: PublicDb) : Endpoint{
 
-    override val path = "/post"
+    override val path get() = "/post"
 
     override fun handle(jsonInput: String): String {
         val args = json.decodeFromString<GetDetailedPostArgs>(jsonInput)

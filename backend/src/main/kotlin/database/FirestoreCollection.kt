@@ -2,6 +2,7 @@ package src.database
 
 import com.google.cloud.firestore.CollectionReference
 import com.google.cloud.firestore.DocumentSnapshot
+import com.google.cloud.firestore.Query
 import com.google.gson.Gson
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -42,6 +43,11 @@ class FirestoreCollection<T>(private val collection: CollectionReference,
 
     fun getAllBy(field: String, value: Any): List<DataIdPair<T>> {
         return collection.whereEqualTo(field, value).get().get().mapNotNull { toObject(it) }
+    }
+
+    fun sortByAndTake(field: String, direction: Query.Direction, amount: Int): List<DataIdPair<T>> {
+        return collection.orderBy(field, direction).limit(amount)
+            .get().get().documents.mapNotNull { toObject(it) }
     }
 
     fun getAll(): List<DataIdPair<T>>

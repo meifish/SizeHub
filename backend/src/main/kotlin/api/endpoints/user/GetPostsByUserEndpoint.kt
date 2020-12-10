@@ -50,7 +50,7 @@ class GetPostsByUserResponse(val posts: List<PostPreviewResponse>) {
 
 class GetPostsByUserEndpoint(private val publicDb: PublicDb) : Endpoint {
 
-    override val path = "/postsByUser"
+    override val path get() = "/postsByUser"
 
     override fun handle(jsonInput: String): String {
         val input = Json.decodeFromString<GetPostsByUserArgs>(jsonInput)

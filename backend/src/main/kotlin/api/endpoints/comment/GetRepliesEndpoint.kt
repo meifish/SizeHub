@@ -25,7 +25,7 @@ class GetRepliesResponse(val comments: List<CommentResponse>) {
 
 class GetRepliesEndpoint(private val publicDb: PublicDb) : Endpoint {
 
-    override val path = "/replies"
+    override val path get() = "/replies"
 
     override fun handle(jsonInput: String): String {
         val input = json.decodeFromString<GetRepliesArgs>(jsonInput)
