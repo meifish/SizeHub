@@ -16,7 +16,7 @@ class CreateUserArgs(private val email: String, private val username: String){
 
 class CreateUserEndpoint(private val publicDb: PublicDb) : Endpoint{
 
-    override val path = "/createUser"
+    override val path get() = "/createUser"
 
     override fun handle(jsonInput: String): String {
         val args = json.decodeFromString<CreateUserArgs>(jsonInput)

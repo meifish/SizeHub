@@ -9,10 +9,9 @@ import io.ktor.server.netty.*
 import io.ktor.websocket.*
 import src.database.PublicDb
 
-class Server(val publicDb: PublicDb) {
+class Server(private val router: Router) {
 
     init {
-        val router = Router(publicDb)
         val port = System.getenv("PORT")?.toInt() ?: 3000
         val server = embeddedServer(Netty, port = port) {
             install(CORS) {
@@ -39,6 +38,6 @@ class Server(val publicDb: PublicDb) {
 
         router.print()
 
-        server.start(wait = true)
+        server.start()
     }
 }

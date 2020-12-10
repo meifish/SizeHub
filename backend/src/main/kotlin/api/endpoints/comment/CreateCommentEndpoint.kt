@@ -21,7 +21,7 @@ class CreateCommentArgs(val token: String,
 
 class CreateCommentEndpoint(publicDb: PublicDb) : AuthEndpoint(publicDb) {
 
-    override val path = "/createComment"
+    override val path get() = "/createComment"
 
     override fun handle(jsonInput: String, user: User): String {
         val input = json.decodeFromString<CreateCommentArgs>(jsonInput)

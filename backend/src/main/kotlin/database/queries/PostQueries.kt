@@ -1,5 +1,6 @@
 package src.database.queries
 
+import com.google.cloud.firestore.Query
 import src.data.Id
 import src.data.PostData
 import src.database.FirestoreCollection
@@ -15,4 +16,7 @@ class PostQueries(private val publicDb: PublicDb,
 
     fun getByUser(userId: Id): List<Post>
         = postCollection.getAllBy("userId", userId).map { it.toItem(publicDb) }
+
+    fun getLatestPosts(amount: Int): List<Post>
+        = postCollection.sortByAndTake("createdAt", Query.Direction.DESCENDING, amount).map { it.toItem(publicDb) }
 }

@@ -26,7 +26,7 @@ class CreatePostArgs(val token: String,
 
 class CreatePostEndpoint(publicDb: PublicDb) : AuthEndpoint(publicDb){
 
-    override val path = "/createPost"
+    override val path get() = "/createPost"
 
     override fun handle(jsonInput: String, user: User): String {
         val input = json.decodeFromString<CreatePostArgs>(jsonInput)
