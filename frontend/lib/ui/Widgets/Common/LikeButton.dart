@@ -2,9 +2,11 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class LikeButton extends StatefulWidget {
-  LikeButton({Key key, this.liked, this.likes}) : super(key: key);
+  LikeButton({Key key, this.liked, this.likes, this.size = 40})
+      : super(key: key);
   final bool liked;
   final String likes;
+  final double size;
 
   @override
   _LikeButtonState createState() {
@@ -38,8 +40,8 @@ class _LikeButtonState extends State<LikeButton> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          height: 40,
-          width: 40,
+          height: widget.size,
+          width: widget.size,
           child: GestureDetector(
             onTap: () {
               setState(() {
@@ -57,11 +59,13 @@ class _LikeButtonState extends State<LikeButton> {
             ),
           ),
         ),
-        Text(
-          widget.likes,
-          textScaleFactor: 0.8,
-          style: TextStyle(color: Colors.grey),
-        )
+        widget.likes != null
+            ? Text(
+                widget.likes,
+                textScaleFactor: 0.8,
+                style: TextStyle(color: Colors.grey),
+              )
+            : Container()
       ],
     );
   }

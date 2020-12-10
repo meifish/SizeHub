@@ -2,14 +2,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:size_hub/data/UserMeasurementsData.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'SizeWidget.dart';
+import 'package:size_hub/ui/Widgets/Common/LikeButton.dart';
 
 class DetailedPostScrollableCardContent extends StatelessWidget {
   final UserMeasurementsData userMeasurementData;
   final List<String> photoUrls;
+  final VoidCallback onCommentButtonPressed;
 
   const DetailedPostScrollableCardContent(
-      {Key key, this.userMeasurementData, this.photoUrls})
+      {Key key,
+      this.userMeasurementData,
+      this.photoUrls,
+      this.onCommentButtonPressed})
       : super(key: key);
 
   @override
@@ -48,10 +52,14 @@ class DetailedPostScrollableCardContent extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: SizeWidget(typeSize: "Size", size: "6"),
-              ),
+              SizedBox(height: 50, width: 50, child: LikeButton(liked: true)),
+              IconButton(
+                icon: Icon(
+                  Icons.comment,
+                  color: Colors.black,
+                ),
+                onPressed: onCommentButtonPressed,
+              )
             ],
           ),
           SizedBox(height: 10),
@@ -83,7 +91,7 @@ class DetailedPostScrollableCardContent extends StatelessWidget {
                           },
                           {
                             'icon': FontAwesomeIcons.rulerHorizontal,
-                            'text': 'Size ${userMeasurementData.wearSize}'
+                            //'text': 'Size ${userMeasurementData.wearSize}'
                           },
                         ]
                             .map((e) => Chip(
