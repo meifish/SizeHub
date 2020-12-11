@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:size_hub/api/args/CreateCommentArgs.dart';
 import 'package:size_hub/data/CommentData.dart';
+import 'package:size_hub/data/CreatePostData.dart';
 import 'package:size_hub/data/DetailedPostData.dart';
 import 'package:size_hub/data/PostPreviewData.dart';
 import 'package:size_hub/data/PublicUserProfileData.dart';
@@ -86,5 +87,12 @@ class ApiClient{
     Map<String, dynamic> response = await _makeGetRequest("/postsByUser", {"userId": userId, "sort": sort.toString().split(".").last});
     if(response == null) return null;
     return (response["posts"] as List<dynamic>).map((e){ return PostPreviewData.fromJson(e); }).toList();
+  }
+
+  Future<DetailedPostData> createPost(CreatePostData data)async{
+    print(data.toJson());
+    Map<String, dynamic> response = await _makePostRequest('/createPost', data.toJson());
+    if(response==null) return null;
+    return DetailedPostData.fromJson(response);
   }
 }
