@@ -3,11 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:size_hub/AuthenticationWrapper.dart';
-import 'package:size_hub/api/ApiClient.dart';
-import 'package:size_hub/api/args/CreateCommentArgs.dart';
 import 'package:size_hub/model/AuthenticationService.dart';
-import 'package:size_hub/socket/TrendingPageSocketClient.dart';
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp().then((_) => runApp(MyApp()));
