@@ -21,7 +21,7 @@ class TrendingPageUpdater(private val publicDb: PublicDb,
                     updatePosts()
                 }
                 sendPost()
-                Thread.sleep(1000)
+                Thread.sleep(2000)
             }
         }.start()
     }
