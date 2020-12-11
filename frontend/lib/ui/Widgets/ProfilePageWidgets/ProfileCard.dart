@@ -1,16 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:size_hub/data/PublicUserProfileData.dart';
+import 'package:size_hub/ui/Pages/ProfileEditPage.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/SizeWidget.dart';
 
 class ProfileCard extends StatelessWidget {
 
   final PublicUserProfileData profile;
-
-  ProfileCard({Key key, this.profile}) : super(key: key);
+  final dummyData;
+  ProfileCard({Key key, this.profile, this.dummyData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    //print(profile);
     return Stack(
       overflow: Overflow.visible,
       children: [
@@ -27,7 +29,10 @@ class ProfileCard extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     onPressed: () {
-
+                      Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProfileEditPage(existingUserMap: dummyData,)),
+                          );
                     },
                   )),
               Column(

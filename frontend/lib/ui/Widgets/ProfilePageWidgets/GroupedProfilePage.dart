@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:size_hub/api/ApiClient.dart';
@@ -19,7 +21,16 @@ class GroupedProfilePageWidgets extends StatefulWidget {
 }
 
 class _GroupedProfilePageWidgetsState extends State<GroupedProfilePageWidgets> {
+  var dummy_profile;
+  Future _loadProfile() async {
+    final profileContent = await DefaultAssetBundle.of(context)
+        .loadString('assets/data/FakeProfileData.json');
 
+    final Map<String, dynamic> profileMap = jsonDecode(profileContent);
+    dummy_profile = profileMap;
+
+    return 1;
+  }
   List<String> images;
   ApiClient apiClient = ApiClient();
 
@@ -54,7 +65,11 @@ class _GroupedProfilePageWidgetsState extends State<GroupedProfilePageWidgets> {
       images: images,
     );
   }
-
+  @override
+  void initState() {
+    _loadProfile();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [
@@ -97,7 +112,7 @@ class _GroupedProfilePageWidgetsState extends State<GroupedProfilePageWidgets> {
                   height: 200,
                   coverPhoto:
                   "https://static.wikia.nocookie.net/kpop/images/9/9c/TWICE_Better_group_concept_photo_3.png/revision/latest?cb=20201005130428",
-                  child: ProfileCard(profile: profile),
+                  child: ProfileCard(profile: profile, dummyData: dummy_profile,),
                 ),
               ),
               SliverToBoxAdapter(
