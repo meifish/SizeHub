@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:size_hub/api/ApiClient.dart';
 import 'package:size_hub/model/AuthenticationService.dart';
 import 'package:size_hub/ui/MainLayout/MainLayout.dart';
 import 'package:size_hub/ui/Widgets/Auth/BackgroundPainter.dart';
@@ -24,7 +25,7 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
   Curve _curve = Curves.bounceIn;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-
+  TextEditingController _usernameController = TextEditingController();
   @override
   void initState() {
     _controller =
@@ -47,6 +48,7 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
     _emailController.dispose();
     _passwordController.dispose();
     _pageViewController.dispose();
+    _usernameController.dispose();
     super.dispose();
   }
 
@@ -98,6 +100,7 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
                             password: _passwordController.text,
                           )
                           .then((value) {
+                            ApiClient().createUser(_emailController.text, _usernameController.text);
                         Scaffold.of(context)
                             .showSnackBar(SnackBar(content: Text(value)));
                         if (value == 'Signed up') {
@@ -181,6 +184,7 @@ class _GroupedAuthWidgetsState extends State<GroupedAuthWidgets>
       child: SignUpCard(
         emailController: _emailController,
         passwordController: _passwordController,
+        nameController: _usernameController,
       ),
     );
   }
