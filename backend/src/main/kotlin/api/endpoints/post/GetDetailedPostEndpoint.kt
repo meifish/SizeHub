@@ -9,7 +9,8 @@ import src.data.Id
 import src.database.PublicDb
 
 @Serializable
-class GetDetailedPostArgs(val postId: Id)
+class GetDetailedPostArgs(val token: String? = null,
+                          val postId: Id)
 
 class GetDetailedPostEndpoint(private val publicDb: PublicDb) : Endpoint{
 
@@ -21,6 +22,8 @@ class GetDetailedPostEndpoint(private val publicDb: PublicDb) : Endpoint{
         val post = publicDb.posts.getById(args.postId)
             ?: return ErrorResponse.postNotFound().toJson()
 
-        return DetailedPostResponse.from(post).toJson()
+        val user = args.token?.let { publicDb.auth.getUser(it) }
+
+        return DetailedPostResponse.from(post, user).toJson()
     }
 }

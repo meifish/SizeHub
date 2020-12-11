@@ -10,6 +10,8 @@ import 'package:size_hub/data/PostPreviewData.dart';
 import 'package:size_hub/data/PublicUserProfileData.dart';
 
 import 'ApiErrorResponse.dart';
+import 'args/AddLikeArgs.dart';
+import 'args/RemoveLikeArgs.dart';
 
 enum PostSort {
   RECENT,
@@ -90,6 +92,20 @@ class ApiClient{
   }
 
   Future<DetailedPostData> createPost(CreatePostData data)async{
+    print(data.toJson());
+    Map<String, dynamic> response = await _makePostRequest('/createPost', data.toJson());
+    if(response==null) return null;
+    return DetailedPostData.fromJson(response);
+  }
+
+  Future<DetailedPostData> addLike(AddLikeArgs data)async{
+    print(data.toJson());
+    Map<String, dynamic> response = await _makePostRequest('/createPost', data.toJson());
+    if(response==null) return null;
+    return DetailedPostData.fromJson(response);
+  }
+
+  Future<DetailedPostData> removeLike(RemoveLikeArgs data)async{
     print(data.toJson());
     Map<String, dynamic> response = await _makePostRequest('/createPost', data.toJson());
     if(response==null) return null;

@@ -19,6 +19,8 @@ class PublicDb(clothingItemCollection: FirestoreCollection<ClothingItemData>,
     val createPost = CreatePostMutator(postCollection, this)
     val createUser = CreateUserMutator(userCollection, this)
     val createComment = CreateCommentMutator(commentCollection, this)
+    val addLike = AddLikeMutator(commentCollection, this)
+    val removeLike = RemoveLikeMutator(commentCollection, this)
 
     //QUERIES
     val auth = AuthQueries(this, userCollection, authService)

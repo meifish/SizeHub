@@ -31,6 +31,6 @@ class CreateCommentEndpoint(publicDb: PublicDb) : AuthEndpoint(publicDb) {
         val comment = publicDb.createComment(input.token, input.toMutatorArgs())
             ?: return ErrorResponse("Failed to create comment").toJson()
 
-        return CommentResponse.from(comment).toJson()
+        return CommentResponse.from(comment, user).toJson()
     }
 }

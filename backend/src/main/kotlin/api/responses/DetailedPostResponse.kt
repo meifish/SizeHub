@@ -7,6 +7,7 @@ import src.data.Id
 import src.data.PostLocation
 import src.data.UserMeasurementsData
 import src.database.dbitems.Post
+import src.database.dbitems.User
 
 @Serializable
 class DetailedPostResponse(val postId: Id,
@@ -20,7 +21,7 @@ class DetailedPostResponse(val postId: Id,
                            val comments: List<CommentResponse>) {
 
     companion object{
-        fun from(post: Post) = DetailedPostResponse(
+        fun from(post: Post, user: User?) = DetailedPostResponse(
             post.id,
             post.getPublicUser()?.let { UserPublicResponse.from(it) },
             post.getClothingItem()?.let { ClothingItemResponse.from(it) },
@@ -29,7 +30,7 @@ class DetailedPostResponse(val postId: Id,
             post.data.photoUrls,
             post.data.location,
             post.data.caption,
-            post.getReplies().map { CommentResponse.from(it) }
+            post.getReplies().map { CommentResponse.from(it, user) }
         )
     }
 

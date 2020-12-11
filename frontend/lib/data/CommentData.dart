@@ -10,11 +10,11 @@ class CommentData{
   final String comment;
   final PublicUserProfileData publicUserProfileData;
   final String createdAt;
+  final List<String> userIdLikes;
+  final bool isLiked;
 
-
-  CommentData(
-      this.commentId, this.comment, this.publicUserProfileData, this.createdAt);
-
+  CommentData(this.commentId, this.comment, this.publicUserProfileData,
+      this.createdAt, this.userIdLikes, this.isLiked);
 
   @override
   String toString() {
