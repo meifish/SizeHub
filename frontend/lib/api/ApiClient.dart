@@ -47,14 +47,14 @@ class ApiClient{
 
   Future<Map<String, dynamic>> _makeGetRequest(String path, Map<String, dynamic> args) async {
     try {
-      return _validateResponse(await dio.get("http://192.168.2.10:3000" + path, queryParameters: args));
+      return _validateResponse(await dio.get("http://10.0.2.2:3000" + path, queryParameters: args));
     }
     catch(e){ print(e); return null; }
   }
 
   Future<Map<String, dynamic>> _makePostRequest(String path, dynamic data) async {
     try {
-      return _validateResponse(await dio.post("http://192.168.2.10:3000" + path, data: data));
+      return _validateResponse(await dio.post("http://10.0.2.2:3000" + path, data: data));
     }
     catch(e){ print(e); return null; }
   }

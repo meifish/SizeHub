@@ -5,7 +5,7 @@ import 'package:web_socket_channel/io.dart';
 
 class TrendingPageSocketClient{
 
-  final channel = IOWebSocketChannel.connect('ws://192.168.2.10:3000/trending');
+  final channel = IOWebSocketChannel.connect('ws://10.0.2.2:3000/trending');
 
   void Function(PostPreviewData) onPost;
 
