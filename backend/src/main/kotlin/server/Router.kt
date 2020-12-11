@@ -5,8 +5,10 @@ import io.ktor.websocket.*
 import src.api.endpoints.Endpoint
 import src.api.endpoints.KtorGetHandler
 import src.api.endpoints.KtorPostHandler
+import src.api.endpoints.comment.AddLikeEndpoint
 import src.api.endpoints.comment.CreateCommentEndpoint
 import src.api.endpoints.comment.GetRepliesEndpoint
+import src.api.endpoints.comment.RemoveLikeEndpoint
 import src.api.endpoints.post.CreatePostEndpoint
 import src.api.endpoints.post.GetDetailedPostEndpoint
 import src.api.endpoints.test.SendPostBurstEndpoint
@@ -37,6 +39,8 @@ class Router(publicDb: PublicDb) {
     private val postEndpoints: List<Endpoint> = listOf(
         //comment
         CreateCommentEndpoint(publicDb),
+        AddLikeEndpoint(publicDb),
+        RemoveLikeEndpoint(publicDb),
 
         //post
         CreatePostEndpoint(publicDb),

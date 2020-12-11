@@ -10,14 +10,17 @@ import src.api.responses.ErrorResponse
 import src.data.Id
 import src.database.PublicDb
 import src.database.dbitems.Comment
+import src.database.dbitems.User
 
 @Serializable
-class GetRepliesArgs(val postId: Id)
+class GetRepliesArgs(val token: String? = null,
+                     val postId: Id)
 
 @Serializable
 class GetRepliesResponse(val comments: List<CommentResponse>) {
     companion object{
-        fun from(comments: List<Comment>) = GetRepliesResponse(comments.map { CommentResponse.from(it) })
+        fun from(comments: List<Comment>, user: User?)
+        = GetRepliesResponse(comments.map { CommentResponse.from(it, user) })
     }
 
     fun toJson() = Json.encodeToString(this)
@@ -33,6 +36,8 @@ class GetRepliesEndpoint(private val publicDb: PublicDb) : Endpoint {
         val post = publicDb.posts.getById(input.postId)
             ?: return ErrorResponse.postNotFound().error
 
-        return GetRepliesResponse.from(post.getReplies()).toJson()
+        val user = input.token?.let { publicDb.auth.getUser(it) }
+
+        return GetRepliesResponse.from(post.getReplies(), user).toJson()
     }
 }

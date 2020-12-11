@@ -10,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl:
   cupertino_icons: ^1.0.0
   flare_flutter: ^2.0.6
   scoped_model: ^1.1.0
@@ -38,6 +41,9 @@ dependencies:
   flutter_map:
 
   
+  web_socket_channel: ^1.1.0
+  shared_preferences: ^0.5.12+4
+  charts_flutter:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -62,3 +68,6 @@ flutter:
     - family: SnowburstOne
       fonts:
         - asset: assets/fonts/SnowburstOne-Regular.ttf
+flutter_intl:
+  enabled: true
+  main_locale: en_US

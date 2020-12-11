@@ -25,9 +25,13 @@ class CreatePostArgs(private val clothingItemId: Id? = null,
 class CreatePostMutator(private val postCollection: FirestoreCollection<PostData>,
                         private val publicDb: PublicDb) {
 
+    var onPostCreate: ((Post)->Unit)? = null
+
     operator fun invoke(token: String, createPostArgs: CreatePostArgs): Post?{
         val user = publicDb.auth.getUser(token) ?: return null
         val postData = createPostArgs.toPostData(user.id, System.currentTimeMillis().toString())
-        return postCollection.create(postData)?.toItem(publicDb)
+        val post = postCollection.create(postData)?.toItem(publicDb)
+        post?.let { onPostCreate?.invoke(it) }
+        return post
     }
 }

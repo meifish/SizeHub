@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:size_hub/data/UserMeasurementsData.dart';
+import 'package:size_hub/api/ApiClient.dart';
+import 'package:size_hub/data/CommentData.dart';
+import 'package:size_hub/data/DetailedPostData.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/CommentBox/CommentBox.dart';
 import 'DetailedPostScrollableCard.dart';
 
 class DetailedPost extends StatefulWidget {
   final String id;
   final String picture;
-  final UserMeasurementsData userMeasurementData;
   final List<String> photoUrls;
+  final DetailedPostData post;
 
   const DetailedPost(
-      {Key key,
-      this.id,
-      this.picture,
-      this.userMeasurementData,
-      this.photoUrls})
+      {Key key, this.id, this.post, this.picture, this.photoUrls})
       : super(key: key);
 
   @override
@@ -24,9 +22,10 @@ class DetailedPost extends StatefulWidget {
 
 class _DetailedPostState extends State<DetailedPost> {
   bool _isCommentBoxOpen = false;
-
+  List<CommentData> commentData;
   @override
   void initState() {
+    ApiClient().getReplies(widget.post.postId).then((value) => commentData=value);
     super.initState();
   }
 
@@ -48,13 +47,15 @@ class _DetailedPostState extends State<DetailedPost> {
           )),
         ),
         DetailedPostScrollableCard(
-          userMeasurementData: widget.userMeasurementData,
+          post: widget.post,
           photoUrls: widget.photoUrls,
           onCommentBoxPressed: () =>
               setState(() => _isCommentBoxOpen = !_isCommentBoxOpen),
         ),
         _isCommentBoxOpen
             ? CommentBox(
+          comments: commentData,
+                post: widget.post,
                 onClose: () => setState(() => _isCommentBoxOpen = false),
               )
             : Container()

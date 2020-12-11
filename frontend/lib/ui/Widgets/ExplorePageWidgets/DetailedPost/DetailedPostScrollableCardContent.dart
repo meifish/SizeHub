@@ -1,19 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:size_hub/data/UserMeasurementsData.dart';
+import 'package:size_hub/data/DetailedPostData.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:size_hub/ui/Widgets/Common/LikeButton.dart';
 
 class DetailedPostScrollableCardContent extends StatelessWidget {
-  final UserMeasurementsData userMeasurementData;
   final List<String> photoUrls;
   final VoidCallback onCommentButtonPressed;
+  final DetailedPostData post;
 
   const DetailedPostScrollableCardContent(
-      {Key key,
-      this.userMeasurementData,
-      this.photoUrls,
-      this.onCommentButtonPressed})
+      {Key key, this.post, this.photoUrls, this.onCommentButtonPressed})
       : super(key: key);
 
   @override
@@ -43,11 +40,13 @@ class DetailedPostScrollableCardContent extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
-                  'Perfectly Oversized Crew',
+                  post.clothingItem.name,
                   textScaleFactor: 1.5,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -69,29 +68,29 @@ class DetailedPostScrollableCardContent extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 20, right: 20),
-                  child: Text(
-                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+                  child: Text(post.caption),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                userMeasurementData == null
+                post.userMeasurementsData == null
                     ? Text("No Measurement Provided with this Post")
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           {
                             'icon': FontAwesomeIcons.rulerVertical,
-                            'text': '${userMeasurementData.height.toString()}'
+                            'text':
+                                'Height ${post.userMeasurementsData.height.toString()}'
+                          },
+                          {
+                            'icon': FontAwesomeIcons.tshirt,
+                            'text': 'Size ${post.clothingItemSize}'
                           },
                           {
                             'icon': FontAwesomeIcons.rulerHorizontal,
                             'text':
-                                '${userMeasurementData.weight.toString()}lbs'
-                          },
-                          {
-                            'icon': FontAwesomeIcons.rulerHorizontal,
-                            //'text': 'Size ${userMeasurementData.wearSize}'
+                                'Weight ${post.userMeasurementsData.weight.toString()}lbs'
                           },
                         ]
                             .map((e) => Chip(

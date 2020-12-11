@@ -9,7 +9,7 @@ part of 'CreateCommentArgs.dart';
 CreateCommentArgs _$CreateCommentArgsFromJson(Map<String, dynamic> json) {
   return CreateCommentArgs(
     postId: json['postId'] as String,
-    userId: json['userId'] as String,
+    token: json['token'] as String,
     comment: json['comment'] as String,
   );
 }
@@ -17,6 +17,6 @@ CreateCommentArgs _$CreateCommentArgsFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$CreateCommentArgsToJson(CreateCommentArgs instance) =>
     <String, dynamic>{
       'postId': instance.postId,
-      'userId': instance.userId,
+      'token': instance.token,
       'comment': instance.comment,
     };

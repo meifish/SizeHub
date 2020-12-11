@@ -21,19 +21,18 @@ class TrendingPageUpdater(private val publicDb: PublicDb,
                     updatePosts()
                 }
                 sendPost()
-                Thread.sleep(1000)
+                Thread.sleep(2000)
             }
         }.start()
     }
 
     private fun updatePosts(){
-        println("Checking")
         if(!trendingPageEndpoint.hasClients){
             return
         }
         println("Updating Post List for Trending Page")
         nextUpdate = System.currentTimeMillis() + postUpdateTime
-        latestPosts = publicDb.posts.getLatestPosts(10)
+        latestPosts = publicDb.posts.getLatestPosts(50)
     }
 
     private fun sendPost(){

@@ -1,4 +1,4 @@
-import 'package:size_hub/data/UserMeasurementsData.dart';
+import 'package:size_hub/data/DetailedPostData.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/Post/PostWidget/PostWidgetStack.dart';
 import 'package:flutter/material.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/DetailedPost.dart';
@@ -8,16 +8,16 @@ class PostWidget extends StatelessWidget {
   final String picture;
   final String id;
   final String postId;
-  final UserMeasurementsData userMeasurementData;
   final List<String> photoUrls;
+  final DetailedPostData post;
 
   const PostWidget(
       {Key key,
       this.userName,
       this.picture,
       this.id,
-      this.userMeasurementData,
       this.postId,
+      this.post,
       this.photoUrls})
       : super(key: key);
 
@@ -29,10 +29,7 @@ class PostWidget extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => DetailedPost(
-                  id: id,
-                  picture: picture,
-                  userMeasurementData: userMeasurementData,
-                  photoUrls: photoUrls)),
+                  id: id, picture: picture, photoUrls: photoUrls, post: post)),
         )
       },
       child: Card(

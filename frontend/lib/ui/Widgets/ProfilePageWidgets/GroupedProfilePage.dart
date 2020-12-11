@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:size_hub/api/ApiClient.dart';
@@ -19,7 +22,16 @@ class GroupedProfilePageWidgets extends StatefulWidget {
 }
 
 class _GroupedProfilePageWidgetsState extends State<GroupedProfilePageWidgets> {
+  var dummy_profile;
+  Future _loadProfile() async {
+    final profileContent = await DefaultAssetBundle.of(context)
+        .loadString('assets/data/FakeProfileData.json');
 
+    final Map<String, dynamic> profileMap = jsonDecode(profileContent);
+    dummy_profile = profileMap;
+
+    return 1;
+  }
   List<String> images;
   ApiClient apiClient = ApiClient();
 
@@ -31,13 +43,17 @@ class _GroupedProfilePageWidgetsState extends State<GroupedProfilePageWidgets> {
   Widget _getCollection({image, firstColor, secondColor, text, PostSort sort}) {
     return GestureDetector(
       onTapUp: (TapUpDetails details) {
-        apiClient.getPostsByUser("2ojhhM2TfdFLKcVr1bh1", sort).then((value) =>
+        loadProfile().then((value) {
+          apiClient.getPostsByUser(value.user.userId, sort)
+              .then((value) {
+                print(value);
             setState(() {
               images = value.map((e) => e.photoUrls.first).toList();
               _profilePictureGrid = _getProfilePictureGrid(
                   Point(details.globalPosition.dx, details.globalPosition.dy));
-            })
-        );
+            });
+          });
+        });
       },
       child: Collection(
         image: image,
@@ -53,6 +69,16 @@ class _GroupedProfilePageWidgetsState extends State<GroupedProfilePageWidgets> {
       point: point,
       images: images,
     );
+  }
+  @override
+  void initState() {
+    _loadProfile();
+    super.initState();
+  }
+
+  Future<PublicUserProfileData> loadProfile() async {
+    String token = await FirebaseAuth.instance.currentUser.getIdToken();
+    return await apiClient.getProfile(token);
   }
 
   @override
@@ -81,7 +107,7 @@ class _GroupedProfilePageWidgetsState extends State<GroupedProfilePageWidgets> {
           sort: PostSort.COMMENTS),
     ];
     return FutureBuilder(
-        future: apiClient.getProfile("2ojhhM2TfdFLKcVr1bh1"),
+        future: loadProfile(),
         builder: (BuildContext context,
             AsyncSnapshot<PublicUserProfileData> data) {
           PublicUserProfileData profile = data.data;
@@ -97,7 +123,7 @@ class _GroupedProfilePageWidgetsState extends State<GroupedProfilePageWidgets> {
                   height: 200,
                   coverPhoto:
                   "https://static.wikia.nocookie.net/kpop/images/9/9c/TWICE_Better_group_concept_photo_3.png/revision/latest?cb=20201005130428",
-                  child: ProfileCard(profile: profile),
+                  child: ProfileCard(profile: profile, dummyData: dummy_profile,),
                 ),
               ),
               SliverToBoxAdapter(

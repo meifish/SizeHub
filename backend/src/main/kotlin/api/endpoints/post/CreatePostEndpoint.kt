@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import src.api.endpoints.AuthEndpoint
 import src.api.endpoints.Endpoint
+import src.api.responses.DetailedPostResponse
 import src.api.responses.ErrorResponse
 import src.api.responses.PostPreviewResponse
 import src.data.Id
@@ -33,10 +34,12 @@ class CreatePostEndpoint(publicDb: PublicDb) : AuthEndpoint(publicDb){
     override fun handle(jsonInput: String, user: User): String {
         val input = json.decodeFromString<CreatePostArgs>(jsonInput)
 
+        println(jsonInput)
+
         if(!publicDb.auth.validateToken(input.token)) return ErrorResponse.invalidToken().toJson()
         val post = publicDb.createPost(input.token, input.toMutatorArgs())
             ?: return ErrorResponse("Failed to create post").toJson()
 
-        return PostPreviewResponse.from(post).toJson()
+        return DetailedPostResponse.from(post, user).toJson()
     }
 }

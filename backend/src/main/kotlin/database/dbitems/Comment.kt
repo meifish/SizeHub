@@ -10,6 +10,7 @@ class Comment(override val id: Id,
               private val publicDb: PublicDb) : DbItem<CommentData> {
 
     fun getPost(): Post? = data.postId.let { publicDb.posts.getById(it) }
+    fun getPublicUser(): PublicUser? = publicDb.users.getPublicDataById(data.userId)
 }
 
 fun DataIdPair<CommentData>.toItem(publicDb: PublicDb) = Comment(id, data, publicDb)

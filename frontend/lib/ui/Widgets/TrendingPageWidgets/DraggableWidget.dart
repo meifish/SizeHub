@@ -33,10 +33,8 @@ class _DraggableWidgetsStat extends State<DraggableWidget> {
     _dx = Random()
         .nextInt((widget.screenWidth - widget.imageHeight).toInt())
         .toDouble();
-    _dy = Random()
-        .nextInt((widget.screenHeight - widget.imageHeight).toInt())
-        .toDouble();
-    speed = Random().nextInt(40) + 10;
+    _dy = widget.screenHeight + widget.imageHeight;
+    speed = Random().nextInt(10) + 10;
     new Timer.periodic(new Duration(milliseconds: speed), increase);
     super.initState();
   }
@@ -64,11 +62,10 @@ class _DraggableWidgetsStat extends State<DraggableWidget> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => DetailedPost(
-                      id: widget.uKey,
-                      picture: widget.image,
-                      userMeasurementData: UserMeasurementsData(25, '25'),
-                      photoUrls: [])));
+                  builder: (context) =>
+                      DetailedPost(id: widget.uKey, picture: widget.image,
+                          //userMeasurementData: UserMeasurementsData(25, '25'),
+                          photoUrls: [])));
         },
         onPanUpdate: (tapInfo) {
           setState(() {

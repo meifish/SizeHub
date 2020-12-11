@@ -6,10 +6,10 @@ part 'CreateCommentArgs.g.dart';
 class CreateCommentArgs{
 
   final String postId;
-  final String userId;
+  final String token;
   final String comment;
 
-  CreateCommentArgs({this.postId, this.userId, this.comment});
+  CreateCommentArgs({this.postId, this.token, this.comment});
 
   factory CreateCommentArgs.fromJson(Map<String, dynamic> json) =>
       json == null ? null : _$CreateCommentArgsFromJson(json);
