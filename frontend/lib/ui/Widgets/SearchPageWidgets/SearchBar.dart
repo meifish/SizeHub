@@ -55,6 +55,9 @@ class SearchBar extends StatelessWidget {
                   elevation: 5.0,
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   child: TextField(
+                    onTap: () {
+                      _showSearch();
+                    },
                     cursorColor: Colors.purple,
                     decoration: InputDecoration(
                         hintText: "Search Product",

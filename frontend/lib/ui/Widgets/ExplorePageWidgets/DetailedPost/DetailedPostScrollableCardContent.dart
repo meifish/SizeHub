@@ -40,18 +40,18 @@ class DetailedPostScrollableCardContent extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
                   post.clothingItem.name,
-                  textScaleFactor: 1.5,
+                  textScaleFactor: 1.25,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 50, width: 50, child: LikeButton(liked: true)),
+              SizedBox(height:40, width: 40, child: LikeButton(liked: true)),
               IconButton(
                 icon: Icon(
                   Icons.comment,

@@ -28,6 +28,11 @@ class Database {
         .snapshots();
   }
 
+  Future<QuerySnapshot> getPostLoc() async {
+    await Firebase.initializeApp();
+    return FirebaseFirestore.instance.collection("LocPostMockup").get();
+  }
+
   Future<String> uploadFile(file) async {
     String firebaseFileName =
         'posts/${String.fromCharCodes(List.generate(15, (index) => Random().nextInt(42) + 48))}';

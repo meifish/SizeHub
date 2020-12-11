@@ -32,7 +32,11 @@ class ElasticSearchDelegate extends SearchDelegate {
         future: searchElasticServer(query),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
-            return CircularProgressIndicator();
+            return Padding(
+              padding: EdgeInsets.all(20),
+              child:
+                  Text("Suggestion: \"lulu\"", style: TextStyle(fontSize: 14)),
+            );
           } else {
             return showItem(snapshot.data);
           }
@@ -45,7 +49,11 @@ class ElasticSearchDelegate extends SearchDelegate {
         future: searchElasticServer(query),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
-            return CircularProgressIndicator();
+            return Padding(
+              padding: EdgeInsets.all(20),
+              child:
+                  Text("Suggestion: \"lulu\"", style: TextStyle(fontSize: 14)),
+            );
           } else {
             return showItem(snapshot.data);
           }

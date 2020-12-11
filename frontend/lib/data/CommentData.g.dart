@@ -15,6 +15,8 @@ CommentData _$CommentDataFromJson(Map<String, dynamic> json) {
         : PublicUserProfileData.fromJson(
             json['publicUserProfileData'] as Map<String, dynamic>),
     json['createdAt'] as String,
+    (json['userIdLikes'] as List)?.map((e) => e as String)?.toList(),
+    json['isLiked'] as bool,
   );
 }
 
@@ -24,4 +26,6 @@ Map<String, dynamic> _$CommentDataToJson(CommentData instance) =>
       'comment': instance.comment,
       'publicUserProfileData': instance.publicUserProfileData,
       'createdAt': instance.createdAt,
+      'userIdLikes': instance.userIdLikes,
+      'isLiked': instance.isLiked,
     };

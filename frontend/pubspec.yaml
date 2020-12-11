@@ -38,6 +38,9 @@ dependencies:
   latlong:
   geolocator: 5.1.1
   geocoder:
+  flutter_map:
+
+  
   web_socket_channel: ^1.1.0
   shared_preferences: ^0.5.12+4
   charts_flutter:

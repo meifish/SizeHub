@@ -47,20 +47,20 @@ class ApiClient{
 
   Future<Map<String, dynamic>> _makeGetRequest(String path, Map<String, dynamic> args) async {
     try {
-      return _validateResponse(await dio.get("http://10.0.2.2:3000" + path, queryParameters: args));
+      return _validateResponse(await dio.get("http://192.168.2.10:3000" + path, queryParameters: args));
     }
     catch(e){ print(e); return null; }
   }
 
   Future<Map<String, dynamic>> _makePostRequest(String path, dynamic data) async {
     try {
-      return _validateResponse(await dio.post("http://10.0.2.2:3000" + path, data: data));
+      return _validateResponse(await dio.post("http://192.168.2.10:3000" + path, data: data));
     }
     catch(e){ print(e); return null; }
   }
 
   //API CALLS
-  
+
   Future<CommentData> createComment(CreateCommentArgs args) async{
     Map<String, dynamic> response = await _makePostRequest("/createComment", args);
     if(response == null) return null;
@@ -92,7 +92,6 @@ class ApiClient{
   }
 
   Future<DetailedPostData> createPost(CreatePostData data)async{
-    print(data.toJson());
     Map<String, dynamic> response = await _makePostRequest('/createPost', data.toJson());
     if(response==null) return null;
     return DetailedPostData.fromJson(response);
@@ -110,5 +109,11 @@ class ApiClient{
     Map<String, dynamic> response = await _makePostRequest('/createPost', data.toJson());
     if(response==null) return null;
     return DetailedPostData.fromJson(response);
+  }
+  Future<String> createUser(String email, String username)async{
+    Map<String,dynamic> response = await _makePostRequest("/createUser", {"username": username, "email": email});
+    if(response==null) return null;
+    return 'Success';
+
   }
 }
