@@ -43,7 +43,7 @@ The backend also needs a json file which contains tokens to access the database.
 	
 The frontend is a normal flutter app and should run when navigating to the /frontend folder under the project root. Do “flutter run”. 
 
-We have created a sample user account for you to use/test on. The credentials are:
+You can create your own account, but if you would like to use an existing account with sample data already on it (such as posts and comments), We have created a sample user account for you to use/test on. The credentials are:
 
 # Sample Account
 
