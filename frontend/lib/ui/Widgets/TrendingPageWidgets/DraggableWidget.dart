@@ -34,7 +34,7 @@ class _DraggableWidgetsStat extends State<DraggableWidget> {
         .nextInt((widget.screenWidth - widget.imageHeight).toInt())
         .toDouble();
     _dy = widget.screenHeight + widget.imageHeight;
-    speed = Random().nextInt(40) + 30;
+    speed = Random().nextInt(10) + 10;
     new Timer.periodic(new Duration(milliseconds: speed), increase);
     super.initState();
   }

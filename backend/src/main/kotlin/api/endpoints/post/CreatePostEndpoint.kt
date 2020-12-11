@@ -34,6 +34,8 @@ class CreatePostEndpoint(publicDb: PublicDb) : AuthEndpoint(publicDb){
     override fun handle(jsonInput: String, user: User): String {
         val input = json.decodeFromString<CreatePostArgs>(jsonInput)
 
+        println(jsonInput)
+
         if(!publicDb.auth.validateToken(input.token)) return ErrorResponse.invalidToken().toJson()
         val post = publicDb.createPost(input.token, input.toMutatorArgs())
             ?: return ErrorResponse("Failed to create post").toJson()
