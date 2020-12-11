@@ -62,11 +62,10 @@ class _DraggableWidgetsStat extends State<DraggableWidget> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => DetailedPost(
-                      id: widget.uKey,
-                      picture: widget.image,
-                      userMeasurementData: UserMeasurementsData(25, '25'),
-                      photoUrls: [])));
+                  builder: (context) =>
+                      DetailedPost(id: widget.uKey, picture: widget.image,
+                          //userMeasurementData: UserMeasurementsData(25, '25'),
+                          photoUrls: [])));
         },
         onPanUpdate: (tapInfo) {
           setState(() {
