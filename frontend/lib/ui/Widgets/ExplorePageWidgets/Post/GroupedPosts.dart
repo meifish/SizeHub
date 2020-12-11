@@ -10,6 +10,7 @@ import 'PostWidget/PostWidget.dart';
 
 class GroupedPosts extends StatefulWidget {
   String displayClotheID;
+
   GroupedPosts({Key key, this.displayClotheID}) : super(key: key);
 
   @override
@@ -57,7 +58,11 @@ class _GroupedPostsState extends State<GroupedPosts> {
                             AsyncSnapshot<DetailedPostData> data) {
                           DetailedPostData post = data.data;
                           return post == null
-                              ? CircularProgressIndicator()
+                              ? FlareActor(
+                                  "assets/animations/Loading.flr",
+                                  animation: "Loading",
+                                  fit: BoxFit.contain,
+                                )
                               : PostWidget(
                                   id: "PostHeroId_$index",
                                   postId: post.postId,
@@ -69,7 +74,7 @@ class _GroupedPostsState extends State<GroupedPosts> {
                                       ? ""
                                       : post.photoUrls[0],
                                   photoUrls: post.photoUrls,
-                                );
+                                  post: post);
                         });
                   },
                   staggeredTileBuilder: (index) =>

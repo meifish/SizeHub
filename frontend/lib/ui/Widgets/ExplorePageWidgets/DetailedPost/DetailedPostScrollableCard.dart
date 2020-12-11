@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:size_hub/data/UserMeasurementsData.dart';
+import 'package:size_hub/data/DetailedPostData.dart';
 import 'package:size_hub/ui/Widgets/Common/ScrollableCard.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/DetailedPostScrollableCardContent.dart';
 
 class DetailedPostScrollableCard extends StatelessWidget {
-  final UserMeasurementsData userMeasurementData;
   final List<String> photoUrls;
   final VoidCallback onCommentBoxPressed;
+  final DetailedPostData post;
 
   const DetailedPostScrollableCard(
-      {Key key,
-      this.userMeasurementData,
-      this.photoUrls,
-      this.onCommentBoxPressed})
+      {Key key, this.post, this.photoUrls, this.onCommentBoxPressed})
       : super(key: key);
 
   @override
@@ -20,7 +17,7 @@ class DetailedPostScrollableCard extends StatelessWidget {
     return ScrollableCard(
         child: DetailedPostScrollableCardContent(
       photoUrls: photoUrls,
-      userMeasurementData: userMeasurementData,
+      post: post,
       onCommentButtonPressed: onCommentBoxPressed,
     ));
   }
