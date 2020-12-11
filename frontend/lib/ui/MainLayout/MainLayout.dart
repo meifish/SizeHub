@@ -9,7 +9,9 @@ import 'BottomNavigationBar/BottomNavigationFAB.dart';
 import 'package:size_hub/ui/MainLayout/BottomNavigationBar/BottomNavigationIconButton.dart';
 
 class MainLayout extends StatefulWidget {
-  MainLayout({Key key}) : super(key: key);
+  Widget bodyWidget;
+
+  MainLayout({Key key, this.bodyWidget}) : super(key: key);
 
   @override
   _MainLayoutState createState() => _MainLayoutState();
@@ -34,7 +36,9 @@ class _MainLayoutState extends State<MainLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: _children[_currentIndex],
+      body: widget.bodyWidget == null
+          ? _children[_currentIndex]
+          : widget.bodyWidget,
       floatingActionButton: BottomNavigationFAB(child: CameraPage()),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigation(
@@ -45,7 +49,9 @@ class _MainLayoutState extends State<MainLayout> {
           BottomNavigationIconButton(
               icon: Icons.search, text: "Search", hasNotification: false),
           BottomNavigationIconButton(
-              icon: Icons.trending_up, text: "Trending", hasNotification: false),
+              icon: Icons.trending_up,
+              text: "Trending",
+              hasNotification: false),
           BottomNavigationIconButton(
               icon: Icons.account_circle_sharp,
               text: "Profile",

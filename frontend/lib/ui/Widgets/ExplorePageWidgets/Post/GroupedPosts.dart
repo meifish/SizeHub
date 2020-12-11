@@ -9,7 +9,8 @@ import 'package:size_hub/data/database/Database.dart';
 import 'PostWidget/PostWidget.dart';
 
 class GroupedPosts extends StatefulWidget {
-  GroupedPosts({Key key}) : super(key: key);
+  String displayClotheID;
+  GroupedPosts({Key key, this.displayClotheID}) : super(key: key);
 
   @override
   _GroupedPostsState createState() => _GroupedPostsState();
@@ -27,7 +28,9 @@ class _GroupedPostsState extends State<GroupedPosts> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _database.readAllNew(),
+        future: (widget.displayClotheID == null)
+            ? _database.readAllNew()
+            : _database.queryByClotheID(widget.displayClotheID),
         builder: (BuildContext context,
             AsyncSnapshot<Stream<QuerySnapshot>> snapshot) {
           if (snapshot.data == null) return Text("No data");

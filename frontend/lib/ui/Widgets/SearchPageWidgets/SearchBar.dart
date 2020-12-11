@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:elastic_client/console_http_transport.dart';
 import 'package:elastic_client/elastic_client.dart';
-import 'package:size_hub/elasticsearch/ElasticsearchDelegate.dart';
+import 'package:size_hub/ui/Pages/ElasticsearchDelegatePage.dart';
 
 class SearchBar extends StatelessWidget {
   SearchBar({Key key}) : super(key: key);

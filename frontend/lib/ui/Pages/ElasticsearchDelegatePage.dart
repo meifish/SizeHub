@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:elastic_client/console_http_transport.dart';
 import 'package:elastic_client/elastic_client.dart' as elastic;
+import 'package:size_hub/ui/MainLayout/MainLayout.dart';
+import 'package:size_hub/ui/Widgets/ExplorePageWidgets/Post/GroupedPosts.dart';
 
 class ElasticSearchDelegate extends SearchDelegate {
   @override
@@ -50,11 +52,23 @@ class ElasticSearchDelegate extends SearchDelegate {
         });
   }
 
-  Widget showItem(List<String> itemList) {
+  Widget showItem(List<Map<dynamic, dynamic>> itemList) {
     return ListView.builder(
         itemCount: itemList.length,
         itemBuilder: (BuildContext context, int idx) {
-          return ListTile(title: Text(itemList[idx]));
+          return ListTile(
+            title: Text(itemList[idx]['doc']['name'].toString()),
+            onTap: () {
+              String clotheID = itemList[idx]['_id'];
+              print("On tap clothe ID: " + clotheID);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MainLayout(
+                        bodyWidget: GroupedPosts(displayClotheID: clotheID))),
+              );
+            },
+          );
         });
   }
 
@@ -64,18 +78,15 @@ class ElasticSearchDelegate extends SearchDelegate {
             'https://a00fb47e0c284c62be6ba4d0526aae81.us-central1.gcp.cloud.es.io:9243'),
         basicAuth: BasicAuth("elastic", "SppDWAjzBCOhkZbGf1edXOYg"));
     final client = elastic.Client(transport);
-    List<String> itemList = List<String>();
+    List<Map<dynamic, dynamic>> itemList = List<Map<dynamic, dynamic>>();
 
-    final SearchResult = await client.search(
-        'elastic-clothingitems-new',
-        '_doc',
-        // query the field 'name' in the collection of 'elastic-clothingitems-new'
-        elastic.Query.term('name', ['$searchQuery']),
+    final SearchResult = await client.search('elastic-clothingitems-new',
+        '_doc', elastic.Query.term('name', ['$searchQuery']),
         source: true);
 
     for (final iter in SearchResult.hits) {
-      Map<dynamic, dynamic> doc = iter.doc;
-      itemList.add(doc['name'].toString());
+      Map<dynamic, dynamic> doc = iter.toMap();
+      itemList.add(doc);
     }
 
     await transport.close();
