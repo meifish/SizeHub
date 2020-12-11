@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:size_hub/data/temp/profileModel.dart';
+import 'package:size_hub/model/AuthenticationService.dart';
+import 'package:size_hub/ui/Pages/SplashPage.dart';
 import 'package:size_hub/ui/Widgets/Common/PurpleRaisedButton.dart';
 import 'package:size_hub/ui/Widgets/DialogueWidget/BodyShapeDialog.dart';
 import 'package:size_hub/model/notification_helper.dart';
 import 'package:size_hub/model/profileDB_helper.dart';
+import 'package:provider/provider.dart';
 
 class ProfileEditForm extends StatefulWidget {
   // existingProfile;
@@ -60,6 +63,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
     'Rectangle'
   ];
   String dropdownValue = 'Hourglass';
+
   //////////////////////////////////////////////////////////////////////////////
   void initState() {
     super.initState();
@@ -224,7 +228,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
                             hintText: 'Enter feet',
                             labelText: 'feet',
                             labelStyle:
-                            TextStyle(fontSize: 12, color: Colors.purple),
+                                TextStyle(fontSize: 12, color: Colors.purple),
                             hintStyle: TextStyle(fontSize: 12)),
                         inputFormatters: [LengthLimitingTextInputFormatter(1)],
                         validator: (userHeightFeet) {
@@ -260,7 +264,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
                             hintText: 'Enter Inch',
                             labelText: 'inch',
                             labelStyle:
-                            TextStyle(fontSize: 12, color: Colors.purple),
+                                TextStyle(fontSize: 12, color: Colors.purple),
                             hintStyle: TextStyle(fontSize: 12)),
                         inputFormatters: [LengthLimitingTextInputFormatter(2)],
                         validator: (userHeightInch) {
@@ -301,7 +305,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
                             hintText: 'Enter Pound',
                             labelText: 'pound',
                             labelStyle:
-                            TextStyle(fontSize: 12, color: Colors.purple),
+                                TextStyle(fontSize: 12, color: Colors.purple),
                             hintStyle: TextStyle(fontSize: 12)),
                         inputFormatters: [LengthLimitingTextInputFormatter(3)],
                         textInputAction: TextInputAction.next,
@@ -337,13 +341,13 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
                                 isExpanded: true,
                                 value: dropdownValue,
                                 items: _bodyType.map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value,
-                                            style: TextStyle(fontSize: 14)),
-                                      );
-                                    }).toList(),
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value,
+                                        style: TextStyle(fontSize: 14)),
+                                  );
+                                }).toList(),
                                 onChanged: (String value) {
                                   setState(() {
                                     widget.user.bodyShape = value;
@@ -372,6 +376,19 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
               PurpleRaisedButton(
                 child: Text("Save"),
                 onPressed: submit,
+              ),
+              PurpleRaisedButton(
+                child: Text('Sign Out'),
+                onPressed: () {
+                  context
+                      .read<AuthenticationService>()
+                      .signOut()
+                      .then((value) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SplashPage()),
+                          ));
+                },
               )
             ],
           )),
