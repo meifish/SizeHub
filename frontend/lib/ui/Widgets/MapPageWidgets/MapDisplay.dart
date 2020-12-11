@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
@@ -23,6 +24,7 @@ class Map extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(imgLocs);
     return FlutterMap(
       options: MapOptions(
         zoom: 7.0,
@@ -39,19 +41,17 @@ class Map extends StatelessWidget {
               'id': 'mapbox.mapbox-streets-v8',
             }),
         MarkerLayerOptions(
-            markers: (imgLocs == null)
-                ? [
-                    Marker(
-                        width: 45.0,
-                        height: 45.0,
-                        point: centre,
-                        builder: (context) => Container(
-                                child: IconButton(
-                              iconSize: 45.0,
-                              color: Colors.blue,
-                              icon: Icon(Icons.location_on),
-                            )))
-                  ]
+            markers: (imgLocs != null)
+                ? imgLocs.map((value) => Marker(
+                    width: 45.0,
+                    height: 45.0,
+                    point: value.latlng,
+                    builder: (context) => Container(
+                            child: Container(
+                                child: CachedNetworkImage(
+                          imageUrl:
+                              value.imgURL,
+                        ))))).toList()
                 : [
                     Marker(
                         width: 45.0,
