@@ -40,6 +40,6 @@ class CreatePostEndpoint(publicDb: PublicDb) : AuthEndpoint(publicDb){
         val post = publicDb.createPost(input.token, input.toMutatorArgs())
             ?: return ErrorResponse("Failed to create post").toJson()
 
-        return DetailedPostResponse.from(post).toJson()
+        return DetailedPostResponse.from(post, user).toJson()
     }
 }

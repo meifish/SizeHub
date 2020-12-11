@@ -10,7 +10,7 @@ import src.data.Id
 
 class DataIdPair<T>(val id: Id, val data: T)
 
-class FirestoreCollection<T>(private val collection: CollectionReference,
+class FirestoreCollection<T>(val collection: CollectionReference,
                              private val decoder: (String)->T){
 
     private val gson = Gson()

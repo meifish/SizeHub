@@ -11,7 +11,7 @@ class CreateCommentArgs(val postId: Id,
                         val comment: String){
 
     fun toCommentData(userId: String, createdAt: String)
-    = CommentData(userId, postId, comment, createdAt)
+    = CommentData(postId, userId, comment, createdAt, emptySet())
 }
 
 class CreateCommentMutator(private val commentCollection: FirestoreCollection<CommentData>,
