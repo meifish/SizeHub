@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:size_hub/data/PublicUserProfileData.dart';
 
 part 'CommentData.g.dart';
 
@@ -7,13 +8,18 @@ class CommentData{
 
   final String commentId;
   final String comment;
+  final PublicUserProfileData publicUserProfileData;
+  final String createdAt;
+
+
+  CommentData(
+      this.commentId, this.comment, this.publicUserProfileData, this.createdAt);
+
 
   @override
   String toString() {
-    return 'CommentData{commentId: $commentId, comment: $comment}';
+    return 'CommentData{commentId: $commentId, comment: $comment, publicUserProfileData: $publicUserProfileData, createdAt: $createdAt}';
   }
-
-  CommentData(this.commentId, this.comment);
 
   factory CommentData.fromJson(Map<String, dynamic> json) =>
       json == null ? null : _$CommentDataFromJson(json);

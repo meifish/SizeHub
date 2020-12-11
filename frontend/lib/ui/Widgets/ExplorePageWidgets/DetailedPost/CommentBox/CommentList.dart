@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:size_hub/data/CommentData.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/CommentBox/Comment.dart';
 
 class CommentList extends StatelessWidget {
   CommentList({Key key, this.data, this.onPressed}) : super(key: key);
-  final data;
+  final List<CommentData> data;
   final VoidCallback onPressed;
 
   @override
