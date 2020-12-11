@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:size_hub/data/PublicUserProfileData.dart';
 import 'package:size_hub/ui/Pages/ProfileEditPage.dart';
+import 'package:size_hub/ui/Widgets/ChartWidgets/ChartPage.dart';
 import 'package:size_hub/ui/Widgets/ExplorePageWidgets/DetailedPost/SizeWidget.dart';
 
 class ProfileCard extends StatelessWidget {
@@ -33,6 +34,20 @@ class ProfileCard extends StatelessWidget {
                             context,
                             MaterialPageRoute(builder: (context) => ProfileEditPage(existingUserMap: dummyData,)),
                           );
+                    },
+                  )),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.analytics,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ChartPage()),
+                      );
                     },
                   )),
               Column(
