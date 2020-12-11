@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:size_hub/ui/Widgets/SearchPageWidgets/SearchBar.dart';
 import 'package:size_hub/ui/Widgets/SearchPageWidgets/SearchPageCategories.dart';
+import 'package:size_hub/ui/Pages/MapPage.dart';
 
 class GroupedSearchPage extends StatefulWidget {
   GroupedSearchPage({Key key}) : super(key: key);
@@ -13,7 +14,7 @@ class _GroupedSearchPageState extends State<GroupedSearchPage> {
   var fakeData = [
     {
       'icon': Icons.trending_up,
-      'onPressed': () {},
+      'onPressed': null,
       'text': 'Trending',
       'image':
           'https://images.lululemon.com/is/image/lululemon/LW6BNZS_038292_2?wid=1440&op_usm=0.5,2,10,0&fmt=webp&qlt=90,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72',
@@ -22,7 +23,7 @@ class _GroupedSearchPageState extends State<GroupedSearchPage> {
     },
     {
       'icon': Icons.star_rate,
-      'onPressed': () {},
+      'onPressed': null,
       'text': 'Featured',
       'image':
           'https://images.lululemon.com/is/image/lululemon/LW5DAQS_046691_2?wid=1080&op_usm=0.5,2,10,0&fmt=webp&qlt=90,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72',
@@ -31,7 +32,7 @@ class _GroupedSearchPageState extends State<GroupedSearchPage> {
     },
     {
       'icon': Icons.group,
-      'onPressed': () {},
+      'onPressed': null,
       'text': 'Following',
       'image':
           'https://images.lululemon.com/is/image/lululemon/LW3DFMS_045852_1?wid=1080&op_usm=0.5,2,10,0&fmt=webp&qlt=90,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72',
@@ -40,7 +41,7 @@ class _GroupedSearchPageState extends State<GroupedSearchPage> {
     },
     {
       'icon': Icons.map,
-      'onPressed': () {},
+      'onPressed': MapPage(),
       'text': 'Location',
       'image':
           'https://images.lululemon.com/is/image/lululemon/LW2BLGS_034270_1?wid=1080&op_usm=0.5,2,10,0&fmt=webp&qlt=90,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72',
@@ -49,7 +50,7 @@ class _GroupedSearchPageState extends State<GroupedSearchPage> {
     },
     {
       'icon': Icons.favorite,
-      'onPressed': () {},
+      'onPressed': null,
       'text': 'Favorites',
       'image':
           'https://images.lululemon.com/is/image/lululemon/LW3DUTS_029610_1?wid=1080&op_usm=0.5,2,10,0&fmt=webp&qlt=90,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72',
@@ -58,7 +59,7 @@ class _GroupedSearchPageState extends State<GroupedSearchPage> {
     },
     {
       'icon': Icons.search,
-      'onPressed': () {},
+      'onPressed': null,
       'text': 'Search Item',
       'image':
           'https://images.lululemon.com/is/image/lululemon/LW1CPWS_0001_1?wid=1080&op_usm=0.5,2,10,0&fmt=webp&qlt=90,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72',
@@ -82,7 +83,15 @@ class _GroupedSearchPageState extends State<GroupedSearchPage> {
                 itemBuilder: (_, index) {
                   var category = fakeData[index];
                   return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        if (fakeData[index]['onPressed'] != null) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      fakeData[index]['onPressed']));
+                        }
+                      },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SearchPageCategories(
