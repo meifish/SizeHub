@@ -1,9 +1,15 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:latlong/latlong.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:size_hub/api/ApiClient.dart';
+import 'package:size_hub/data/CreatePostData.dart';
+import 'package:size_hub/data/PostLocationData.dart';
+import 'package:size_hub/data/UserMeasurementsData.dart';
 import 'package:size_hub/data/database/Database.dart';
+import 'package:size_hub/ui/MainLayout/MainLayout.dart';
 import 'package:size_hub/ui/Widgets/Common/PurpleRaisedButton.dart';
 import 'package:size_hub/ui/Widgets/CreatePostWidgets/CreatePostForm.dart';
 import 'package:size_hub/ui/animations/BounceInAnimation.dart';
@@ -21,7 +27,15 @@ class GroupedCreatePostWidgets extends StatefulWidget {
 class _GroupedCreatePostWidgetsState extends State<GroupedCreatePostWidgets> {
   var _geolocator = Geolocator()..forceAndroidLocationManager = true;
   LatLng _currentLatLng;
-  var address;
+  var _cityName;
+  TextEditingController clothingNameController = TextEditingController();
+  TextEditingController brandController = TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
+  TextEditingController captionController = TextEditingController();
+  TextEditingController sizeController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -36,7 +50,10 @@ class _GroupedCreatePostWidgetsState extends State<GroupedCreatePostWidgets> {
       setState(() {
         _currentLatLng = LatLng(userLocation.latitude, userLocation.longitude);
         print(_currentLatLng);
-        address=Geocoder.local.findAddressesFromCoordinates(Coordinates(_currentLatLng.latitude, _currentLatLng.longitude)).then((value) => print("${value.first.locality}, ${value.first.adminArea}, ${value.first.countryName}"));
+        Geocoder.local
+            .findAddressesFromCoordinates(
+                Coordinates(_currentLatLng.latitude, _currentLatLng.longitude))
+            .then((value) => _cityName = value.first.locality);
       });
     });
   }
@@ -63,7 +80,16 @@ class _GroupedCreatePostWidgetsState extends State<GroupedCreatePostWidgets> {
             child: Align(
                 alignment: Alignment.bottomCenter,
                 child: IntrinsicHeight(
-                    child: Card(child: Center(child: CreatePostForm())))),
+                    child: Card(
+                        child: Center(
+                            child: CreatePostForm(
+                  clothingNameController: clothingNameController,
+                  brandController: brandController,
+                  captionController: captionController,
+                  sizeController: sizeController,
+                  weightController: weightController,
+                  heightController: heightController,
+                ))))),
           ),
         ),
         Padding(
@@ -74,10 +100,24 @@ class _GroupedCreatePostWidgetsState extends State<GroupedCreatePostWidgets> {
                 onPressed: () {
                   _updateLocationOneTime();
                   Database().uploadFile(File(widget.imgPath)).then((value) {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => MainLayout()),
-                    // );
+                    FirebaseAuth.instance.currentUser.getIdToken().then(
+                        (token) => ApiClient()
+                            .createPost(CreatePostData(
+                                null,
+                                sizeController.text,
+                                UserMeasurementsData(
+                                    int.parse(weightController.text),
+                                    heightController.text),
+                                [value],
+                                PostLocationData(_currentLatLng.latitude,
+                                    _currentLatLng.longitude, _cityName),
+                                captionController.text,
+                                token))
+                            .then((value) => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MainLayout()),
+                                )));
                   });
                 },
                 child: IntrinsicWidth(
