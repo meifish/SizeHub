@@ -77,8 +77,8 @@ class ApiClient{
     return DetailedPostData.fromJson(response);
   }
 
-  Future<PublicUserProfileData> getProfile(String userId) async{
-    Map<String, dynamic> response = await _makeGetRequest("/profile", {"userId": userId});
+  Future<PublicUserProfileData> getProfile(String token) async{
+    Map<String, dynamic> response = await _makeGetRequest("/profile", {"token": token});
     if(response == null) return null;
     return PublicUserProfileData.fromJson(response);
   }

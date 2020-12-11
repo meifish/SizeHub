@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:size_hub/api/ApiClient.dart';
@@ -42,13 +43,17 @@ class _GroupedProfilePageWidgetsState extends State<GroupedProfilePageWidgets> {
   Widget _getCollection({image, firstColor, secondColor, text, PostSort sort}) {
     return GestureDetector(
       onTapUp: (TapUpDetails details) {
-        apiClient.getPostsByUser("2ojhhM2TfdFLKcVr1bh1", sort).then((value) =>
+        loadProfile().then((value) {
+          apiClient.getPostsByUser(value.user.userId, sort)
+              .then((value) {
+                print(value);
             setState(() {
               images = value.map((e) => e.photoUrls.first).toList();
               _profilePictureGrid = _getProfilePictureGrid(
                   Point(details.globalPosition.dx, details.globalPosition.dy));
-            })
-        );
+            });
+          });
+        });
       },
       child: Collection(
         image: image,
@@ -70,6 +75,12 @@ class _GroupedProfilePageWidgetsState extends State<GroupedProfilePageWidgets> {
     _loadProfile();
     super.initState();
   }
+
+  Future<PublicUserProfileData> loadProfile() async {
+    String token = await FirebaseAuth.instance.currentUser.getIdToken();
+    return await apiClient.getProfile(token);
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [
@@ -96,7 +107,7 @@ class _GroupedProfilePageWidgetsState extends State<GroupedProfilePageWidgets> {
           sort: PostSort.COMMENTS),
     ];
     return FutureBuilder(
-        future: apiClient.getProfile("2ojhhM2TfdFLKcVr1bh1"),
+        future: loadProfile(),
         builder: (BuildContext context,
             AsyncSnapshot<PublicUserProfileData> data) {
           PublicUserProfileData profile = data.data;
