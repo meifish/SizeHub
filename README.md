@@ -1,3 +1,7 @@
+# Demo:
+https://user-images.githubusercontent.com/10296596/163721459-f30fbd63-e9f0-42c2-9cee-bbb2f21e44ab.mp4
+
+
 # Summary:
 
 Our app is a social media site designed for sharing clothing items. When user’s purchase a new item of clothing, they can model the item, and post their photos. The app asks users for their measurement data (such as weight and height). Using this data, we can recommend future users the correct size of clothing for them, based on the data we have collected from previous users.
